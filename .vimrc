@@ -29,6 +29,7 @@ highlight TabLineSel ctermfg=196 ctermbg=None
 highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
 set encoding=utf-8
 set guifont=Ubuntu\ Mono\ derivative\ Powerlin
+set updatetime=100
 
 " Key Mapping
 "inoremap <C-q> <Esc>
