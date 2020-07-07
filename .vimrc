@@ -30,6 +30,8 @@ highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
 set encoding=utf-8
 set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
+set equalalways
+autocmd VimResized * wincmd = 
 
 " Key Mapping
 "inoremap <C-q> <Esc>
