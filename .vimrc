@@ -47,10 +47,11 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/frazrepo/vim-rainbow.git'
 Plug 'vim-airline/vim-airline'
 Plug 'https://tpope.io/vim/fugitive.git'
+Plug 'https://github.com/Yggdroot/indentLine.git'
 call plug#end()
 
 " YouCompleteMe
-let g:ycm_filetype_specific_completion_to_disable = {'*': 1} 
+let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
 
 " Rainbow
 let g:rainbow_active = 1
@@ -71,3 +72,7 @@ nmap [ <Plug>(GitGutterPrevHunk)
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" indentLine
+let g:indentLine_char = '|'
+let g:indentLine_color_term = 237 
