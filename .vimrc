@@ -22,7 +22,6 @@ highlight LineNr ctermfg=darkred ctermbg=237 cterm=NONE guifg=#90908a guibg=#3c3
 set signcolumn=yes
 highlight SignColumn ctermbg=None
 highlight VertSplit ctermbg=darkred ctermfg=237
-set listchars=tab:>-
 highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
 highlight TabLine ctermfg=darkred ctermbg=237 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
@@ -31,7 +30,17 @@ set encoding=utf-8
 set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
 set equalalways
-autocmd VimResized * wincmd = 
+autocmd VimResized * wincmd =
+"set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~
+"set showbreak=\\ " [bonus]
+"highlight ExtraWhitespace ctermfg=blue ctermbg=red guibg=red
+"match ExtraWhitespace /\s\+$/
+highlight RedundantSpaces ctermbg=darkred guibg=red
+match RedundantSpaces /\s\+$/
+"autocmd BufWinEnter <buffer> match Error /\s\+$/
+"autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
+"autocmd InsertLeave <buffer> match Error /\s\+$/
+"autocmd BufWinLeave <buffer> call clearmatches()
 
 " Key Mapping
 "inoremap <C-q> <Esc>
@@ -77,4 +86,4 @@ nmap [ <Plug>(GitGutterPrevHunk)
 
 " indentLine
 let g:indentLine_char = '|'
-let g:indentLine_color_term = 237 
+let g:indentLine_color_term = 237
