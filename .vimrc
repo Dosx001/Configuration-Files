@@ -80,9 +80,11 @@ let g:rainbow_active = 1
 highlight GitGutterAdd ctermfg=green ctermbg=237
 highlight GitGutterChange ctermfg=226 ctermbg=237
 highlight GitGutterDelete ctermfg=darkred ctermbg=237
+highlight GitGutterChangeDelete ctermfg=202 ctermbg=237
 let g:gitgutter_enabled = 1
 let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed = '−'
+let g:gitgutter_sign_modified_removed = "~-"
 nmap ] <Plug>(GitGutterNextHunk)
 nmap [ <Plug>(GitGutterPrevHunk)
 
