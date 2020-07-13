@@ -31,12 +31,13 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
 set equalalways
 autocmd VimResized * wincmd =
-"set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~
+set listchars=tab:┆\ ,trail:·,extends:>,precedes:<,nbsp:~
+highlight SpecialKey ctermfg=darkred
 "set showbreak=\\ " [bonus]
 "highlight ExtraWhitespace ctermfg=blue ctermbg=red guibg=red
-"match ExtraWhitespace /\s\+$/
-highlight RedundantSpaces ctermbg=darkred guibg=red
-match RedundantSpaces /\s\+$/
+"match ExtraWhitespace /\s\+$\|\t/
+"highlight RedundantSpaces ctermbg=darkred guibg=red
+"match RedundantSpaces /\s\+$/
 "autocmd BufWinEnter <buffer> match Error /\s\+$/
 "autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
 "autocmd InsertLeave <buffer> match Error /\s\+$/
