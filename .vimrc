@@ -67,6 +67,7 @@ Plug 'https://github.com/frazrepo/vim-rainbow.git'
 Plug 'vim-airline/vim-airline'
 Plug 'https://tpope.io/vim/fugitive.git'
 "Plug 'https://github.com/Yggdroot/indentLine.git'
+Plug 'https://github.com/thaerkh/vim-indentguides.git'
 call plug#end()
 
 " YouCompleteMe
