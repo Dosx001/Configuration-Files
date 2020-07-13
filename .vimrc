@@ -62,7 +62,7 @@ Plug 'https://github.com/Yggdroot/indentLine.git'
 call plug#end()
 
 " YouCompleteMe
-let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
+"let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
 
 " Rainbow
 let g:rainbow_active = 1
