@@ -31,7 +31,7 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
 set equalalways
 autocmd VimResized * wincmd =
-set listchars=tab:┆\ ,trail:·,extends:>,precedes:<,nbsp:~
+set listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~
 highlight SpecialKey ctermfg=darkred
 "set showbreak=\\ " [bonus]
 "highlight ExtraWhitespace ctermfg=blue ctermbg=red guibg=red
