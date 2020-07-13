@@ -40,7 +40,7 @@ match RedundantSpaces /\s\+$/
 "autocmd BufWinEnter <buffer> match Error /\s\+$/
 "autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
 "autocmd InsertLeave <buffer> match Error /\s\+$/
-"autocmd BufWinLeave <buffer> call clearmatches()
+autocmd BufWinLeave <buffer> call clearmatches()
 
 " Key Mapping
 "inoremap <C-q> <Esc>
@@ -85,5 +85,5 @@ nmap [ <Plug>(GitGutterPrevHunk)
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " indentLine
-let g:indentLine_char = '|'
-let g:indentLine_color_term = 237
+"let g:indentLine_enabled = 0
+"let g:indentLine_char = '|'
