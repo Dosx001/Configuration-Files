@@ -7,7 +7,7 @@ set wildmenu
 set path+=**
 set incsearch
 set smartcase
-set colorcolumn=125
+set colorcolumn=100
 highlight ColorColumn ctermbg=darkgrey
 set noswapfile
 set nobackup
@@ -87,3 +87,4 @@ nmap [ <Plug>(GitGutterPrevHunk)
 " indentLine
 "let g:indentLine_enabled = 0
 "let g:indentLine_char = '|'
+let g:indentLine_color_term = 237
