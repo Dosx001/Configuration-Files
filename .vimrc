@@ -23,7 +23,7 @@ set signcolumn=yes
 highlight SignColumn ctermbg=None
 highlight VertSplit ctermbg=darkred ctermfg=237
 highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
-highlight TabLine ctermfg=darkred ctermbg=237 cterm=None
+highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
 highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
 set encoding=utf-8
