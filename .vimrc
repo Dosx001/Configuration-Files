@@ -66,7 +66,7 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/frazrepo/vim-rainbow.git'
 Plug 'vim-airline/vim-airline'
 Plug 'https://tpope.io/vim/fugitive.git'
-Plug 'https://github.com/Yggdroot/indentLine.git'
+"Plug 'https://github.com/Yggdroot/indentLine.git'
 call plug#end()
 
 " YouCompleteMe
@@ -95,4 +95,4 @@ nmap [ <Plug>(GitGutterPrevHunk)
 " indentLine
 "let g:indentLine_enabled = 0
 "let g:indentLine_char = '|'
-let g:indentLine_color_term = 237
+"let g:indentLine_color_term = 237
