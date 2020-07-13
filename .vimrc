@@ -97,3 +97,7 @@ nmap [ <Plug>(GitGutterPrevHunk)
 "let g:indentLine_enabled = 0
 "let g:indentLine_char = '|'
 "let g:indentLine_color_term = 237
+
+" Indent Guides
+let g:indentguides_spacechar = '|'
+let g:indentguides_tabchar = '┆'
