@@ -42,6 +42,13 @@ highlight SpecialKey ctermfg=darkred
 "autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
 "autocmd InsertLeave <buffer> match Error /\s\+$/
 autocmd BufWinLeave <buffer> call clearmatches()
+highlight Visual ctermbg=235
+"highlight Cursor ctermfg=red ctermbg=blue guifg=red guibg=black
+"highlight iCursor ctermfg=green ctermbg=yellow guifg=green guibg=steelblue
+"set guicursor=n-v-c:block-Cursor
+"set guicursor+=i:ver100-iCursor
+"set guicursor+=n-v-c:blinkon0
+"set guicursor+=i:blinkwait10
 
 " Key Mapping
 "inoremap <C-q> <Esc>
