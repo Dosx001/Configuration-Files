@@ -58,11 +58,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
- }
-
-
 if [ "$color_prompt" = yes ]; then
    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
 else
@@ -130,4 +125,14 @@ export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 #    source $HOME/.bash-git-prompt/gitprompt.sh
 #fi
 
-export PS1="\e[92m\u@\h:\e[94m\W\e[31m\$(git_branch)\[\e[00m\]> "
+git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+git_status() {
+    git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g'
+}
+
+export PS1="\e[92m\u@\h \e[37m`date "+%a %D"`\e[31m\$(git_status)\n\e[94m\W\e[31m\$(git_branch)\[\e[00m\]> "
+export VISUAL=vim
+export EDITOR="$VISUAL"
