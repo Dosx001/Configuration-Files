@@ -78,6 +78,10 @@ call plug#end()
 
 " Rainbow
 let g:rainbow_active = 1
+"let g:rainbow_ctermfgs = [196, 208, 226, 46, 51, 21, 93, 202] "rainbow colors
+let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
+            \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray', 184,
+            \'darkmagenta', 'Darkblue', 'darkgreen', 'darkcyan', 'darkred', 'red']
 
 " Git Gutter
 highlight GitGutterAdd ctermfg=green ctermbg=237
