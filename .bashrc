@@ -132,7 +132,7 @@ git_branch() {
 git_status() {
     git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g'
 }
-
 export PS1="\[\e[92m\]\u@\h \[\e[00m\]`date "+%a %D"` \[\e[31m\]\$(git_status)\n\[\e[94m\]\W\[\e[31m\]\$(git_branch)\[\e[00m\]> "
 export VISUAL=vim
 export EDITOR="$VISUAL"
+source ~/.aliasme/aliasme.sh
