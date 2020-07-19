@@ -70,6 +70,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'https://tpope.io/vim/fugitive.git'
 "Plug 'https://github.com/Yggdroot/indentLine.git'
 Plug 'https://github.com/thaerkh/vim-indentguides.git'
+Plug 'https://github.com/mkitt/tabline.vim.git'
 call plug#end()
 
 " YouCompleteMe
