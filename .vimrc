@@ -27,6 +27,7 @@ highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
 highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
 highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
+highlight EndOfBuffer ctermfg=237 ctermbg=None
 set encoding=utf-8
 set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
