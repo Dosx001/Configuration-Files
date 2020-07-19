@@ -5,6 +5,7 @@ syntax on
 "colorscheme monokai
 set wildmenu
 set path+=**
+set complete-=i
 set incsearch
 set smartcase
 set colorcolumn=100
