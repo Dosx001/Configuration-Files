@@ -21,7 +21,7 @@ highlight CursorLineNR cterm=None ctermbg=white
 "highlight CursorColumn cterm=None ctermbg=17
 highlight LineNr ctermfg=darkred ctermbg=237 cterm=NONE guifg=#90908a guibg=#3c3d37 gui=NONE
 set signcolumn=yes
-highlight SignColumn ctermbg=None
+highlight SignColumn ctermbg=NONE
 highlight VertSplit ctermbg=darkred ctermfg=237
 highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
 highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
@@ -33,8 +33,12 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
 set equalalways
 autocmd VimResized * wincmd =
-set listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~
+set listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~ ",eol:π
 highlight SpecialKey ctermfg=darkred
+highlight NoneText ctermfg=darkred ctermbg=237 cterm=bold
+highlight ExtendsChar ctermfg=darkred ctermbg=237 cterm=bold
+highlight PrecedesChar ctermfg=darkred ctermbg=237 cterm=bold
+highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
 "set showbreak=\\ " [bonus]
 "highlight ExtraWhitespace ctermfg=blue ctermbg=red guibg=red
 "match ExtraWhitespace /\s\+$\|\t/
