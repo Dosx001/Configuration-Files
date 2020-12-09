@@ -1,7 +1,8 @@
 set number
 set smartindent
 set expandtab shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufRead,BufNewFile *.html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+filetype plugin on
+filetype plugin indent on
 syntax on
 "colorscheme monokai
 set wildmenu
