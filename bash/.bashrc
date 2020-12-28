@@ -126,38 +126,28 @@ export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 #fi
 
 Date() {
-    echo `date "+%a %D"`
+    echo -e "\e[33m`date '+%a %D'`"
 }
 
 bash_tips() {
-    echo "\$(~/bash_tips_generator.sh)"
+    echo -e "\e[00m\$(~/bash_tips_generator.sh)"
 }
 
 git_status() {
-    git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g'
+    echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
 }
 
 git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
-
-emtpy() {
-    local Name=$(git branch 2> /dev/null)
-    if [ -z "$Name" ]
+    var=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    if [ -n "$var" ]
     then
-        echo ""
+        echo -e "\e[34;41m\e[30;41m$var\e[31;40m"
+    else
+        echo -e "\e[34;40m"
     fi
 }
 
-full() {
-    local Name=$(git branch 2> /dev/null)
-    if [ -n "$Name" ]
-    then
-        echo ""
-    fi
-}
-
-export PS1="\[\e[33m\]\$(Date) \[\e[00m\]$(bash_tips)\n\[\e[92m\]\u@\h\[\e[31m\]\$(git_status)\n\[\e[32;44m\]\W\[\e[34;40m\]\$(emtpy)\[\e[34;41m\]\$(full)\[\e[30;41m\]\$(git_branch)\[\e[31;40m\]\$(full)\[\e[00m\]"
+export PS1="\$(Date) $(bash_tips)\n\[\e[92m\]\u@\h\$(git_status)\n\[\e[32;44m\]\W\$(git_branch)\[\e[00m\]"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 source ~/.aliasme/aliasme.sh
