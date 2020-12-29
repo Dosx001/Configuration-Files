@@ -134,7 +134,46 @@ Date() {
 }
 
 git_status() {
-    echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
+    #echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
+    var=$(git status --short 2> /dev/null)
+    if [ -n "$var" ]
+    then
+        get=()
+        bool=false
+        for item in ${var}
+        do
+            if [[ "$bool" == true ]]
+            then
+                bool=false
+                check=$(git diff --raw ${item})
+                if [[ -z "$check" ]]
+                then
+                    get=("${get[@]}" "\e[32m")
+                else
+                    get=("${get[@]}" "\e[33m")
+                fi
+            fi
+            if [[ "$item" == "M" ]]
+            then
+                bool=true
+            elif [[ "$item" == "??" ]]
+            then
+                get=("${get[@]}" "\e[37m")
+            elif [[ "$item" == "A" ]]
+            then
+                get=("${get[@]}" "\e[36m")
+            elif [[ "$item" == "D" ]]
+            then
+                get=("${get[@]}" "\e[31m")
+            elif [[ "$item" == "AD" ]]
+            then
+                get=("${get[@]}" "\e[35m")
+            else
+                get=("${get[@]}" "$item")
+            fi
+        done
+        echo -e "\n${get[@]}"
+    fi
 }
 
 git_branch() {
