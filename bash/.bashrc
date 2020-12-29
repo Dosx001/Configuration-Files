@@ -125,12 +125,12 @@ export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 #    source $HOME/.bash-git-prompt/gitprompt.sh
 #fi
 
-Date() {
-    echo -e "\e[33m`date '+%a %D'`"
-}
+#bash_tips() {
+#    echo -e "\e[00m\$(~/bash_tips_generator.sh)"
+#}
 
-bash_tips() {
-    echo -e "\e[00m\$(~/bash_tips_generator.sh)"
+Date() {
+    echo -e "\e[33m`date '+%a %D'`\e[00m"
 }
 
 git_status() {
@@ -147,7 +147,7 @@ git_branch() {
     fi
 }
 
-export PS1="\$(Date) $(bash_tips)\n\[\e[92m\]\u@\h\$(git_status)\n\[\e[32;44m\]\W\$(git_branch)\[\e[00m\]"
+export PS1="\[\e[92m\]\u@\h \$(Date)\$(git_status)\n\[\e[32;44m\]\W\$(git_branch)\[\e[00m\]"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 source ~/.aliasme/aliasme.sh
