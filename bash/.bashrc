@@ -130,7 +130,7 @@ export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 #}
 
 Date() {
-    echo -e "\e[33m`date '+%a %D'`\e[00m"
+    echo -e "\e[33m`date '+%a %b %d, %Y'`\e[00m"
 }
 
 git_status() {
