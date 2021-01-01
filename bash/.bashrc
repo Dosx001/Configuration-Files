@@ -145,12 +145,11 @@ git_status() {
             if [[ "$bool" == true ]]
             then
                 bool=false
-                check=$(git diff --raw ${item})
-                if [[ -z "$check" ]]
+                if [[ -z "$(git diff --raw ${item})" ]]
                 then
-                    get=("${get[@]}" "\e[32m")
+                    get+=("\e[32m")
                 else
-                    get=("${get[@]}" "\e[33m")
+                    get+=("\e[33m")
                 fi
             fi
             if [[ "$item" == "M" ]]
@@ -158,18 +157,18 @@ git_status() {
                 bool=true
             elif [[ "$item" == "??" ]]
             then
-                get=("${get[@]}" "\e[37m")
+                get+=("\e[37m")
             elif [[ "$item" == "A" ]]
             then
-                get=("${get[@]}" "\e[36m")
+                get+=("\e[36m")
             elif [[ "$item" == "D" ]]
             then
-                get=("${get[@]}" "\e[31m")
+                get+=("\e[31m")
             elif [[ "$item" == "AD" ]]
             then
-                get=("${get[@]}" "\e[35m")
+                get+=("\e[35m")
             else
-                get=("${get[@]}" "$item")
+                get+=("$item")
             fi
         done
         echo -e "\n${get[@]}"
@@ -190,3 +189,4 @@ export PS1="\[\e[92m\]\u@\h \$(Date)\$(git_status)\n\[\e[32;44m\]\W\$(git_branch
 export VISUAL=vim
 export EDITOR="$VISUAL"
 source ~/.aliasme/aliasme.sh
+alias fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
