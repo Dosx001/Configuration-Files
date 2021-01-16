@@ -20,6 +20,10 @@ set equalalways
 autocmd VimResized * wincmd =
 autocmd BufWinLeave <buffer> call clearmatches()
 
+command Py execute "wa | !clear; python3 '%:t'"
+command Restore execute "!git restore '%:p'"
+command Source execute "w | source %"
+
 " Key Mapping
 "inoremap <C-q> <Esc>
 "vnoremap <C-q> <Esc>
