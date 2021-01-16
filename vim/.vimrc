@@ -16,6 +16,7 @@ set encoding=utf-8
 set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
 set equalalways
+set autoread
 
 autocmd VimResized * wincmd =
 autocmd BufWinLeave <buffer> call clearmatches()
