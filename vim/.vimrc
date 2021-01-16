@@ -1,62 +1,24 @@
-set number
-set smartindent
-set expandtab shiftwidth=4 tabstop=4 softtabstop=4
 filetype plugin on
 filetype plugin indent on
-syntax on
-"colorscheme monokai
+
+set smartindent
+set expandtab shiftwidth=4 tabstop=4 softtabstop=4
 set wildmenu
 set path+=**
 set complete-=i
 set incsearch
 set smartcase
-set colorcolumn=100
-highlight ColorColumn ctermbg=darkgrey
 set noswapfile
 set nobackup
 set nowrap
 set hidden
-set cursorline
-highlight CursorLine cterm=NONE ctermbg=17
-highlight CursorLineNR cterm=None ctermbg=white
-"set cursorcolumn
-"highlight CursorColumn cterm=None ctermbg=17
-highlight LineNr ctermfg=darkred ctermbg=237 cterm=NONE guifg=#90908a guibg=#3c3d37 gui=NONE
-set signcolumn=yes
-highlight SignColumn ctermbg=NONE
-highlight VertSplit ctermbg=darkred ctermfg=237
-highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
-highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
-highlight TabLineSel ctermfg=196 ctermbg=None
-highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
-highlight EndOfBuffer ctermfg=237 ctermbg=None
 set encoding=utf-8
 set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
 set equalalways
+
 autocmd VimResized * wincmd =
-set listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~ ",eol:π
-highlight SpecialKey ctermfg=darkred
-highlight NoneText ctermfg=darkred ctermbg=237 cterm=bold
-highlight ExtendsChar ctermfg=darkred ctermbg=237 cterm=bold
-highlight PrecedesChar ctermfg=darkred ctermbg=237 cterm=bold
-highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
-"set showbreak=\\ " [bonus]
-"highlight ExtraWhitespace ctermfg=blue ctermbg=red guibg=red
-"match ExtraWhitespace /\s\+$\|\t/
-"highlight RedundantSpaces ctermbg=darkred guibg=red
-"match RedundantSpaces /\s\+$/
-"autocmd BufWinEnter <buffer> match Error /\s\+$/
-"autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
-"autocmd InsertLeave <buffer> match Error /\s\+$/
 autocmd BufWinLeave <buffer> call clearmatches()
-highlight Visual ctermbg=235
-"highlight Cursor ctermfg=red ctermbg=blue guifg=red guibg=black
-"highlight iCursor ctermfg=green ctermbg=yellow guifg=green guibg=steelblue
-"set guicursor=n-v-c:block-Cursor
-"set guicursor+=i:ver100-iCursor
-"set guicursor+=n-v-c:blinkon0
-"set guicursor+=i:blinkwait10
 
 " Key Mapping
 "inoremap <C-q> <Esc>
@@ -67,6 +29,54 @@ highlight Visual ctermbg=235
 "inoremap ( ()<left>
 "inoremap [ []<left>
 "inoremap { {}<left>
+
+syntax on
+"colorscheme monokai
+highlight Visual ctermbg=235
+highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
+highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
+highlight TabLineSel ctermfg=196 ctermbg=None
+highlight VertSplit ctermbg=darkred ctermfg=237
+highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
+highlight EndOfBuffer ctermfg=237 ctermbg=None
+
+set number
+highlight LineNr ctermfg=darkred ctermbg=237 cterm=NONE guifg=#90908a guibg=#3c3d37 gui=NONE
+
+set colorcolumn=100
+highlight ColorColumn ctermbg=darkgrey
+
+set cursorline
+highlight CursorLine cterm=NONE ctermbg=17
+highlight CursorLineNR cterm=None ctermbg=white
+
+"set cursorcolumn
+"highlight CursorColumn cterm=None ctermbg=17
+
+set signcolumn=yes
+highlight SignColumn ctermbg=NONE
+
+set listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~ ",eol:π
+highlight SpecialKey ctermfg=darkred
+highlight NoneText ctermfg=darkred ctermbg=237 cterm=bold
+highlight ExtendsChar ctermfg=darkred ctermbg=237 cterm=bold
+highlight PrecedesChar ctermfg=darkred ctermbg=237 cterm=bold
+highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
+
+"set showbreak=\\ " [bonus]
+"highlight ExtraWhitespace ctermfg=blue ctermbg=red guibg=red
+"match ExtraWhitespace /\s\+$\|\t/
+"highlight RedundantSpaces ctermbg=darkred guibg=red
+"match RedundantSpaces /\s\+$/
+"autocmd BufWinEnter <buffer> match Error /\s\+$/
+"autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
+"autocmd InsertLeave <buffer> match Error /\s\+$/
+"highlight Cursor ctermfg=red ctermbg=blue guifg=red guibg=black
+"highlight iCursor ctermfg=green ctermbg=yellow guifg=green guibg=steelblue
+"set guicursor=n-v-c:block-Cursor
+"set guicursor+=i:ver100-iCursor
+"set guicursor+=n-v-c:blinkon0
+"set guicursor+=i:blinkwait10
 
 call plug#begin('~/.vim/plugged')
 "Plug 'https://github.com/ycm-core/YouCompleteMe.git'
