@@ -77,6 +77,9 @@ Plug 'https://tpope.io/vim/fugitive.git'
 "Plug 'https://github.com/Yggdroot/indentLine.git'
 Plug 'https://github.com/thaerkh/vim-indentguides.git'
 Plug 'https://github.com/mkitt/tabline.vim.git'
+Plug 'mattn/emmet-vim'
+"Plug 'https://github.com/jaxbot/browserlink.vim'
+Plug 'https://github.com/junegunn/vim-plug'
 call plug#end()
 
 " YouCompleteMe
@@ -86,7 +89,7 @@ call plug#end()
 autocmd FileType c,cpp,python,javascript,java,json call rainbow#load()
 "let g:rainbow_ctermfgs = [196, 208, 226, 46, 51, 21, 93, 202] "rainbow colors
 let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
-            \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray', 184,
+            \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray',
             \'darkmagenta', 'Darkblue', 'darkgreen', 'darkcyan', 'darkred', 'red']
 
 " Git Gutter
@@ -103,7 +106,7 @@ nmap [ <Plug>(GitGutterPrevHunk)
 
 " Airline
 "let g:airline_extensions = []
-"let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 "let g:Powerline_symbols='unicode'
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
@@ -117,3 +120,7 @@ nmap [ <Plug>(GitGutterPrevHunk)
 " Indent Guides
 let g:indentguides_spacechar = '|'
 let g:indentguides_tabchar = '┆'
+
+" Emmet
+"let g:user_emmet_leader_key='<Ctrl-q>'
+"let g:user_emmet_mode='a'
