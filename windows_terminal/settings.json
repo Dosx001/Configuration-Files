@@ -9,7 +9,6 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
 
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-
     // You can add more global application settings here.
     // To learn more about global settings, visit https://aka.ms/terminal-global-settings
 
@@ -94,5 +93,6 @@
         // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
         // To learn more about panes, visit https://aka.ms/terminal-panes
         { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" }
-    ]
+    ],
+    "tabSwitcherMode": false
 }
