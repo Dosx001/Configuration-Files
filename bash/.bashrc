@@ -152,24 +152,20 @@ git_status() {
                     get+=("\e[33m")
                 fi
             fi
-            if [[ "$item" == "M" ]]
-            then
-                bool=true
-            elif [[ "$item" == "??" ]]
-            then
-                get+=("\e[37m")
-            elif [[ "$item" == "A" ]]
-            then
-                get+=("\e[36m")
-            elif [[ "$item" == "D" ]]
-            then
-                get+=("\e[31m")
-            elif [[ "$item" == "AD" ]]
-            then
-                get+=("\e[35m")
-            else
-                get+=("$item")
-            fi
+            case "$item" in
+                "M")
+                    bool=true;;
+                "??")
+                    get+=("\e[37m");;
+                "A")
+                    get+=("\e[36m");;
+                "D")
+                    get+=("\e[31m");;
+                "AD")
+                    get+=("\e[35m");;
+                *)
+                    get+=("$item");;
+            esac
         done
         echo -e "\n${get[@]}"
     fi
