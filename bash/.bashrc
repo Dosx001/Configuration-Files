@@ -140,29 +140,49 @@ git_status() {
     then
         get=()
         bool=false
+        check=false
         for item in ${var}
         do
             if [[ "$bool" == true ]]
             then
                 bool=false
-                if [[ -z "$(git diff --raw ${item})" ]]
+                if [[ "$check" == true ]]
                 then
-                    get+=("\e[32m")
+                    if [[ -z "$(git diff --raw ${item})" ]]
+                    then
+                        get+=("\e[32m")
+                    else
+                        get+=("\e[33m")
+                    fi
                 else
-                    get+=("\e[33m")
+                    file=$(git status ${item})
+                    if [[ ${file:74:3} == "not" ]]
+                    then
+                        get+=("\e[31m")
+                    else
+                        get+=("\e[91m")
+                    fi
                 fi
             fi
             case "$item" in
                 "M")
-                    bool=true;;
+                    bool=true
+                    check=true;;
                 "??")
                     get+=("\e[37m");;
                 "A")
-                    get+=("\e[36m");;
+                    get+=("\e[34m");;
                 "D")
-                    get+=("\e[31m");;
-                "AD")
+                    bool=true
+                    check=false;;
+                "R")
                     get+=("\e[35m");;
+                "AD")
+                    get+=("\e[96m");;
+                "MM")
+                    get+=("\e[93m");;
+                "AM")
+                    get+=("\e[94m");;
                 *)
                     get+=("$item");;
             esac
