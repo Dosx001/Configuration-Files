@@ -195,7 +195,15 @@ git_branch() {
     fi
 }
 
-export PS1="\[\e[92m\]\u@\h \$(Date)\$(git_status)\n\[\e[32;44m\]\W\$(git_branch)\[\e[00m\]"
+git_stash() {
+    stash=$(git stash list 2> /dev/null | wc -l)
+    if [[ $stash -gt 0 ]]
+    then
+        echo -e "\e[90mStashes: $stash"
+    fi
+}
+
+export PS1="\[\e[92m\]\u@\h \$(Date) \$(git_stash)\$(git_status)\n\[\e[32;44m\]\W\$(git_branch)\[\e[00m\]"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 source ~/.aliasme/aliasme.sh
