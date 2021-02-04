@@ -135,67 +135,61 @@ Date() {
 
 git_status() {
     #echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
-    var=$(git status --short 2> /dev/null)
-    if [ -n "$var" ]
+    status=$(git status --short 2> /dev/null)
+    if [ -n "$status" ]
     then
-        get=()
-        bool=false
-        check=false
-        for item in ${var}
+        output=()
+        for item in ${status}
         do
-            if [[ "$bool" == true ]]
-            then
-                bool=false
-                if [[ "$check" == true ]]
-                then
-                    if [[ -z "$(git diff --raw ${item})" ]]
+            case $Case in
+                0)
+                    if [[ -z $(git diff --raw ${item}) ]]
                     then
-                        get+=("\e[32m")
+                        output+=("\e[32m")
                     else
-                        get+=("\e[33m")
-                    fi
-                else
-                    file=$(git status ${item})
-                    if [[ ${file:74:3} == "not" ]]
+                        output+=("\e[33m")
+                    fi;;
+                1)
+                    if [[ $(git status ${item}) == *"not"* ]]
                     then
-                        get+=("\e[31m")
+                        output+=("\e[31m")
                     else
-                        get+=("\e[91m")
-                    fi
-                fi
-            fi
-            case "$item" in
+                        output+=("\e[91m")
+                    fi;;
+            esac
+            Case=-1
+            case $item in
+                "??" | "js")
+                    output+=("\e[37m");;
                 "M")
-                    bool=true
-                    check=true;;
-                "??")
-                    get+=("\e[37m");;
-                "A")
-                    get+=("\e[34m");;
-                "D")
-                    bool=true
-                    check=false;;
-                "R")
-                    get+=("\e[35m");;
-                "AD")
-                    get+=("\e[96m");;
+                    Case=0;;
                 "MM")
-                    get+=("\e[93m");;
+                    output+=("\e[93m");;
+                "A")
+                    output+=("\e[34m");;
                 "AM")
-                    get+=("\e[94m");;
+                    output+=("\e[94m");;
+                "AD")
+                    output+=("\e[96m");;
+                "D")
+                    Case=1;;
+                "R")
+                    output+=("\e[35m");;
+                "UU")
+                    output+=("\e[90m");;
                 *)
-                    get+=("$item");;
+                    output+=($item);;
             esac
         done
-        echo -e "\n${get[@]}"
+        echo -e "\n${output[@]}"
     fi
 }
 
 git_branch() {
-    var=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-    if [ -n "$var" ]
+    branch=$(git branch --show-current 2> /dev/null)
+    if [ -n "$branch" ]
     then
-        echo -e "\e[34;41m\e[30;41m$var\e[31;40m"
+        echo -e "\e[34;41m\e[30;41m$branch\e[31;40m"
     else
         echo -e "\e[34;40m"
     fi
