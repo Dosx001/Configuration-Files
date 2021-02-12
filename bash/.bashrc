@@ -211,7 +211,8 @@ export PS1="\[\e[92m\]\u@\h \$(Date) \$(git_stash)\$(git_status)\n\[\e[32;44m\]\
 export VISUAL=vim
 export EDITOR="$VISUAL"
 source ~/.aliasme/aliasme.sh
-alias fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
+alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
+alias Explorer="/mnt/c/Windows/explorer.exe ."
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
