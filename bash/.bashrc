@@ -130,7 +130,7 @@ export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 #}
 
 Date() {
-    echo -e "\e[33m`date '+%a %b %d, %Y'`\e[00m"
+    echo -e "\e[33m`date '+%a %b %d, %Y'`"
 }
 
 git_status() {
@@ -189,9 +189,9 @@ git_branch() {
     branch=$(git branch --show-current 2> /dev/null)
     if [ -n "$branch" ]
     then
-        echo -e "\e[34;41m\e[30;41m$branch\e[31;40m"
+        echo -e "\e[34;41m\e[30;41m$branch\e[00m\e[31m"
     else
-        echo -e "\e[34;40m"
+        echo -e "\e[00m\e[34m"
     fi
 }
 
