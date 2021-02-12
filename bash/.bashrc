@@ -157,7 +157,7 @@ git_status() {
                         output+=("\e[91m")
                     fi;;
             esac
-            Case=-1
+            Case=""
             case $item in
                 "??" | "js")
                     output+=("\e[37m");;
@@ -165,6 +165,8 @@ git_status() {
                     Case=0;;
                 "MM")
                     output+=("\e[93m");;
+                "MD")
+                    output+=("\e[38;5;202m");;
                 "A")
                     output+=("\e[34m");;
                 "AM")
