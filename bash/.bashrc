@@ -203,6 +203,10 @@ git_stash() {
     fi
 }
 
+position() {
+    tput cup $LINES
+}
+
 export PS1="\[\e[92m\]\u@\h \$(Date) \$(git_stash)\$(git_status)\n\[\e[32;44m\]\W\$(git_branch)\[\e[00m\]"
 export VISUAL=vim
 export EDITOR="$VISUAL"
