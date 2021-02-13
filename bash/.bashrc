@@ -133,7 +133,7 @@ Date() {
     echo -e "\e[33m`date '+%a %b %d, %Y'`"
 }
 
-git_status() {
+gitStatus() {
     #echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
     status=$(git status --short 2> /dev/null)
     if [ -n "$status" ]
@@ -141,28 +141,11 @@ git_status() {
         output=()
         for item in ${status}
         do
-            case $Case in
-                0)
-                    if [[ -z $(git diff --raw ${item}) ]]
-                    then
-                        output+=("\e[32m")
-                    else
-                        output+=("\e[33m")
-                    fi;;
-                1)
-                    if [[ $(git status ${item}) == *"not"* ]]
-                    then
-                        output+=("\e[31m")
-                    else
-                        output+=("\e[91m")
-                    fi;;
-            esac
-            Case=""
             case $item in
                 "??" | "js")
                     output+=("\e[37m");;
                 "M")
-                    Case=0;;
+                    Type="M";;
                 "MM")
                     output+=("\e[93m");;
                 "MD")
@@ -173,21 +156,42 @@ git_status() {
                     output+=("\e[94m");;
                 "AD")
                     output+=("\e[96m");;
-                "D")
-                    Case=1;;
                 "R")
                     output+=("\e[35m");;
-                "UU")
+                "RM")
+                    output+=("\e[38;5;93m");;
+                "RD")
+                    output+=("\e[38;5;201m");;
+                "D")
+                    Type="D";;
+                "UU" | "AA")
                     output+=("\e[90m");;
                 *)
-                    output+=($item);;
+                    case $Type in
+                        "M")
+                            if [[ -z $(git diff --raw ${item}) ]]
+                            then
+                                output+=("\e[32m")
+                            else
+                                output+=("\e[33m")
+                            fi;;
+                        "D")
+                            if [[ $(git status ${item}) == *"not"* ]]
+                            then
+                                output+=("\e[31m")
+                            else
+                                output+=("\e[91m")
+                            fi;;
+                    esac
+                    Type=""
+                    output+=($item)
             esac
         done
         echo -e "\n${output[@]}"
     fi
 }
 
-git_branch() {
+gitBranch() {
     branch=$(git branch --show-current 2> /dev/null)
     if [ -n "$branch" ]
     then
@@ -197,7 +201,7 @@ git_branch() {
     fi
 }
 
-git_stash() {
+gitStash() {
     stash=$(git stash list 2> /dev/null | wc -l)
     if [[ $stash -gt 0 ]]
     then
@@ -209,7 +213,7 @@ position() {
     tput cup $LINES
 }
 
-export PS1="\[\e[92m\]\u@\h \$(Date) \$(git_stash)\$(git_status)\n\[\e[32;44m\]\W\$(git_branch)\[\e[00m\]"
+export PS1="\[\e[92m\]\u@\h \$(Date) \$(gitStash)\$(gitLastLog)\$(gitStatus)\n\[\e[32;44m\]\W\$(gitBranch)\[\e[00m\]"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 source ~/.aliasme/aliasme.sh
