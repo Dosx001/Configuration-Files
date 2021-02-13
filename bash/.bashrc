@@ -205,7 +205,15 @@ gitStash() {
     stash=$(git stash list 2> /dev/null | wc -l)
     if [[ $stash -gt 0 ]]
     then
-        echo -e "\e[90mStashes: $stash"
+        echo -e "\e[35mStashes: $stash"
+    fi
+}
+
+gitLastLog() {
+    commit=$(git log -1 2> /dev/null | sed -n "5p")
+    if [ -n "$commit" ]
+    then
+        echo -e "\n\e[90mLast commit:" $commit
     fi
 }
 
