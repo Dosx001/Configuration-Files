@@ -52,8 +52,8 @@ set colorcolumn=100
 highlight ColorColumn ctermbg=darkgrey
 
 set cursorline
-highlight CursorLine cterm=NONE ctermbg=17
-highlight CursorLineNR cterm=None ctermbg=white
+highlight CursorLine cterm=NONE ctermbg=235
+highlight CursorLineNR cterm=None ctermbg=7
 
 "set cursorcolumn
 "highlight CursorColumn cterm=None ctermbg=17
@@ -84,6 +84,7 @@ highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
 "set guicursor+=i:blinkwait10
 
 call plug#begin('~/.vim/plugged')
+Plug 'https://github.com/junegunn/vim-plug'
 "Plug 'https://github.com/ycm-core/YouCompleteMe.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/frazrepo/vim-rainbow.git'
@@ -94,7 +95,7 @@ Plug 'https://github.com/thaerkh/vim-indentguides.git'
 Plug 'https://github.com/mkitt/tabline.vim.git'
 Plug 'mattn/emmet-vim'
 "Plug 'https://github.com/jaxbot/browserlink.vim'
-Plug 'https://github.com/junegunn/vim-plug'
+"Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
 
 " YouCompleteMe
