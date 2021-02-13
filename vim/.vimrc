@@ -24,6 +24,7 @@ autocmd BufWinLeave <buffer> call clearmatches()
 command Py execute "wa | !clear; python3 '%:t'"
 command Restore execute "!git restore '%:p'"
 command Source execute "w | source %"
+command Clear execute "!clear"
 
 " Key Mapping
 "inoremap <C-q> <Esc>
