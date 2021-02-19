@@ -210,10 +210,10 @@ gitStash() {
 }
 
 gitLastLog() {
-    commit=$(git log -1 2> /dev/null | sed -n "5p")
+    commit=$(git log -1 --pretty=format:"%s" 2> /dev/null)
     if [ -n "$commit" ]
     then
-        echo -e "\n\e[90mLast commit:" $commit
+        echo -e "\n\e[90m" $commit
     fi
 }
 
