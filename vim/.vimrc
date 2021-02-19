@@ -85,17 +85,17 @@ highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
 "set guicursor+=i:blinkwait10
 
 call plug#begin('~/.vim/plugged')
-Plug 'https://github.com/junegunn/vim-plug'
-"Plug 'https://github.com/ycm-core/YouCompleteMe.git'
-Plug 'https://github.com/airblade/vim-gitgutter.git'
-Plug 'https://github.com/frazrepo/vim-rainbow.git'
+Plug 'junegunn/vim-plug'
+Plug 'Dosx001/tabline.vim.git'
+Plug 'Dosx001/vim-indentguides.git'
+Plug 'airblade/vim-gitgutter.git'
+Plug 'frazrepo/vim-rainbow.git'
 Plug 'vim-airline/vim-airline'
-Plug 'https://tpope.io/vim/fugitive.git'
-"Plug 'https://github.com/Yggdroot/indentLine.git'
-Plug 'https://github.com/thaerkh/vim-indentguides.git'
-Plug 'https://github.com/mkitt/tabline.vim.git'
+Plug 'vim/fugitive.git'
 Plug 'mattn/emmet-vim'
-"Plug 'https://github.com/jaxbot/browserlink.vim'
+"Plug 'Yggdroot/indentLine.git'
+"Plug 'ycm-core/YouCompleteMe.git'
+"Plug 'jaxbot/browserlink.vim'
 "Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
 
