@@ -227,6 +227,7 @@ export EDITOR="$VISUAL"
 source ~/.aliasme/aliasme.sh
 alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 alias Explorer="/mnt/c/Windows/explorer.exe ."
+alias Sever="live-server --no-browser --port=8000"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
