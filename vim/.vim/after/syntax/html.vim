@@ -1,1 +1,1 @@
-setlocal syntax=sh
+"setlocal syntax=sh
