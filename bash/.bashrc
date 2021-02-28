@@ -142,7 +142,7 @@ gitStatus() {
         for item in ${status}
         do
             case $item in
-                "??" | "js")
+                "??")
                     output+=("\e[37m");;
                 "M")
                     Type="M";;
@@ -167,24 +167,32 @@ gitStatus() {
                 "UU" | "AA")
                     output+=("\e[90m");;
                 *)
-                    case $Type in
-                        "M")
-                            if [[ -z $(git diff --raw ${item}) ]]
-                            then
-                                output+=("\e[32m")
-                            else
-                                output+=("\e[33m")
-                            fi;;
-                        "D")
-                            if [[ $(git status ${item}) == *"not"* ]]
-                            then
-                                output+=("\e[31m")
-                            else
-                                output+=("\e[91m")
-                            fi;;
-                    esac
-                    Type=""
-                    output+=($item)
+                    if [[ ${#item} == 2 ]]
+                    then
+                        if [[ ${output[-1]} != "\e[37m" ]]
+                        then
+                            output+=("\e[37m")
+                        fi
+                    else
+                        case $Type in
+                            "M")
+                                if [[ -z $(git diff --raw ${item}) ]]
+                                then
+                                    output+=("\e[32m")
+                                else
+                                    output+=("\e[33m")
+                                fi;;
+                            "D")
+                                if [[ $(git status ${item}) == *"not"* ]]
+                                then
+                                    output+=("\e[31m")
+                                else
+                                    output+=("\e[91m")
+                                fi;;
+                        esac
+                        Type=""
+                        output+=($item)
+                    fi
             esac
         done
         echo -e "\n${output[@]}"
