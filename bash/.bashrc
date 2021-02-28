@@ -232,10 +232,12 @@ position() {
 export PS1="\[\e[92m\]\u@\h \$(Date) \$(gitStash)\$(gitLastLog)\$(gitStatus)\n\[\e[32;44m\]\W\$(gitBranch)\[\e[00m\]"
 export VISUAL=vim
 export EDITOR="$VISUAL"
+export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
 source ~/.aliasme/aliasme.sh
 alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 alias Explorer="/mnt/c/Windows/explorer.exe ."
 alias Sever="live-server --no-browser --port=8000"
+alias VcXsrv="/mnt/d/Program\ Files/VcXsrv/vcxsrv.exe"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
