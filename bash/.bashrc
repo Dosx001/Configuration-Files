@@ -169,7 +169,7 @@ gitStatus() {
                 *)
                     if [[ ${#item} == 2 ]]
                     then
-                        if [[ ${output[-1]} != "\e[37m" ]]
+                        if [[ ${#output[@]} -eq 0 || ${output[-1]} != "\e[37m" ]]
                         then
                             output+=("\e[37m")
                         fi
