@@ -167,7 +167,7 @@ gitStatus() {
                 "UU" | "AA")
                     output+=("\e[90m");;
                 *)
-                    if [[ ${#item} == 2 ]]
+                    if [[ ${#item} == 2 && ${item} != "->" ]]
                     then
                         if [[ ${#output[@]} -eq 0 || ${output[-1]} != "\e[37m" ]]
                         then
@@ -236,7 +236,7 @@ export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
 source ~/.aliasme/aliasme.sh
 alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 alias Explorer="/mnt/c/Windows/explorer.exe ."
-alias Sever="live-server --no-browser --port=8000"
+alias Server="live-server --no-browser --port=8000"
 alias VcXsrv="/mnt/d/Program\ Files/VcXsrv/vcxsrv.exe"
 
 # >>> conda initialize >>>
