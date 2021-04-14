@@ -22,6 +22,7 @@ autocmd VimResized * wincmd =
 autocmd BufWinLeave <buffer> call clearmatches()
 
 command Py execute "wa | !clear; python3 '%:t'"
+command Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
 command Restore execute "!git restore '%:p'"
 command Source execute "w | source %"
 command Clear execute "!clear"
@@ -86,13 +87,14 @@ highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug'
-Plug 'Dosx001/tabline.vim.git'
-Plug 'Dosx001/vim-indentguides.git'
-Plug 'airblade/vim-gitgutter.git'
-Plug 'frazrepo/vim-rainbow.git'
+Plug 'Dosx001/tabline.vim'
+Plug 'Dosx001/vim-indentguides'
+Plug 'airblade/vim-gitgutter'
+Plug 'frazrepo/vim-rainbow'
 Plug 'vim-airline/vim-airline'
-Plug 'vim/fugitive.git'
+Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
+Plug 'cakebaker/scss-syntax.vim'
 "Plug 'Yggdroot/indentLine.git'
 "Plug 'ycm-core/YouCompleteMe.git'
 "Plug 'jaxbot/browserlink.vim'
@@ -103,7 +105,7 @@ call plug#end()
 "let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
 
 " Rainbow
-autocmd FileType c,cpp,python,javascript,java,json call rainbow#load()
+autocmd FileType c,cpp,python,javascript,java,jsont call rainbow#load()
 "let g:rainbow_ctermfgs = [196, 208, 226, 46, 51, 21, 93, 202] "rainbow colors
 let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
             \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray',
