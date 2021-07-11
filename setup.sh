@@ -1,4 +1,7 @@
 sudo apt-get install git
+add-apt-repository ppa:git-core/ppa
+apt update
+apt install git
 git config --global user.name "Andres Rodriguez"
 git config --global user.email "andresmichelrodriguez@gmail.com"
 git config --global core.editor vim
