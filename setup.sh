@@ -48,6 +48,7 @@ wget https://az764295.vo.msecnd.net/stable/2d23c42a936db1c7b3b06f918cde29561cc47
 wget https://github.com/ChrisAnd1998/TaskbarX/releases/download/1.7.0.0/TaskbarX_1.7.0.0_x64.zip
 wget https://github.com/White-Tiger/T-Clock/releases/download/v2.1.0%2357/T-Clock.zip
 wget https://genshinimpact.mihoyo.com/client_app/launcher/20210609_faac20994b76230c/GenshinImpact_install_mihoyo_20210525204658.exe
+wget https://www.gskill.com/gskill-device/keyboard/G.SKILL_RIPJAWSKeyboard_KM780_MX_Setup_V2.03.zip
 
 al origin
 git clone https://github.com/sgolovine/nerdfont-patcher.git
