@@ -18,3 +18,7 @@ Windows Security
 Firewall & network protection
 Allow an app through firewall
 make sure VcXsrv has both public and private checked
+disable access control
+
+# DS
+C 34 40 50
