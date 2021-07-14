@@ -39,8 +39,10 @@ cd /usr/src/gtest
 sudo cmake CMakeLists.txt
 sudo make
 
-mkdir /mnt/c/download
-cd /mnt/c/download
+User=`/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -C whoami`
+User=${User##*\\}
+User=${User:0:${#User}-1}
+cd /mnt/c/Users/`echo $User`/Downloads
 wget https://justgetflux.com/flux-setup.exe
 wget https://github.com/ChrisAnd1998/TaskbarX/releases/download/1.7.0.0/TaskbarX_1.7.0.0_x64.zip
 wget https://github.com/White-Tiger/T-Clock/releases/download/v2.1.0%2357/T-Clock.zip
@@ -56,7 +58,7 @@ wget https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe
 wget https://www.gskill.com/gskill-device/keyboard/G.SKILL_RIPJAWSKeyboard_KM780_MX_Setup_V2.03.zip
 wget https://www.libreoffice.org/donate/dl/win-x86_64/7.0.6/en-US/LibreOffice_7.0.6_Win_x64.msi
 
-cd /mnt/d/Repositories
+cd /mnt/d/Repositories || cd /mnt/c/Repositories
 git clone https://github.com/sgolovine/nerdfont-patcher.git
 cd nerdfont-patcher
 sudo apt-get install software-properties-common
