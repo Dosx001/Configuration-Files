@@ -35,7 +35,7 @@
               "hidden": false,
               "name": "Ubuntu",
               "source": "Windows.Terminal.Wsl",
-              "fontFace": "Consolas",
+              "fontFace": "Consolas Nerd Font",
               "fontSize": 10,
               "padding": "0, 0, 0, 0",
               "background": "#000"
@@ -46,8 +46,10 @@
               "name": "Windows PowerShell",
               "commandline": "powershell.exe",
               "hidden": false,
+              "fontFace": "Consolas Nerd Font",
+              "fontSize": 10,
+              "padding": "0, 0, 0, 0",
               "background": "#000"
-
             },
             {
                 // Make changes here to the cmd.exe profile.
@@ -55,8 +57,8 @@
                 "name": "Command Prompt",
                 "commandline": "cmd.exe",
                 "hidden": false,
-                "fontFace": "Consolas",
-                "fontSize": 11,
+                "fontFace": "Consolas Nerd Font",
+                "fontSize": 10,
                 "padding": "0, 0, 0, 0",
                 "background": "#000"
             },
@@ -65,6 +67,9 @@
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure",
+                "fontFace": "Consolas Nerd Font",
+                "fontSize": 10,
+                "padding": "0, 0, 0, 0",
                 "background": "#000"
             }
         ]
