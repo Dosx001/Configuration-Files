@@ -25,6 +25,8 @@ cp aliasme/cmd ~/.aliasme
 
 sudo apt install node-typescript
 sudo apt install yui-compressor
+py=`python3 -V`
+sudo apt-get install python`echo ${py:7:3}`-tk
 
 sudo apt-get install python3-pip
 pip3 install matplotlib
