@@ -25,12 +25,15 @@ cp aliasme/cmd ~/.aliasme
 
 sudo apt install node-typescript
 sudo apt install yui-compressor
+sudo apt install firefox
+sudo apt install firefox-geckodriver
 py=`python3 -V`
 sudo apt-get install python`echo ${py:7:3}`-tk
 
 sudo apt-get install python3-pip
 pip3 install matplotlib
 pip3 install numpy
+pip3 install -U selenium
 
 sudo apt install npm
 sudo npm install -g sass
