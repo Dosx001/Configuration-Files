@@ -12,6 +12,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 wget https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 ./wsl_update_x64.msi
 wsl --set-default-version 2
+? wsl.exe --set-version Ubuntu 2
 
 # VcXsrv
 Windows Security
@@ -22,3 +23,6 @@ disable access control
 
 # DS
 C 34 40 50
+  33 30 25
+X 67
+  50 75
