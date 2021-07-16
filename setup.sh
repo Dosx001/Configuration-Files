@@ -37,7 +37,8 @@ pip3 install -U selenium
 
 sudo apt install npm
 sudo npm install -g sass
-sudo npm install terser -g
+sudo npm install -g terser
+sudo npm install -g live-server
 
 sudo apt-get install libgtest-dev
 cd /usr/src/gtest
