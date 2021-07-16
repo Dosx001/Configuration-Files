@@ -105,7 +105,7 @@ call plug#end()
 "let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
 
 " Rainbow
-autocmd FileType c,cpp,python,javascript,java,jsont call rainbow#load()
+autocmd FileType c,cpp,python,javascript,java,json,typescript call rainbow#load()
 "let g:rainbow_ctermfgs = [196, 208, 226, 46, 51, 21, 93, 202] "rainbow colors
 let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
             \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray',
