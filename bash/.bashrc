@@ -237,7 +237,9 @@ source ~/.aliasme/aliasme.sh
 alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 alias Explorer="/mnt/c/Windows/explorer.exe ."
 alias Server="live-server --no-browser --port=8000"
-alias VcXsrv="/mnt/d/Program\ Files/VcXsrv/vcxsrv.exe"
+alias Powershell="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
+alias VcXsrv="Powershell -C 'D:\Repositories\Configuration-Files\VcXsrv\config.xlaunch' &"
+alias Kill="Powershell -C 'Stop-Process -name vcxsrv'"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
