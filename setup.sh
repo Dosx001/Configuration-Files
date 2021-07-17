@@ -12,11 +12,16 @@ git config --global user.email "andresmichelrodriguez@gmail.com"
 git config --global core.editor vim
 git config --global init.defaultBranch main
 
-git clone git@github.com:Dosx001/Configuration-Files.git
-cd Configuration-Files
-cp -r vim/.vimrc .vim/after bash/.bashrc ~
+User=`/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -C whoami`
+User=${User##*\\}
+User=${User:0:${#User}-1}
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone git@github.com:Dosx001/Configuration-Files.git
+cd Configuration-Files
+cp -r vim/.vimrc vim/.vim bash/.bashrc ~
+cp windows_terminal/settings.json /mnt/c/`echo $User`/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 vim ~/.vimrc "+PlugInstall | q | q"
 
 mkdir ~/.aliasme
@@ -47,9 +52,6 @@ cd /usr/src/gtest
 sudo cmake CMakeLists.txt
 sudo make
 
-User=`/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -C whoami`
-User=${User##*\\}
-User=${User:0:${#User}-1}
 cd /mnt/c/Users/`echo $User`/Downloads
 wget https://justgetflux.com/flux-setup.exe
 wget https://wifimouse.necta.us/apk/MouseServer.exe
