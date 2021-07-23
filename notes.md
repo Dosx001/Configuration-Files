@@ -26,3 +26,8 @@ C 34 40 50
   33 30 25
 X 67
   50 75
+
+# Notes
+Uninstall bloatware
+Disable background apps
+Disable startup apps
