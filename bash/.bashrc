@@ -240,6 +240,7 @@ alias Server="live-server --no-browser --port=8000"
 alias Powershell="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
 alias VcXsrv="Powershell -C 'D:\Repositories\Configuration-Files\VcXsrv\config.xlaunch' &"
 alias Kill="Powershell -C 'Stop-Process -name vcxsrv'"
+alias Restart="Kill; VcXsrv"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
