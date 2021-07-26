@@ -30,6 +30,9 @@ X 67
 # mouseless
 disable useless shortcuts
 
+# Powershell
+Set-ExecutionPolicy RemoteSigned
+
 # Notes
 Uninstall bloatware
 Disable background apps
