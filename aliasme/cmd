@@ -1,3 +1,57 @@
+terminal
+cd /mnt/c/Users/Dosx001/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
+Default
 origin
-cd /mnt/c/git
+cd /mnt/d/Repositories
+Default
+genshin
+cd /mnt/d/Repositories/python/Genshin_Tools
+Default
+Google
+cd /mnt/d/Repositories/python/Google
+Default
+configuration
+cd /mnt/d/Repositories/Configuration-Files
+Default
+mini-RPG
+cd /mnt/d/Repositories/C++/mini-RPG
+Default
+anime-calendar
+cd /mnt/d/Repositories/html/anime-calendar
+Default
+homeC
+cd /mnt/c/Users/Dosx001
+Default
+github
+cd /mnt/d/Repositories/github
+Default
+reset
+git reset --soft HEAD~
+Default
+push
+git push
+Default
+pushf
+git push -f
+Default
+AnimeCalendar
+cd /mnt/d/Repositories/github/AnimeCalendar.github.io
+Default
+keyboard
+cd /mnt/c/Users/Dosx001/AndroidStudioProjects/AndroidBluetoothKeyboardMouse
+Default
+robin
+cd /mnt/d/Repositories/python/robinhood-bot
+Default
+practice
+cd /mnt/d/Users/Dosx001/AndroidStudioProjects/AndroidAppPractice
+Default
+QWERTY
+cd /mnt/d/Users/Dosx001/AndroidStudioProjects/QWERTY
+Default
+banner
+cd /mnt/d/Repositories/python/Genshin_Banner
+Default
+merge
+files=(); for i in `git status -s`; do if [[ -f $i && -n $(git diff --raw $i) ]]; then files+=($i); fi; done; vim ${files[@]} -p
 Default
