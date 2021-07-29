@@ -1,3 +1,5 @@
+#!/bin/bash
+rm .setup.sh.swp
 ssh-keygen -t ed25519 -C "andresmichelrodriguez@gmail.com"
 ssh-add ~/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub
@@ -21,7 +23,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 git clone git@github.com:Dosx001/Configuration-Files.git
 cd Configuration-Files
 cp -r vim/.vimrc vim/.vim bash/.bashrc ~
-cp windows_terminal/settings.json /mnt/c/`echo $User`/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
+cp windows_terminal/settings.json /mnt/c/Users/`echo $User`/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 vim ~/.vimrc "+PlugInstall | q | q"
 
 mkdir ~/.aliasme
