@@ -164,8 +164,15 @@ gitStatus() {
                     output+=("\e[38;5;201m");;
                 "D")
                     Type="D";;
-                "UU" | "AA")
-                    output+=("\e[90m");;
+                "UU")
+                    output+=("\e[30;43m")
+                    merge=true;;
+                "AA")
+                    output+=("\e[30;42m")
+                    merge=true;;
+                "UD" | "DU")
+                    output+=("\e[30;41m")
+                    merge=true;;
                 *)
                     if [[ ${#item} == 2 && ${item} != "->" ]]
                     then
@@ -192,6 +199,11 @@ gitStatus() {
                         esac
                         Type=""
                         output+=($item)
+                        if [[ $merge == true ]]
+                        then
+                            output+=("\e[00m")
+                            merge=false
+                        fi
                     fi
             esac
         done
