@@ -20,6 +20,7 @@ set autoread
 
 autocmd VimResized * wincmd =
 autocmd BufWinLeave <buffer> call clearmatches()
+autocmd BufRead,BufNewFile * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
 
 command Py execute "wa | !clear; python3 '%:t'"
 command Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
