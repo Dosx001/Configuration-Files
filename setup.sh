@@ -33,6 +33,7 @@ cp aliasme/cmd ~/.aliasme
 sudo apt install -y make
 sudo apt install -y cmake
 sudo apt install -y firefox
+sudo apt install -y libgbm-dev # wsl electron
 sudo apt install -y yui-compressor
 sudo apt install -y node-typescript
 sudo apt install -y firefox-geckodriver
