@@ -134,6 +134,8 @@ Date() {
 }
 
 gitStatus() {
+    # single char dir & double char files bad
+    # double char dir decrease performance
     #echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
     status=$(git status --short 2> /dev/null)
     if [ -n "$status" ]
@@ -144,6 +146,8 @@ gitStatus() {
             case $item in
                 "??")
                     output+=("\e[37m");;
+                "D")
+                    Type="D";;
                 "M")
                     Type="M";;
                 "MM")
@@ -162,19 +166,29 @@ gitStatus() {
                     output+=("\e[38;5;93m");;
                 "RD")
                     output+=("\e[38;5;201m");;
-                "D")
-                    Type="D";;
                 "UU")
                     output+=("\e[30;43m")
                     merge=true;;
                 "AA")
                     output+=("\e[30;42m")
                     merge=true;;
-                "UD" | "DU")
+                "AU")
+                    output+=("\e[37;42m")
+                    merge=true;;
+                "UA")
+                    output+=("\e[96;42m")
+                    merge=true;;
+                "DD")
                     output+=("\e[30;41m")
                     merge=true;;
+                "DU")
+                    output+=("\e[37;41m")
+                    merge=true;;
+                "UD")
+                    output+=("\e[96;41m")
+                    merge=true;;
                 *)
-                    if [[ ${#item} == 2 && ${item} != "->" ]]
+                    if [[ ${#item} == 2 && ${item} != "->" && ! ${item} =~ "./" ]]
                     then
                         if [[ ${#output[@]} -eq 0 || ${output[-1]} != "\e[37m" ]]
                         then
@@ -199,7 +213,7 @@ gitStatus() {
                         esac
                         Type=""
                         output+=($item)
-                        if [[ $merge == true ]]
+                        if [[ $merge ]]
                         then
                             output+=("\e[00m")
                             merge=false
