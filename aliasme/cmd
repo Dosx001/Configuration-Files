@@ -55,3 +55,9 @@ Default
 merge
 files=(); for i in `git status -s`; do if [[ -f $i && -n $(git diff --raw $i) ]]; then files+=($i); fi; done; vim ${files[@]} -p
 Default
+branch
+git push --set-upstream origin `git branch --show-current`
+Default
+resume
+cd /mnt/d/Repositories/github/Dosx001/resume
+Default
