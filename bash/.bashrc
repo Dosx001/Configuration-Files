@@ -134,9 +134,8 @@ Date() {
 }
 
 gitStatus() {
-    # single char dir & double char files bad
-    # double char dir decrease performance
     #echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
+    set -o noglob
     status=$(git status --short 2> /dev/null)
     if [ -n "$status" ]
     then
@@ -188,36 +187,28 @@ gitStatus() {
                     output+=("\e[96;41m")
                     merge=true;;
                 *)
-                    if [[ ${#item} == 2 && ${item} != "->" && ! ${item} =~ "./" ]]
+                    case $Type in
+                        "M")
+                            if [[ -z $(git diff --raw ${item}) ]]
+                            then
+                                output+=("\e[32m")
+                            else
+                                output+=("\e[33m")
+                            fi;;
+                        "D")
+                            if [[ $(git status ${item}) == *"not"* ]]
+                            then
+                                output+=("\e[31m")
+                            else
+                                output+=("\e[91m")
+                            fi;;
+                    esac
+                    Type=""
+                    output+=($item)
+                    if [[ $merge ]]
                     then
-                        if [[ ${#output[@]} -eq 0 || ${output[-1]} != "\e[37m" ]]
-                        then
-                            output+=("\e[37m")
-                        fi
-                    else
-                        case $Type in
-                            "M")
-                                if [[ -z $(git diff --raw ${item}) ]]
-                                then
-                                    output+=("\e[32m")
-                                else
-                                    output+=("\e[33m")
-                                fi;;
-                            "D")
-                                if [[ $(git status ${item}) == *"not"* ]]
-                                then
-                                    output+=("\e[31m")
-                                else
-                                    output+=("\e[91m")
-                                fi;;
-                        esac
-                        Type=""
-                        output+=($item)
-                        if [[ $merge ]]
-                        then
-                            output+=("\e[00m")
-                            merge=false
-                        fi
+                        output+=("\e[00m")
+                        merge=false
                     fi
             esac
         done
