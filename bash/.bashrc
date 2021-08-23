@@ -136,83 +136,83 @@ Date() {
 gitStatus() {
     #echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
     set -o noglob
-    status=$(git status --short 2> /dev/null)
+    status=$(git status -s 2> /dev/null)
     if [ -n "$status" ]
     then
-        output=()
+        echo
         for item in ${status}
         do
             case $item in
                 "??")
-                    output+=("\e[37m");;
+                    echo -en "\e[37m";;
                 "D")
                     Type="D";;
                 "M")
                     Type="M";;
                 "MM")
-                    output+=("\e[93m");;
+                    echo -en "\e[93m";;
                 "MD")
-                    output+=("\e[38;5;202m");;
+                    echo -en "\e[38;5;202m";;
                 "A")
-                    output+=("\e[34m");;
+                    echo -en "\e[34m";;
                 "AM")
-                    output+=("\e[94m");;
+                    echo -en "\e[94m";;
                 "AD")
-                    output+=("\e[96m");;
+                    echo -en "\e[96m";;
                 "R")
-                    output+=("\e[35m");;
+                    echo -en "\e[35m";;
                 "RM")
-                    output+=("\e[38;5;93m");;
+                    echo -en "\e[38;5;93m";;
                 "RD")
-                    output+=("\e[38;5;201m");;
+                    echo -en "\e[38;5;201m";;
                 "UU")
-                    output+=("\e[30;43m")
+                    echo -en "\e[30;43m"
                     merge=true;;
                 "AA")
-                    output+=("\e[30;42m")
+                    echo -en "\e[30;42m"
                     merge=true;;
                 "AU")
-                    output+=("\e[37;42m")
+                    echo -en "\e[37;42m"
                     merge=true;;
                 "UA")
-                    output+=("\e[96;42m")
+                    echo -en "\e[96;42m"
                     merge=true;;
                 "DD")
-                    output+=("\e[30;41m")
+                    echo -en "\e[30;41m"
                     merge=true;;
                 "DU")
-                    output+=("\e[37;41m")
+                    echo -en "\e[37;41m"
                     merge=true;;
                 "UD")
-                    output+=("\e[96;41m")
+                    echo -en "\e[96;41m"
                     merge=true;;
                 *)
                     case $Type in
                         "M")
-                            if [[ -z $(git diff --raw ${item}) ]]
+                            if [[ "$(git status -s $item)" =~ "  " ]]
                             then
-                                output+=("\e[32m")
+                                echo -en "\e[32m"
                             else
-                                output+=("\e[33m")
+                                echo -en "\e[33m"
                             fi;;
                         "D")
-                            if [[ $(git status ${item}) == *"not"* ]]
+                            if [[ "$(git status -s $item)" =~ "  " ]]
                             then
-                                output+=("\e[31m")
+                                echo -en "\e[91m"
                             else
-                                output+=("\e[91m")
+                                echo -en "\e[31m"
                             fi;;
                     esac
                     Type=""
-                    output+=($item)
                     if [[ $merge ]]
                     then
-                        output+=("\e[00m")
+                        echo -en $item"\e[00m "
                         merge=false
+                    else
+                        echo -n $item" "
                     fi
             esac
         done
-        echo -e "\n${output[@]}"
     fi
 }
 
@@ -238,7 +238,7 @@ gitLastLog() {
     commit=$(git log -1 --pretty=format:"%s" 2> /dev/null)
     if [ -n "$commit" ]
     then
-        echo -e "\n\e[90m" $commit
+        echo -e "\n\e[90m$commit"
     fi
 }
 
