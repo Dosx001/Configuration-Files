@@ -20,6 +20,50 @@ set autoread
 set showcmd
 set noshowmode
 
+"function! InsertStatuslineColor(mode)
+"    let modes = {'n': 'Normal ', 'i': 'Insert ', 'R': 'Replace ', 'v': 'Visual ', 'V': 'V-Line ', "\<C-v>": 'V-Block '}
+"    return  get(modes, a:mode, 'New ')
+"endfunction
+"
+"function! GitStatus()
+"    let l:branch = system("git branch --show-current 2> /dev/null | tr -d '\n'")
+"    if l:branch != ""
+"        let l:branch .= " "
+"        let l:branch .= join(map(['+','~','-'], {i,v -> v.''.GitGutterGetHunkSummary()[i]}), ' ')
+"        return l:branch
+"    endif
+"    return ""
+"endfunction
+"set statusline=%{InsertStatuslineColor(mode())}
+"set statusline+=%{GitStatus()}
+
+augroup UPDATE_GITBRANCH
+  " clear old commands
+  autocmd!
+
+  " update git branch
+  autocmd BufWritePre * :call UpdateGitBranch()
+  autocmd BufReadPost * :call UpdateGitBranch()
+  autocmd BufEnter * :call UpdateGitBranch()
+augroup END
+let b:gitparsedbranchname = ''
+function! UpdateGitBranch()
+  let l:string = system("git branch --show-current 2>/dev/null | tr -d '\n'")
+  let b:gitparsedbranchname = strlen(l:string) > 0?''.l:string.'':' '
+endfunction
+
+set laststatus=2
+set statusline=%{b:gitparsedbranchname}
+set statusline+=%#LineNr#
+set statusline+=\ %f
+set statusline+=%m
+set statusline+=%=
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+
 autocmd VimResized * wincmd =
 autocmd BufWinLeave <buffer> call clearmatches()
 autocmd BufRead,BufNewFile * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
@@ -94,7 +138,7 @@ Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-indentguides'
 Plug 'airblade/vim-gitgutter'
 Plug 'frazrepo/vim-rainbow'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
@@ -127,7 +171,7 @@ nmap ] <Plug>(GitGutterNextHunk)
 nmap [ <Plug>(GitGutterPrevHunk)
 
 " Airline
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 "let g:airline_extensions = []
 "let g:Powerline_symbols='unicode'
 "let g:airline#extensions#tabline#enabled = 1
