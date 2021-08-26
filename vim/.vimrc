@@ -17,6 +17,8 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
 set equalalways
 set autoread
+set showcmd
+set noshowmode
 
 autocmd VimResized * wincmd =
 autocmd BufWinLeave <buffer> call clearmatches()
@@ -41,18 +43,18 @@ command Clear execute "!clear"
 syntax on
 "colorscheme monokai
 highlight Visual ctermbg=235
-highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
 highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
-highlight VertSplit ctermbg=darkred ctermfg=237
+highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
 highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
+highlight VertSplit ctermbg=darkred ctermfg=237
 highlight EndOfBuffer ctermfg=237 ctermbg=None
 
 set number
-highlight LineNr ctermfg=darkred ctermbg=237 cterm=NONE guifg=#90908a guibg=#3c3d37 gui=NONE
+highlight LineNr ctermfg=darkred ctermbg=black
 
 set colorcolumn=100
-highlight ColorColumn ctermbg=darkgrey
+highlight ColorColumn ctermbg=235
 
 set cursorline
 highlight CursorLine cterm=NONE ctermbg=235
@@ -125,8 +127,8 @@ nmap ] <Plug>(GitGutterNextHunk)
 nmap [ <Plug>(GitGutterPrevHunk)
 
 " Airline
-"let g:airline_extensions = []
 let g:airline_powerline_fonts = 1
+"let g:airline_extensions = []
 "let g:Powerline_symbols='unicode'
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
