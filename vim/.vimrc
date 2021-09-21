@@ -92,20 +92,23 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug'
 Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-indentguides'
-Plug 'airblade/vim-gitgutter'
-Plug 'frazrepo/vim-rainbow'
-Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
-"Plug 'Yggdroot/indentLine.git'
-"Plug 'ycm-core/YouCompleteMe.git'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'frazrepo/vim-rainbow'
+"Plug 'ycm-core/YouCompleteMe'
 "Plug 'jaxbot/browserlink.vim'
 "Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
 
 " YouCompleteMe
 "let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
+"set completeopt-=preview
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_max_num_candidates = 10
 
 " Rainbow
 autocmd FileType c,cpp,python,javascript,java,json,typescript call rainbow#load()
@@ -134,15 +137,10 @@ let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 
-" indentLine
-"let g:indentLine_enabled = 0
-"let g:indentLine_char = '|'
-"let g:indentLine_color_term = 237
-
 " Indent Guides
 let g:indentguides_spacechar = '|'
 let g:indentguides_tabchar = '┆'
 
 " Emmet
-"let g:user_emmet_leader_key='<Ctrl-q>'
+let g:user_emmet_leader_key='<Tab>'
 "let g:user_emmet_mode='a'
