@@ -22,7 +22,7 @@ set noshowmode
 
 autocmd VimResized * wincmd =
 autocmd BufWinLeave <buffer> call clearmatches()
-autocmd BufRead,BufNewFile * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
+autocmd BufRead * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
 
 command Py execute "wa | !clear; python3 '%:t'"
 command Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
@@ -41,7 +41,6 @@ command Clear execute "!clear"
 "inoremap { {}<left>
 
 syntax on
-"colorscheme monokai
 highlight Visual ctermbg=235
 highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
@@ -49,9 +48,11 @@ highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
 highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
 highlight VertSplit ctermbg=darkred ctermfg=237
 highlight EndOfBuffer ctermfg=237 ctermbg=None
+highlight Pmenu ctermfg=1 ctermbg=black
+highlight PmenuSel ctermfg=208 ctermbg=8
 
 set number
-highlight LineNr ctermfg=darkred ctermbg=black
+highlight LineNr ctermfg=darkred ctermbg=234
 
 set colorcolumn=100
 highlight ColorColumn ctermbg=235
@@ -73,20 +74,7 @@ highlight ExtendsChar ctermfg=darkred ctermbg=237 cterm=bold
 highlight PrecedesChar ctermfg=darkred ctermbg=237 cterm=bold
 highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
 
-"set showbreak=\\ " [bonus]
-"highlight ExtraWhitespace ctermfg=blue ctermbg=red guibg=red
-"match ExtraWhitespace /\s\+$\|\t/
-"highlight RedundantSpaces ctermbg=darkred guibg=red
-"match RedundantSpaces /\s\+$/
-"autocmd BufWinEnter <buffer> match Error /\s\+$/
-"autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
-"autocmd InsertLeave <buffer> match Error /\s\+$/
-"highlight Cursor ctermfg=red ctermbg=blue guifg=red guibg=black
-"highlight iCursor ctermfg=green ctermbg=yellow guifg=green guibg=steelblue
-"set guicursor=n-v-c:block-Cursor
-"set guicursor+=i:ver100-iCursor
-"set guicursor+=n-v-c:blinkon0
-"set guicursor+=i:blinkwait10
+hi def Yellow ctermfg=3
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug'
@@ -131,6 +119,7 @@ nmap [ <Plug>(GitGutterPrevHunk)
 
 " Airline
 let g:airline_powerline_fonts = 1
+let g:airline_theme='jet'
 "let g:airline_extensions = []
 "let g:Powerline_symbols='unicode'
 "let g:airline#extensions#tabline#enabled = 1
@@ -142,5 +131,5 @@ let g:indentguides_spacechar = '|'
 let g:indentguides_tabchar = '┆'
 
 " Emmet
-let g:user_emmet_leader_key='<Tab>'
-"let g:user_emmet_mode='a'
+let g:user_emmet_leader_key='<C-a>'
+let g:user_emmet_mode='i'
