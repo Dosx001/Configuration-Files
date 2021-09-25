@@ -80,13 +80,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug'
 Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-indentguides'
+Plug 'Dosx001/vim-rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'frazrepo/vim-rainbow'
 "Plug 'ycm-core/YouCompleteMe'
 "Plug 'jaxbot/browserlink.vim'
 "Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
@@ -99,7 +99,7 @@ call plug#end()
 "let g:ycm_max_num_candidates = 10
 
 " Rainbow
-autocmd FileType c,cpp,python,javascript,java,json,typescript call rainbow#load()
+let g:rainbow_blacklist = ['css', 'html', 'scss']
 "let g:rainbow_ctermfgs = [196, 208, 226, 46, 51, 21, 93, 202] "rainbow colors
 let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
             \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray',
