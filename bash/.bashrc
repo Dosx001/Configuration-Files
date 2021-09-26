@@ -118,7 +118,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/mnt/c/Users/Dosx001/AppData/Local/Programs/"Microsoft VS Code"/bin
+export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/mnt/e/Users/Dosx001/AppData/Local/Programs/"Microsoft VS Code"/bin
 
 #if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
 #    GIT_PROMPT_ONLY_IN_REPO=1
@@ -145,6 +145,7 @@ alias Powershell="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
 alias VcXsrv="Powershell -C 'D:\Repositories\Configuration-Files\VcXsrv\config.xlaunch' &"
 alias Kill="Powershell -C 'Stop-Process -name vcxsrv'"
 alias Restart="Kill; VcXsrv"
+stty -ixon
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
