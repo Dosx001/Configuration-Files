@@ -13,7 +13,6 @@ set nobackup
 set nowrap
 set hidden
 set encoding=utf-8
-set guifont=Ubuntu\ Mono\ derivative\ Powerlin
 set updatetime=100
 set equalalways
 set autoread
@@ -30,15 +29,12 @@ command Restore execute "!git restore '%:p'"
 command Source execute "w | source %"
 command Clear execute "!clear"
 
-" Key Mapping
-"inoremap <C-q> <Esc>
-"vnoremap <C-q> <Esc>
-"cnoremap <C-q> <Esc>
-"inoremap \" \""<left>
-"inoremap ' ''<left>
-"inoremap ( ()<left>
-"inoremap [ []<left>
-"inoremap { {}<left>
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+nnoremap <C-q> :wa<CR>
+inoremap <C-q> <Esc>:wa<CR>
+inoremap . .<C-g>u
+inoremap <Space> <Space><C-g>u
 
 syntax on
 highlight Visual ctermbg=235
@@ -120,16 +116,7 @@ nmap [ <Plug>(GitGutterPrevHunk)
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='jet'
-"let g:airline_extensions = []
-"let g:Powerline_symbols='unicode'
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " Indent Guides
 let g:indentguides_spacechar = '|'
 let g:indentguides_tabchar = '┆'
-
-" Emmet
-let g:user_emmet_leader_key='<C-a>'
-let g:user_emmet_mode='i'
