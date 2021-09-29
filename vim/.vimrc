@@ -18,10 +18,13 @@ set equalalways
 set autoread
 set showcmd
 set noshowmode
+set scrolloff=999
 
-autocmd VimResized * wincmd =
-autocmd BufWinLeave <buffer> call clearmatches()
-autocmd BufRead * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
+augroup Start
+    autocmd VimResized * wincmd =
+    autocmd BufWinLeave <buffer> call clearmatches()
+    autocmd BufRead * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
+augroup END
 
 command Py execute "wa | !clear; python3 '%:t'"
 command Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
@@ -29,6 +32,14 @@ command Restore execute "!git restore '%:p'"
 command Source execute "w | source %"
 command Clear execute "!clear"
 
+nnoremap <F2> :%s/
+inoremap <F2> <Esc>:%s/
+nnoremap <F3> :vs 
+inoremap <F3> <Esc>:vs 
+nnoremap <F4> :tabe 
+inoremap <F4> <Esc>:tabe 
+nnoremap <F5> :!<CR><CR>
+inoremap <F5> <Esc>:!<CR><CR>
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>
 nnoremap <C-q> :wa<CR>
@@ -76,6 +87,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug'
 Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-indentguides'
+Plug 'Dosx001/vim-template'
 Plug 'Dosx001/vim-rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
