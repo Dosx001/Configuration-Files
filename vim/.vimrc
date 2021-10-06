@@ -18,12 +18,13 @@ set equalalways
 set autoread
 set showcmd
 set noshowmode
-set scrolloff=999
 
 augroup Start
     autocmd VimResized * wincmd =
     autocmd BufWinLeave <buffer> call clearmatches()
     autocmd BufRead * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
+    autocmd CursorMoved * call CenterCursor()
+    autocmd CursorMovedI * call CenterCursor()
 augroup END
 
 command Py execute "wa | !clear; python3 '%:t'"
@@ -46,6 +47,15 @@ nnoremap <C-q> :wa<CR>
 inoremap <C-q> <Esc>:wa<CR>
 inoremap . .<C-g>u
 inoremap <Space> <Space><C-g>u
+
+fun! g:CenterCursor()
+    let i = line('$') - line('.')
+    if i < 30
+        execute "set scrolloff=" . i
+    else
+        set scrolloff=999
+    endif
+endfun
 
 syntax on
 highlight Visual ctermbg=235
