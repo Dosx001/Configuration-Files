@@ -84,7 +84,6 @@ highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
 hi def Yellow ctermfg=3
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/vim-plug'
 Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-indentguides'
 Plug 'Dosx001/vim-template'
@@ -100,18 +99,9 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
 
-" YouCompleteMe
-"let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
-"set completeopt-=preview
-"let g:ycm_min_num_of_chars_for_completion = 1
-"let g:ycm_max_num_candidates = 10
-
-" Rainbow
-let g:rainbow_blacklist = ['css', 'html', 'scss']
-"let g:rainbow_ctermfgs = [196, 208, 226, 46, 51, 21, 93, 202] "rainbow colors
-let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
-            \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray',
-            \'darkmagenta', 'Darkblue', 'darkgreen', 'darkcyan', 'darkred', 'red']
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='jet'
 
 " Git Gutter
 highlight GitGutterAdd ctermfg=green ctermbg=237
@@ -122,13 +112,22 @@ let g:gitgutter_enabled = 1
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_removed = '−'
 let g:gitgutter_sign_modified_removed = "~-"
-nmap ] <Plug>(GitGutterNextHunk)
-nmap [ <Plug>(GitGutterPrevHunk)
-
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme='jet'
+nmap <F10> <Plug>(GitGutterNextHunk)
+nmap <F9> <Plug>(GitGutterPrevHunk)
 
 " Indent Guides
 let g:indentguides_spacechar = '|'
 let g:indentguides_tabchar = '┆'
+
+" Rainbow
+let g:rainbow_blacklist = ['css', 'html', 'scss']
+"let g:rainbow_ctermfgs = [196, 208, 226, 46, 51, 21, 93, 202] "rainbow colors
+let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
+            \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray',
+            \'darkmagenta', 'Darkblue', 'darkgreen', 'darkcyan', 'darkred', 'red']
+
+" YouCompleteMe
+"let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
+"set completeopt-=preview
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_max_num_candidates = 10
