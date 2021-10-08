@@ -103,6 +103,12 @@ highlight ExtendsChar ctermfg=darkred ctermbg=237 cterm=bold
 highlight PrecedesChar ctermfg=darkred ctermbg=237 cterm=bold
 highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
 
+set spell spelllang=en_us
+highlight SpellBad term=reverse ctermfg=black ctermbg=red gui=undercurl guisp=Red
+highlight SpellCap term=reverse ctermfg=black ctermbg=blue gui=undercurl guisp=Blue
+highlight SpellRare term=reverse ctermfg=black ctermbg=magenta gui=undercurl guisp=Magenta
+highlight SpellLocal term=underline ctermfg=black ctermbg=darkcyan gui=undercurl guisp=DarkCyan
+
 hi def Yellow ctermfg=3
 
 call plug#begin('~/.vim/plugged')
