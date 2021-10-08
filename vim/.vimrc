@@ -27,6 +27,15 @@ augroup Start
     autocmd CursorMovedI * call CenterCursor()
 augroup END
 
+fun! g:CenterCursor()
+    let i = line('$') - line('.')
+    if i < 30
+        execute "set scrolloff=" . i
+    else
+        set scrolloff=999
+    endif
+endfun
+
 command Py execute "wa | !clear; python3 '%:t'"
 command Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
 command Restore execute "!git restore '%:p'"
@@ -47,13 +56,16 @@ nnoremap <C-q> :wa<CR>
 inoremap <C-q> <Esc>:wa<CR>
 inoremap . .<C-g>u
 inoremap <Space> <Space><C-g>u
+nnoremap <C-k> :call CtrlK()<CR>
+inoremap <C-k> <Esc>:call CtrlK()<CR>
 
-fun! g:CenterCursor()
-    let i = line('$') - line('.')
-    if i < 30
-        execute "set scrolloff=" . i
-    else
-        set scrolloff=999
+fun! g:CtrlK()
+    let filetype = expand('%:e')
+    if filetype == "py"
+        execute "Py"
+    elseif filetype == "html"
+        call cursor(line('.'), len(getline('.')))
+        call emmet#expandAbbr(3,"")
     endif
 endfun
 
