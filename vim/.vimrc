@@ -19,57 +19,78 @@ set autoread
 set showcmd
 set noshowmode
 
-"function! InsertStatuslineColor(mode)
-"    let modes = {'n': 'Normal ', 'i': 'Insert ', 'R': 'Replace ', 'v': 'Visual ', 'V': 'V-Line ', "\<C-v>": 'V-Block '}
-"    return  get(modes, a:mode, 'New ')
-"endfunction
-"
-"function! GitStatus()
-"    let l:branch = system("git branch --show-current 2> /dev/null | tr -d '\n'")
-"    if l:branch != ""
-"        let l:branch .= " "
-"        let l:branch .= join(map(['+','~','-'], {i,v -> v.''.GitGutterGetHunkSummary()[i]}), ' ')
-"        return l:branch
-"    endif
-"    return ""
-"endfunction
-"set statusline=%{InsertStatuslineColor(mode())}
-"set statusline+=%{GitStatus()}
-
-augroup UPDATE_GITBRANCH
-  " clear old commands
-  autocmd!
-
-  " update git branch
-  autocmd BufWritePre * :call UpdateGitBranch()
-  autocmd BufReadPost * :call UpdateGitBranch()
-  autocmd BufEnter * :call UpdateGitBranch()
-augroup END
-let b:gitparsedbranchname = ''
-function! UpdateGitBranch()
-  let l:string = system("git branch --show-current 2>/dev/null | tr -d '\n'")
-  let b:gitparsedbranchname = strlen(l:string) > 0?''.l:string.'':' '
-endfunction
-
-set laststatus=2
-set statusline=%{b:gitparsedbranchname}
-set statusline+=%#LineNr#
-set statusline+=\ %f
-set statusline+=%m
-set statusline+=%=
-set statusline+=\ %y
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\[%{&fileformat}\]
-set statusline+=\ %p%%
-set statusline+=\ %l:%c
-
 augroup Start
     autocmd VimResized * wincmd =
     autocmd BufWinLeave <buffer> call clearmatches()
     autocmd BufRead * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
-    autocmd CursorMoved * call CenterCursor()
-    autocmd CursorMovedI * call CenterCursor()
+    autocmd CursorMoved,CursorMovedI * call CenterCursor()
 augroup END
+
+let g:currentmode={
+            \ 'n' : ['Normal', 'N'],
+           \ 'no' : ['Normal·Operator Pending', 'N'],
+            \ 'v' : ['Visual', 'V'],
+            \ 'V' : ['V·Line', 'V'],
+       \ "\<C-V>" : ['V·Block', 'V'],
+            \ 's' : ['Select', 'S'],
+            \ 'S' : ['S·Line', 'S'],
+       \ "\<C-S>" : ['S·Block', 'S'],
+            \ 'i' : ['Insert', 'I'],
+            \ 'R' : ['Replace', 'R'],
+           \ 'Rv' : ['V·Replace', 'R'],
+            \ 'c' : ['Command', 'C'],
+           \ 'cv' : ['Vim Ex', 'O'],
+           \ 'ce' : ['Ex', 'O'],
+            \ 'r' : ['Prompt', 'O'],
+           \ 'rm' : ['More', 'O'],
+           \ 'r?' : ['Confirm', 'O'],
+            \ '!' : ['Shell', 'O'],
+            \ 't' : ['Terminal', 'O']
+            \}
+hi statusline ctermbg=black ctermfg=green
+fun! g:Color()
+    if g:int
+        hi statusline ctermfg=124
+        return 'Completion'
+    endif
+    let a = g:currentmode[mode()]
+    if a[1] == 'N'
+        hi statusline ctermfg=green
+    elseif a[1] == 'I'
+        hi statusline ctermfg=124
+    elseif a[1] == 'V'
+        hi statusline ctermfg=20
+    elseif a[1] == 'R'
+        hi statusline ctermfg=202
+    elseif a[1] == 'S'
+        hi statusline ctermfg=190
+    elseif a[1] == 'C'
+        hi statusline ctermfg=magenta
+    else
+        hi statusline ctermfg=cyan
+    endif
+    return a[0]
+endfun
+
+fun! g:GitBranch()
+    let branch = FugitiveStatusline()
+    return !empty(branch) ? branch[5:-3] : ""
+endfun
+
+inoremap <C-X> <Esc>:let g:int = 1<CR>i<C-X>
+au InsertChange,InsertLeave,CursorMovedI * let g:int = 0
+let g:int = 0
+set laststatus=2
+set statusline=
+set statusline+=\ %{toupper(g:Color())}\             " The current mode
+set statusline+=%1*\ %{GitBranch()}\                 " Git Branch
+set statusline+=%2*\ %{@%}\                          " File path
+set statusline+=%=                                   " Right Side
+set statusline+=%2*\ %{&ft}\                         " File type
+set statusline+=%1*\ %{''.(&fenc!=''?&fenc:&enc).''} " Encoding
+
+hi User1 ctermfg=1 ctermbg=black
+hi User2 ctermfg=1 ctermbg=234
 
 fun! g:CenterCursor()
     let i = line('$') - line('.')
@@ -118,7 +139,6 @@ highlight Visual ctermbg=235
 highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
 highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
-highlight StatusLine ctermfg=white ctermbg=241 cterm=bold
 highlight VertSplit ctermbg=darkred ctermfg=237
 highlight EndOfBuffer ctermfg=237 ctermbg=None
 highlight Pmenu ctermfg=1 ctermbg=black
@@ -162,8 +182,6 @@ Plug 'Dosx001/vim-template'
 Plug 'Dosx001/vim-rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 "Plug 'ycm-core/YouCompleteMe'
