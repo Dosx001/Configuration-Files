@@ -14,31 +14,41 @@ git config --global user.email "andresmichelrodriguez@gmail.com"
 git config --global core.editor vim
 git config --global init.defaultBranch main
 
+sudo apt install -y make
+sudo apt install -y cmake
+cd /mnt/d || cd /mnt/c
+cd Repositories || mkdir Repositories && cd Repositories
+git clone git@github.com:Dosx001/GitPrompt.git
+cd GitPrompt
+cmake CMakeLists.txt
+make
+cp bin/GitPrompt.exe ~
+
 User=`/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -C whoami`
 User=${User##*\\}
 User=${User:0:${#User}-1}
 
+cd ../
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone git@github.com:Dosx001/Configuration-Files.git
 cd Configuration-Files
 cp -r vim/.vimrc vim/.vim bash/.bashrc ~
-cp windows_terminal/settings.json /mnt/c/Users/`echo $User`/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
+cp windows_terminal/settings.json /mnt/c/Users/"$User"/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 vim ~/.vimrc "+PlugInstall | q | q"
 
 mkdir ~/.aliasme
 curl https://raw.githubusercontent.com/Dosx001/aliasme/main/aliasme.sh > ~/.aliasme/aliasme.sh
 cp aliasme/cmd ~/.aliasme
 
-sudo apt install -y make
-sudo apt install -y cmake
+sudo apt install -y expect
 sudo apt install -y firefox
 sudo apt install -y libgbm-dev # wsl electron
 sudo apt install -y yui-compressor
 sudo apt install -y node-typescript
 sudo apt install -y firefox-geckodriver
 py=`python3 -V`
-sudo apt-get install -y python`echo ${py:7:3}`-tk
+sudo apt-get install -y python"${py:7:3}"-tk
 
 sudo apt-get install -y python3-pip
 pip3 install numpy
@@ -55,7 +65,7 @@ cd /usr/src/gtest
 sudo cmake CMakeLists.txt
 sudo make
 
-cd /mnt/c/Users/`echo $User`/Downloads
+cd /mnt/c/Users/"$User"/Downloads
 wget https://justgetflux.com/flux-setup.exe
 wget https://wifimouse.necta.us/apk/MouseServer.exe
 wget https://downloadmirror.intel.com/29183/eng/XTUSetup.exe

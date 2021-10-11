@@ -118,7 +118,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/mnt/c/Users/Dosx001/AppData/Local/Programs/"Microsoft VS Code"/bin
+export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/mnt/e/Users/Dosx001/AppData/Local/Programs/"Microsoft VS Code"/bin
 
 #if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
 #    GIT_PROMPT_ONLY_IN_REPO=1
@@ -133,120 +133,7 @@ Date() {
     echo -e "\e[33m`date '+%a %b %d, %Y'`"
 }
 
-gitStatus() {
-    #echo -e "\e[31m$(git status --short 2> /dev/null | sed ':a;N;$!ba;s/\n/ /g')"
-    set -o noglob
-    status=$(git status -s 2> /dev/null)
-    if [ -n "$status" ]
-    then
-        echo
-        for item in ${status}
-        do
-            case $item in
-                "??")
-                    echo -en "\e[37m";;
-                "D")
-                    Type="D";;
-                "M")
-                    Type="M";;
-                "MM")
-                    echo -en "\e[93m";;
-                "MD")
-                    echo -en "\e[38;5;202m";;
-                "A")
-                    echo -en "\e[34m";;
-                "AM")
-                    echo -en "\e[94m";;
-                "AD")
-                    echo -en "\e[96m";;
-                "R")
-                    echo -en "\e[35m";;
-                "RM")
-                    echo -en "\e[38;5;93m";;
-                "RD")
-                    echo -en "\e[38;5;201m";;
-                "UU")
-                    echo -en "\e[30;43m"
-                    merge=true;;
-                "AA")
-                    echo -en "\e[30;42m"
-                    merge=true;;
-                "AU")
-                    echo -en "\e[37;42m"
-                    merge=true;;
-                "UA")
-                    echo -en "\e[96;42m"
-                    merge=true;;
-                "DD")
-                    echo -en "\e[30;41m"
-                    merge=true;;
-                "DU")
-                    echo -en "\e[37;41m"
-                    merge=true;;
-                "UD")
-                    echo -en "\e[96;41m"
-                    merge=true;;
-                *)
-                    case $Type in
-                        "M")
-                            if [[ "$(git status -s $item)" =~ "  " ]]
-                            then
-                                echo -en "\e[32m"
-                            else
-                                echo -en "\e[33m"
-                            fi;;
-                        "D")
-                            if [[ "$(git status -s $item)" =~ "  " ]]
-                            then
-                                echo -en "\e[91m"
-                            else
-                                echo -en "\e[31m"
-                            fi;;
-                    esac
-                    Type=""
-                    if [[ $merge ]]
-                    then
-                        echo -en $item"\e[00m "
-                        merge=false
-                    else
-                        echo -n $item" "
-                    fi
-            esac
-        done
-    fi
-}
-
-gitBranch() {
-    branch=$(git branch --show-current 2> /dev/null)
-    if [ -n "$branch" ]
-    then
-        echo -e "\e[34;41m\e[30;41m$branch\e[00m\e[31m"
-    else
-        echo -e "\e[00m\e[34m"
-    fi
-}
-
-gitStash() {
-    stash=$(git stash list 2> /dev/null | wc -l)
-    if [[ $stash -gt 0 ]]
-    then
-        echo -e "\e[35mStashes: $stash"
-    fi
-}
-
-gitLastLog() {
-    commit=$(git log -1 --pretty=format:"%s" 2> /dev/null)
-    if [ -n "$commit" ]
-    then
-        echo -e "\n\e[90m$commit"
-    fi
-}
-
-position() {
-    tput cup $LINES
-}
-
-export PS1="\[\e[92m\]\u@\h \$(Date) \$(gitStash)\$(gitLastLog)\$(gitStatus)\n\[\e[32;44m\]\W\$(gitBranch)\[\e[00m\]"
+export PS1="\[\e[92m\]\u@\h \$(Date) \$(~/GitPrompt.exe)\[\e[32;44m\]\W\[\e[0;34m\]\[\e[0m\]"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
@@ -258,6 +145,7 @@ alias Powershell="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
 alias VcXsrv="Powershell -C 'D:\Repositories\Configuration-Files\VcXsrv\config.xlaunch' &"
 alias Kill="Powershell -C 'Stop-Process -name vcxsrv'"
 alias Restart="Kill; VcXsrv"
+stty -ixon
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

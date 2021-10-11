@@ -25,15 +25,6 @@ Default
 github
 cd /mnt/d/Repositories/github
 Default
-reset
-git reset --soft HEAD~
-Default
-push
-git push
-Default
-pushf
-git push -f
-Default
 AnimeCalendar
 cd /mnt/d/Repositories/github/AnimeCalendar.github.io
 Default
@@ -60,4 +51,10 @@ git push --set-upstream origin `git branch --show-current`
 Default
 resume
 cd /mnt/d/Repositories/github/Dosx001/resume
+Default
+Prompt
+cd /mnt/d/Repositories/C++/GitPrompt
+Default
+date
+GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date "$(date)"
 Default
