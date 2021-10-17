@@ -26,72 +26,6 @@ augroup Start
     autocmd CursorMoved,CursorMovedI * call CenterCursor()
 augroup END
 
-let g:currentmode={
-            \ 'n' : ['Normal', 'N'],
-           \ 'no' : ['Normal·Operator Pending', 'N'],
-            \ 'v' : ['Visual', 'V'],
-            \ 'V' : ['V·Line', 'V'],
-       \ "\<C-V>" : ['V·Block', 'V'],
-            \ 's' : ['Select', 'S'],
-            \ 'S' : ['S·Line', 'S'],
-       \ "\<C-S>" : ['S·Block', 'S'],
-            \ 'i' : ['Insert', 'I'],
-            \ 'R' : ['Replace', 'R'],
-           \ 'Rv' : ['V·Replace', 'R'],
-            \ 'c' : ['Command', 'C'],
-           \ 'cv' : ['Vim Ex', 'O'],
-           \ 'ce' : ['Ex', 'O'],
-            \ 'r' : ['Prompt', 'O'],
-           \ 'rm' : ['More', 'O'],
-           \ 'r?' : ['Confirm', 'O'],
-            \ '!' : ['Shell', 'O'],
-            \ 't' : ['Terminal', 'O']
-            \}
-hi statusline ctermbg=black ctermfg=green
-fun! g:Color()
-    if g:int
-        hi statusline ctermfg=124
-        return 'Completion'
-    endif
-    let a = g:currentmode[mode()]
-    if a[1] == 'N'
-        hi statusline ctermfg=green
-    elseif a[1] == 'I'
-        hi statusline ctermfg=124
-    elseif a[1] == 'V'
-        hi statusline ctermfg=20
-    elseif a[1] == 'R'
-        hi statusline ctermfg=202
-    elseif a[1] == 'S'
-        hi statusline ctermfg=190
-    elseif a[1] == 'C'
-        hi statusline ctermfg=magenta
-    else
-        hi statusline ctermfg=cyan
-    endif
-    return a[0]
-endfun
-
-fun! g:GitBranch()
-    let branch = FugitiveStatusline()
-    return !empty(branch) ? branch[5:-3] : ""
-endfun
-
-inoremap <C-X> <Esc>:let g:int = 1<CR>i<C-X>
-au InsertChange,InsertLeave,CursorMovedI * let g:int = 0
-let g:int = 0
-set laststatus=2
-set statusline=
-set statusline+=\ %{toupper(g:Color())}\             " The current mode
-set statusline+=%1*\ %{GitBranch()}\                 " Git Branch
-set statusline+=%2*\ %{@%}\                          " File path
-set statusline+=%=                                   " Right Side
-set statusline+=%2*\ %{&ft}\                         " File type
-set statusline+=%1*\ %{''.(&fenc!=''?&fenc:&enc).''} " Encoding
-
-hi User1 ctermfg=1 ctermbg=black
-hi User2 ctermfg=1 ctermbg=234
-
 fun! g:CenterCursor()
     let i = line('$') - line('.')
     if i < 30
@@ -139,6 +73,8 @@ highlight Visual ctermbg=235
 highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
 highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
+highlight StatusLine ctermfg=237 ctermbg=196
+highlight WildMenu ctermfg=34 ctermbg=black
 highlight VertSplit ctermbg=darkred ctermfg=237
 highlight EndOfBuffer ctermfg=237 ctermbg=None
 highlight Pmenu ctermfg=1 ctermbg=black
@@ -175,6 +111,61 @@ highlight SpellLocal term=underline ctermfg=black ctermbg=darkcyan gui=undercurl
 
 hi def Yellow ctermfg=3
 
+let g:currentmode={
+            \ 'n' : ['Normal', 'NM'],
+            \ 'v' : ['Visual', 'VM'],
+            \ 'V' : ['V·Line', 'VM'],
+       \ "\<C-V>" : ['V·Block', 'VM'],
+            \ 's' : ['Select', 'SM'],
+            \ 'S' : ['S·Line', 'SM'],
+       \ "\<C-S>" : ['S·Block', 'SM'],
+            \ 'R' : ['Replace', 'RM'],
+           \ 'Rv' : ['V·Replace', 'RM'],
+            \ 'c' : ['Command', 'CM'],
+           \ 'ce' : ['Ex', 'OM'],
+            \ 'r' : ['Prompt', 'OM'],
+           \ 'rm' : ['More', 'OM'],
+           \ 'r?' : ['Confirm', 'OM'],
+            \ '!' : ['Shell', 'OM'],
+            \ 't' : ['Terminal', 'OM']
+            \}
+hi statusline ctermbg=124 ctermfg=234
+hi NM ctermfg=black ctermbg=34
+hi IM ctermfg=black ctermbg=124
+hi VM ctermfg=black ctermbg=4
+hi RM ctermfg=black ctermbg=166
+hi SM ctermfg=black ctermbg=154
+hi CM ctermfg=black ctermbg=53
+hi OM ctermfg=black ctermbg=cyan
+hi User1 ctermfg=1 ctermbg=black
+hi User2 ctermfg=1 ctermbg=234
+
+let g:int = 0
+inoremap <C-X> <Esc>:let g:int = 1<CR>i<C-X>
+au InsertChange,InsertLeave,CursorMovedI * let g:int = 0
+
+set laststatus=2
+au VimEnter,WinEnter,TabEnter * call StatusLine()
+au WinLeave,TabLeave * setlocal statusline=%2*\ %{@%}%m
+fun! g:StatusLine()
+    setlocal statusline=
+    setlocal statusline+=%#IM#%{mode()=='i'?(g:int?'\ \ Completion\ ':'\ \ Insert\ '):''}
+    for [key, value] in items(g:currentmode)
+        execute "setlocal statusline+=%#" . value[1] . "#%{mode()=='" . key . "'?'\\ \\ " . value[0] . "\\ ':''}"
+    endfor
+    setlocal statusline+=%1*\ %{GitBranch()}\                 " Git Branch
+    setlocal statusline+=%2*\ %{@%}%m\                        " File path
+    setlocal statusline+=%=                                   " Right Side
+    setlocal statusline+=%2*\ %{&ft}\                         " File type
+    setlocal statusline+=%1*\ %{''.(&fenc!=''?&fenc:&enc).''} " Encoding
+endfun
+
+fun! g:GitBranch()
+    let branch = FugitiveStatusline()
+    let [a,m,r] = GitGutterGetHunkSummary()
+    return !empty(branch) ? "+" . a . " ~" . m . " -" . r . " " . branch[5:-3] : ""
+endfun
+
 call plug#begin('~/.vim/plugged')
 Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-indentguides'
@@ -188,10 +179,6 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'jaxbot/browserlink.vim'
 "Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
-
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme='jet'
 
 " Git Gutter
 highlight GitGutterAdd ctermfg=green ctermbg=237
