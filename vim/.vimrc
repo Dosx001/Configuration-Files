@@ -73,7 +73,6 @@ highlight Visual ctermbg=235
 highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
 highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
-highlight StatusLine ctermfg=237 ctermbg=196
 highlight WildMenu ctermfg=34 ctermbg=black
 highlight VertSplit ctermbg=darkred ctermfg=237
 highlight EndOfBuffer ctermfg=237 ctermbg=None
@@ -111,7 +110,24 @@ highlight SpellLocal term=underline ctermfg=black ctermbg=darkcyan gui=undercurl
 
 hi def Yellow ctermfg=3
 
+set laststatus=2
+set statusline=%1*\ %{GitBranch()}\                    " Git Branch
+set statusline+=%2*\ %{@%}%m\                          " File
+set statusline+=%=                                     " Right Side
+set statusline+=%2*%l/%L\                              " Line Count
+set statusline+=%1*\ %{&ft}\                           " File type
+set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}\  " Encoding
+
+fun! g:GitBranch()
+    let branch = FugitiveStatusline()
+    let [a,m,r] = GitGutterGetHunkSummary()
+    return empty(branch) ? "" : "+" . a . " ~" . m . " -" . r . " " . branch[5:-3]
+endfun
+
 let g:currentmode={
+            \ 'i' : ['Insert', 'IM'],
+           \ 'ix' : ['Completion', 'ICM'],
+           \ 'ic' : ['Completion', 'ICM'],
             \ 'n' : ['Normal', 'NM'],
             \ 'v' : ['Visual', 'VM'],
             \ 'V' : ['V·Line', 'VM'],
@@ -121,6 +137,8 @@ let g:currentmode={
        \ "\<C-S>" : ['S·Block', 'SM'],
             \ 'R' : ['Replace', 'RM'],
            \ 'Rv' : ['V·Replace', 'RM'],
+           \ 'Rx' : ['C·Replace', 'RM'],
+           \ 'Rc' : ['C·Replace', 'RM'],
             \ 'c' : ['Command', 'CM'],
            \ 'ce' : ['Ex', 'OM'],
             \ 'r' : ['Prompt', 'OM'],
@@ -129,42 +147,32 @@ let g:currentmode={
             \ '!' : ['Shell', 'OM'],
             \ 't' : ['Terminal', 'OM']
             \}
-hi statusline ctermbg=124 ctermfg=234
 hi NM ctermfg=black ctermbg=34
 hi IM ctermfg=black ctermbg=124
+hi ICM ctermfg=black ctermbg=33
 hi VM ctermfg=black ctermbg=4
 hi RM ctermfg=black ctermbg=166
 hi SM ctermfg=black ctermbg=154
 hi CM ctermfg=black ctermbg=53
-hi OM ctermfg=black ctermbg=cyan
-hi User1 ctermfg=1 ctermbg=black
+hi OM ctermfg=black ctermbg=13
+hi User1 ctermfg=1 ctermbg=0
 hi User2 ctermfg=1 ctermbg=234
+hi StatusLine ctermfg=237 ctermbg=196
+hi StatusLineNC ctermfg=237 ctermbg=196
 
-let g:int = 0
-inoremap <C-X> <Esc>:let g:int = 1<CR>i<C-X>
-au InsertChange,InsertLeave,CursorMovedI * let g:int = 0
-
-set laststatus=2
-au VimEnter,WinEnter,TabEnter * call StatusLine()
-au WinLeave,TabLeave * setlocal statusline=%2*\ %{@%}%m
-fun! g:StatusLine()
-    setlocal statusline=
-    setlocal statusline+=%#IM#%{mode()=='i'?(g:int?'\ \ Completion\ ':'\ \ Insert\ '):''}
-    for [key, value] in items(g:currentmode)
-        execute "setlocal statusline+=%#" . value[1] . "#%{mode()=='" . key . "'?'\\ \\ " . value[0] . "\\ ':''}"
-    endfor
-    setlocal statusline+=%1*\ %{GitBranch()}\                 " Git Branch
-    setlocal statusline+=%2*\ %{@%}%m\                        " File path
-    setlocal statusline+=%=                                   " Right Side
-    setlocal statusline+=%2*\ %{&ft}\                         " File type
-    setlocal statusline+=%1*\ %{''.(&fenc!=''?&fenc:&enc).''} " Encoding
+fun! StatueLine(statusline)
+    let [mode, color] = g:currentmode[mode(1)]
+    return '%#' . color . '# ' . mode . ' ' . a:statusline
 endfun
 
-fun! g:GitBranch()
-    let branch = FugitiveStatusline()
-    let [a,m,r] = GitGutterGetHunkSummary()
-    return !empty(branch) ? "+" . a . " ~" . m . " -" . r . " " . branch[5:-3] : ""
-endfun
+augroup StatusLine
+  autocmd!
+  au VimEnter,WinEnter,TabEnter,SourcePost *
+        \ setlocal statusline& |
+        \ let statusline=&statusline |
+        \ setlocal statusline=%!StatueLine(statusline)
+  au WinLeave,TabLeave * setlocal statusline=%2*\ %{@%}%m
+augroup END
 
 call plug#begin('~/.vim/plugged')
 Plug 'Dosx001/tabline.vim'
