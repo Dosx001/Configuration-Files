@@ -183,7 +183,7 @@ Plug 'mattn/emmet-vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-"Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 "Plug 'jaxbot/browserlink.vim'
 "Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
@@ -213,6 +213,7 @@ let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
 
 " YouCompleteMe
 "let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
-"set completeopt-=preview
-"let g:ycm_min_num_of_chars_for_completion = 1
+set completeopt-=preview
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_auto_hover = ""
 "let g:ycm_max_num_candidates = 10
