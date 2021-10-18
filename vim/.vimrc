@@ -120,15 +120,22 @@ set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}\  " Encoding
 
 fun! g:GitBranch()
     let branch = FugitiveStatusline()
+    return empty(branch) ? "" : GitSummary(0) . branch[5:-3]
+endfun
+
+fun! g:GitSummary(int)
     let [a,m,r] = GitGutterGetHunkSummary()
-    return empty(branch) ? "" : "+" . a . " ~" . m . " -" . r . " " . branch[5:-3]
+    return a:int ? "" : "+" . a . " ~" . m . " -" . r . " "
 endfun
 
 let g:currentmode={
+            \ 'n' : ['Normal', 'NM'],
+          \ 'niI' : ['Normal', 'NM'],
+          \ 'niR' : ['Normal', 'NM'],
+          \ 'niV' : ['Normal', 'NM'],
             \ 'i' : ['Insert', 'IM'],
            \ 'ix' : ['Completion', 'ICM'],
            \ 'ic' : ['Completion', 'ICM'],
-            \ 'n' : ['Normal', 'NM'],
             \ 'v' : ['Visual', 'VM'],
             \ 'V' : ['V·Line', 'VM'],
        \ "\<C-V>" : ['V·Block', 'VM'],
@@ -167,11 +174,11 @@ endfun
 
 augroup StatusLine
   autocmd!
-  au VimEnter,WinEnter,TabEnter,SourcePost *
+  au VimEnter,WinEnter,TabEnter,BufWinEnter,SourcePost *
         \ setlocal statusline& |
         \ let statusline=&statusline |
         \ setlocal statusline=%!StatueLine(statusline)
-  au WinLeave,TabLeave * setlocal statusline=%2*\ %{@%}%m
+  au WinLeave,TabLeave * setlocal statusline=%2*\ %{@%}%m\ %{GitSummary(empty(FugitiveStatusline())?1:0)}
 augroup END
 
 call plug#begin('~/.vim/plugged')
