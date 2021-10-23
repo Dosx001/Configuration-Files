@@ -58,3 +58,12 @@ Default
 date
 GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date "$(date)"
 Default
+Template
+cd ~/.vim/plugged/vim-template
+Default
+Lazy
+cd /home/dosx/.vim/plugged/vim-lazy
+Default
+pwd
+al add `basename $PWD` "cd `pwd`"
+Default
