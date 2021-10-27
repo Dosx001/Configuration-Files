@@ -1,0 +1,18 @@
+[user]
+	name = Andres Rodriguez
+	email = andresmichelrodriguez@gmail.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+[init]
+	defaultBranch = main
+[alias]
+	root = rev-parse --show-toplevel
+	edit = commit -a --amend --no-edit
+	hard = reset --hard
+	age = restore --staged
+	ignore = !sh -c \"cp ~/.gitignore_global .gitignore\"
+[credential]
+	helper = store
+[help]
+	autocorrect = 20

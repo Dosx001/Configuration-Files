@@ -9,10 +9,6 @@ sudo apt-get install -y git
 sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt update -y
 sudo apt install -y git
-git config --global user.name "Andres Rodriguez"
-git config --global user.email "andresmichelrodriguez@gmail.com"
-git config --global core.editor vim
-git config --global init.defaultBranch main
 
 sudo apt install -y make
 sudo apt install -y cmake
@@ -33,7 +29,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone git@github.com:Dosx001/Configuration-Files.git
 cd Configuration-Files
-cp -r vim/.vimrc vim/.vim bash/.bashrc ~
+cp -r vim/.vimrc vim/.vim bash/.bashrc git/.gitconfig git/.gitignore_global ~
 cp windows_terminal/settings.json /mnt/c/Users/"$User"/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 vim ~/.vimrc "+PlugInstall | q | q"
 
