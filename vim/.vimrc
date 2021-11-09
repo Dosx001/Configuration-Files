@@ -3,7 +3,6 @@ filetype plugin indent on
 
 set smartindent
 set expandtab shiftwidth=4 tabstop=4 softtabstop=4
-set wildmenu
 set path+=**
 set complete-=i
 set incsearch
@@ -72,10 +71,6 @@ endfun
 
 syntax on
 highlight Visual ctermbg=235
-highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
-highlight TabLineSel ctermfg=196 ctermbg=None
-highlight TabLineFill ctermfg=237 ctermbg=DarkGreen
-highlight WildMenu ctermfg=34 ctermbg=black
 highlight VertSplit ctermbg=darkred ctermfg=237
 highlight EndOfBuffer ctermfg=237 ctermbg=None
 highlight Pmenu ctermfg=1 ctermbg=black
@@ -85,6 +80,16 @@ hi DiffAdd term=bold ctermbg=22 guibg=LightBlue
 hi DiffChange term=bold ctermbg=3 guibg=LightMagenta
 hi DiffDelete term=bold ctermbg=88 gui=bold guifg=Blue guibg=LightCyan
 hi DiffText term=reverse cterm=bold ctermbg=53 gui=bold guibg=Red
+
+set wildmenu
+hi WildMenu ctermfg=34 ctermbg=black
+hi StatusLine ctermfg=236 ctermbg=196
+hi StatusLineNC ctermfg=236 ctermbg=196
+
+set showtabline=2
+highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
+highlight TabLineSel ctermfg=196 ctermbg=None
+highlight TabLineFill ctermfg=237
 
 set number relativenumber
 highlight LineNr ctermfg=darkred ctermbg=234
@@ -117,78 +122,8 @@ highlight SpellLocal term=underline ctermfg=black ctermbg=darkcyan gui=undercurl
 
 hi def Yellow ctermfg=3
 
-set laststatus=2
-set statusline=%1*\ %{GitBranch()}\                    " Git Branch
-set statusline+=%2*\ %{@%}%m\                          " File
-set statusline+=%=                                     " Right Side
-set statusline+=%2*%l/%L\                              " Line Count
-set statusline+=%1*\ %{&ft}\                           " File type
-set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}\  " Encoding
-
-fun! g:GitBranch()
-    let branch = FugitiveStatusline()
-    return empty(branch) ? "" : GitSummary(0) . branch[5:-3]
-endfun
-
-fun! g:GitSummary(int)
-    let [a,m,r] = GitGutterGetHunkSummary()
-    return a:int ? "" : "+" . a . " ~" . m . " -" . r . " "
-endfun
-
-let g:currentmode={
-            \ 'n' : ['Normal', 'NM'],
-          \ 'niI' : ['Normal', 'NM'],
-          \ 'niR' : ['Normal', 'NM'],
-          \ 'niV' : ['Normal', 'NM'],
-            \ 'i' : ['Insert', 'IM'],
-           \ 'ix' : ['Completion', 'ICM'],
-           \ 'ic' : ['Completion', 'ICM'],
-            \ 'v' : ['Visual', 'VM'],
-            \ 'V' : ['V·Line', 'VM'],
-       \ "\<C-V>" : ['V·Block', 'VM'],
-            \ 's' : ['Select', 'SM'],
-            \ 'S' : ['S·Line', 'SM'],
-       \ "\<C-S>" : ['S·Block', 'SM'],
-            \ 'R' : ['Replace', 'RM'],
-           \ 'Rv' : ['V·Replace', 'RM'],
-           \ 'Rx' : ['C·Replace', 'RM'],
-           \ 'Rc' : ['C·Replace', 'RM'],
-            \ 'c' : ['Command', 'CM'],
-           \ 'ce' : ['Ex', 'OM'],
-            \ 'r' : ['Prompt', 'OM'],
-           \ 'rm' : ['More', 'OM'],
-           \ 'r?' : ['Confirm', 'OM'],
-            \ '!' : ['Shell', 'OM'],
-            \ 't' : ['Terminal', 'OM']
-            \}
-hi NM ctermfg=black ctermbg=34
-hi IM ctermfg=black ctermbg=124
-hi ICM ctermfg=black ctermbg=33
-hi VM ctermfg=black ctermbg=4
-hi RM ctermfg=black ctermbg=166
-hi SM ctermfg=black ctermbg=154
-hi CM ctermfg=black ctermbg=53
-hi OM ctermfg=black ctermbg=13
-hi User1 ctermfg=1 ctermbg=0
-hi User2 ctermfg=1 ctermbg=234
-hi StatusLine ctermfg=237 ctermbg=196
-hi StatusLineNC ctermfg=237 ctermbg=196
-
-fun! StatueLine(statusline)
-    let [mode, color] = g:currentmode[mode(1)]
-    return '%#' . color . '# ' . mode . ' ' . a:statusline
-endfun
-
-augroup StatusLine
-    autocmd!
-    au WinEnter,TabEnter,BufWinEnter,SourcePost *
-        \ setlocal statusline& |
-        \ let statusline=&statusline |
-        \ setlocal statusline=%!StatueLine(statusline)
-    au WinLeave,TabLeave * setlocal statusline=%2*\ %{@%}%m\ %{GitSummary(empty(FugitiveStatusline())?1:0)}
-augroup END
-
 call plug#begin('~/.vim/plugged')
+Plug 'Dosx001/statusline.vim'
 Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-indentguides'
 Plug 'Dosx001/vim-lazy'
