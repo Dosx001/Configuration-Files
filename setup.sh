@@ -29,7 +29,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone git@github.com:Dosx001/Configuration-Files.git
 cd Configuration-Files
-cp -r vim/.vimrc vim/.vim bash/.bashrc git/.gitconfig git/.gitignore_global ~
+cp -r vim/.vimrc vim/.vim bash/.bashrc aliasrc.sh git/.gitconfig git/.gitignore_global ~
 cp windows_terminal/settings.json /mnt/c/Users/"$User"/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 vim ~/.vimrc "+PlugInstall | q | q"
 

@@ -8,8 +8,6 @@ case $- in
       *) return;;
 esac
 
-alias winhome='cd /mnt/c/Users/Dosx001/'
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -74,38 +72,17 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
+# enable color support of ls
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -130,22 +107,22 @@ export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 #}
 
 Date() {
-    echo -e "\e[33m`date '+%a %b %d, %Y'`"
+    date '+%a %b %d, %Y'
 }
 
-export PS1="\[\e[92m\]\u@\h \$(Date) \$(~/GitPrompt.exe)\[\e[32;44m\]\W\[\e[0;34m\]\[\e[0m\]"
-export VISUAL=vim
-export EDITOR="$VISUAL"
+export PS1="\[\e[92m\]\u@\h \[\e[33m\]\$(Date) \$(~/GitPrompt.exe)\n\[\e[32;44m\] \W\[\e[0;34m\]\[\e[0m\]"
 export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+export VISUAL=vi
+export EDITOR="$VISUAL"
+set -o vi
+
+source ~/aliasrc.sh
 source ~/.aliasme/aliasme.sh
-alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
-alias Explorer="/mnt/c/Windows/explorer.exe ."
-alias Server="live-server --no-browser --port=8000"
-alias Powershell="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
-alias VcXsrv="Powershell -C 'D:\Repositories\Configuration-Files\VcXsrv\config.xlaunch' &"
-alias Kill="Powershell -C 'Stop-Process -name vcxsrv'"
-alias Restart="Kill; VcXsrv"
+
 stty -ixon
+bind '"\C-j": menu-complete'
+bind '"\C-k": menu-complete-backward'
+bind '"\e[24": "tmux\r"'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
