@@ -1,5 +1,15 @@
-alias ls='ls --color=auto'
-alias ll='ls -alF'
+stty -ixon
+export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+
+HISTSIZE=1000
+HISTFILESIZE=2000
+SAVEHIST=1000
+HISTCONTROL=ignoreboth
+
+source ~/.aliasme/aliasme.sh
+
+alias ls='ls --color=auto --group-directories-first'
+alias ll='ls -AlF'
 alias la='ls -A'
 alias l='ls -CF'
 alias grep='grep --color=auto'

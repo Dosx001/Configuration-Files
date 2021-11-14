@@ -8,16 +8,8 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
 # append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -106,20 +98,17 @@ export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 #    echo -e "\e[00m\$(~/bash_tips_generator.sh)"
 #}
 
+source ~/rc.sh
+
 Date() {
     date '+%a %b %d, %Y'
 }
 
 export PS1="\[\e[92m\]\u@\h \[\e[33m\]\$(Date) \$(~/GitPrompt.exe)\n\[\e[32;44m\] \W\[\e[0;34m\]\[\e[0m\]"
-export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
 export VISUAL=vi
 export EDITOR="$VISUAL"
 set -o vi
 
-source ~/aliasrc.sh
-source ~/.aliasme/aliasme.sh
-
-stty -ixon
 bind '"\C-j": menu-complete'
 bind '"\C-k": menu-complete-backward'
 bind '"\e[24": "tmux\r"'
