@@ -1,7 +1,7 @@
 $RegConnect = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey([Microsoft.Win32.RegistryHive]"CurrentUser", "$env:COMPUTERNAME")
 $RegCursors = $RegConnect.OpenSubKey("Control Panel\Cursors", $true)
 
-$PWD = $pwd.Path + "\"
+$PWD = $pwd.Path + "\cur\"
 
 $RegCursors.SetValue("","Red")
 $RegCursors.SetValue("AppStarting",$PWD + "wait_red.cur")
