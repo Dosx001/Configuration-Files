@@ -8,6 +8,8 @@ HISTFILE=~/.histfile
 setopt HIST_SAVE_NO_DUPS
 
 bindkey -v
+VISUAL=vi
+EDITOR=vi
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
