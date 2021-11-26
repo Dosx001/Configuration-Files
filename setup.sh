@@ -7,7 +7,7 @@ read -p 'https://github.com/settings/ssh/new'
 
 sudo apt-get install -y git
 sudo add-apt-repository -y ppa:git-core/ppa
-sudo apt update -y
+sudo apt update -y && sudo apt upgrade -y
 sudo apt install -y git
 
 sudo apt install -y make
@@ -40,8 +40,15 @@ cp aliasme/cmd ~/.aliasme
 sudo apt install -y zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.zsh/fast-syntax-highlighting
-
 sudo chsh -s /bin/zsh
+sudo apt install gh
+if [[ ! `which gh` ]]; then
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt install gh
+fi
+gh completion -s zsh > _gh
+sudo mv _gh /usr/local/share/zsh/site-functions/
 
 sudo apt install -y expect
 sudo apt install -y firefox
