@@ -20,17 +20,12 @@ cmake CMakeLists.txt
 make
 cp bin/GitPrompt.exe ~
 
-User=`/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -C whoami`
-User=${User##*\\}
-User=${User:0:${#User}-1}
-
 cd ../
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone git@github.com:Dosx001/Configuration-Files.git
 cd Configuration-Files
 cp -r vim/.vimrc vim/.vim zsh/.zshrc bash/.bashrc aliasrc.sh git/.gitconfig git/.gitignore_global ~
-cp windows_terminal/settings.json /mnt/c/Users/"$User"/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 vim ~/.vimrc "+PlugInstall | q | q"
 
 mkdir ~/.aliasme
@@ -73,22 +68,6 @@ sudo apt-get install -y libgtest-dev
 cd /usr/src/gtest
 sudo cmake CMakeLists.txt
 sudo make
-
-cd /mnt/c/Users/"$User"/Downloads
-wget https://justgetflux.com/flux-setup.exe
-wget https://wifimouse.necta.us/apk/MouseServer.exe
-wget https://downloadmirror.intel.com/29183/eng/XTUSetup.exe
-wget https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe
-wget https://dl.discordapp.net/distro/app/stable/win/x86/1.0.9002/DiscordSetup.exe
-wget https://mirrors.syringanetworks.net/videolan/vlc/3.0.16/win32/vlc-3.0.16-win32.exe
-wget https://github.com/White-Tiger/T-Clock/releases/download/v2.4.4%23492-rc/T-Clock.zip
-wget https://ys-api-os.mihoyo.com/event/download_porter/link/ys_global/genshinimpactpc/default
-wget https://www.libreoffice.org/donate/dl/win-x86_64/7.0.6/en-US/LibreOffice_7.0.6_Win_x64.msi
-wget https://github.com/ChrisAnd1998/TaskbarX/releases/download/1.7.0.0/TaskbarX_1.7.0.0_x64.zip
-wget https://www.gskill.com/gskill-device/keyboard/G.SKILL_RIPJAWSKeyboard_KM780_MX_Setup_V2.03.zip
-wget https://cfhcable.dl.sourceforge.net/project/vcxsrv/vcxsrv/1.20.9.0/vcxsrv-64.1.20.9.0.installer.exe
-wget https://az764295.vo.msecnd.net/stable/2d23c42a936db1c7b3b06f918cde29561cc47cd6/VSCodeUserSetup-x64-1.58.0.exe
-wget https://phoenixnap.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-4.3.6/qbittorrent_4.3.6_setup.exe
 
 cd /mnt/d/Repositories || cd /mnt/c/Repositories
 git clone https://github.com/sgolovine/nerdfont-patcher.git
