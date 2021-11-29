@@ -67,3 +67,15 @@ Default
 pwd
 al add `basename $PWD` "cd `pwd`"
 Default
+del
+files=(); chk=false; for i in `git status -s`; do if $chk; then files+=($i); chk=false; fi; if [[ $i == "D" ]]; then chk=true; fi; done; git restore ${files[@]}
+Default
+root
+cd `git rev-parse --show-toplevel`
+Default
+GI-Artifact-Leveler
+cd /mnt/d/Repositories/python/GI-Artifact-Leveler
+Default
+statusline.vim
+cd /home/dosx/.vim/plugged/statusline.vim
+Default
