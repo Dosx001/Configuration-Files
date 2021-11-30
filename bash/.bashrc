@@ -100,11 +100,7 @@ export PATH=/home/dosx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 
 source ~/rc.sh
 
-Date() {
-    date '+%a %b %d, %Y'
-}
-
-export PS1="\[\e[92m\]\u@\h \[\e[33m\]\$(Date) \$(~/GitPrompt.exe)\n\[\e[32;44m\] \W\[\e[0;34m\]\[\e[0m\]"
+export PS1="\[\e[92m\]\u@\h \$(~/GitPrompt.exe)\n\[\e[32;44m\] \W \[\e[0;34m\]\[\e[0m\]"
 export VISUAL=vi
 export EDITOR="$VISUAL"
 set -o vi
