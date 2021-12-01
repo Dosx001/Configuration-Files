@@ -130,22 +130,13 @@ Plug 'Dosx001/vim-lazy'
 Plug 'Dosx001/vim-template'
 Plug 'Dosx001/vim-rainbow'
 Plug 'mattn/emmet-vim'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'ycm-core/YouCompleteMe'
-"Plug 'jaxbot/browserlink.vim'
-"Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
-
-let g:UltiSnipsExpandTrigger="<F8>"
-let g:UltiSnipsJumpForwardTrigger="<c-f>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
 
 " Git Gutter
 highlight GitGutterAdd ctermfg=green ctermbg=237
