@@ -17,6 +17,7 @@
 
     // If enabled, formatted data is also copied to your clipboard
     "copyFormatting": false,
+    "tabSwitcherMode": false,
 
     // A profile specifies a command to execute paired with information about how it should look and feel.
     // Each one of them will appear in the 'New Tab' dropdown,
@@ -30,20 +31,29 @@
             "fontSize": 10,
             "padding": "0, 0, 0, 0",
             "background": "#000",
+            //"foreground" : "#00c4d9",
             "startingDirectory": "D:/Repositories",
+            "suppressApplicationTitle": true,
             "bellStyle": "none"
         },
         "list":
         [
             {
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "name": "Ubuntu",
+                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+                "name": "Arch",
                 "source": "Windows.Terminal.Wsl",
+                "icon": "C:/Users/Dosx001/Pictures/arch.png",
             },
             {
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "name": "Windows PowerShell",
                 "commandline": "powershell.exe",
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl",
+                "icon": "C:/Users/Dosx001/Pictures/ubuntu.png"
             },
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -73,52 +83,8 @@
         { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
         { "command": "paste", "keys": "ctrl+shift+v" },
         { "command": "find", "keys": "ctrl+shift+f" },
-        { "command" : null, "keys" : "alt+space" },
+        { "command": null, "keys": "alt+space" },
         { "command": null, "keys": "alt+shift+-" },
         { "command": null, "keys": "alt+shift+=" },
-        { "command": { "action": "splitPane", "split": "vertical" }, "keys": "alt+shift+v" },
-        { "command": { "action": "splitPane", "split": "horizontal" }, "keys": "alt+shift+h" },
-
-        { "command": { "action": "multipleActions",
-            "actions": [
-                { "action": "splitPane", "split": "left", "size": 0.75, "startingDirectory": "." },
-                { "action": "moveFocus", "direction": "right" }
-            ]},
-            "keys": "ctrl+shift+s"
-        },
-        { "command": {"action": "moveFocus", "direction": "left" }, "keys": "ctrl+left" },
-        { "command": {"action": "moveFocus", "direction": "right" }, "keys": "ctrl+right" },
-        { "command": {"action": "moveFocus", "direction": "up" }, "keys": "ctrl+up" },
-        { "command": {"action": "moveFocus", "direction": "down" }, "keys": "ctrl+down" },
-        { "command": "paste", "keys": "ctrl+shift+v" },
-        { "command": { "action": "multipleActions",
-            "actions": [
-                { "action": "swapPane", "direction": "left" },
-                { "action": "moveFocus", "direction": "right" }
-            ]},
-            "keys": "alt+left"
-        },
-        { "command": { "action": "multipleActions",
-            "actions": [
-                { "action": "swapPane", "direction": "right" },
-                { "action": "moveFocus", "direction": "left" }
-            ]},
-            "keys": "alt+right"
-        },
-        { "command": { "action": "multipleActions",
-            "actions": [
-                { "action": "swapPane", "direction": "up" },
-                { "action": "moveFocus", "direction": "down" }
-            ]},
-            "keys": "alt+up"
-        },
-        { "command": { "action": "multipleActions",
-            "actions": [
-                { "action": "swapPane", "direction": "down" },
-                { "action": "moveFocus", "direction": "up" }
-            ]},
-            "keys": "alt+down"
-        }
-    ],
-    "tabSwitcherMode": false
+    ]
 }
