@@ -1,19 +1,15 @@
 wsl --install
-# dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-# dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-# wget https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -O wsl_update_x64.msi
-# ./wsl_update_x64.msi /quiet
-# wsl --set-default-version 2
-# $wsl = wsl -l -v
-# if ($wsl[2][57] -eq "1") {
-#     wsl.exe --set-version Ubuntu 2
-# }
 
 winget install --id Microsoft.WindowsTerminal
 wget https://raw.githubusercontent.com/Dosx001/Configuration-Files/main/windows_terminal/settings.json -O settings.json
 mv settings.json windows_terminal/settings.json /mnt/c/Users/$env:UserName/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 wget https://github.com/yuk7/ArchWSL/releases/download/21.8.28.0/Arch.zip -O Arch.zip
 Expand-Archive Arch.zip -DestinationPath Arch
+cd Arch
+.\Arch.exe
+wsl --set-default Arch
+wsl --shutdown
+wt
 
 winget install --id VideoLAN.VLC
 winget install --id flux.flux
