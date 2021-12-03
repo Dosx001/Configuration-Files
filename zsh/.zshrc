@@ -1,5 +1,6 @@
 autoload -U compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=32=31' '=*=32'
 zmodload zsh/complist
 compinit -i
 _comp_options+=(globdots)
