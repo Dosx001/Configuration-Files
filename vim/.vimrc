@@ -89,7 +89,7 @@ hi StatusLineNC ctermfg=236 ctermbg=196
 set showtabline=2
 highlight TabLine ctermfg=darkred ctermbg=234 cterm=None
 highlight TabLineSel ctermfg=196 ctermbg=None
-highlight TabLineFill ctermfg=237
+highlight TabLineFill ctermfg=233
 
 set number relativenumber
 highlight LineNr ctermfg=darkred ctermbg=234
@@ -131,6 +131,7 @@ Plug 'Dosx001/vim-template'
 Plug 'Dosx001/vim-rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'tpope/vim-repeat'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -139,20 +140,24 @@ Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 
 " Git Gutter
-highlight GitGutterAdd ctermfg=green ctermbg=237
-highlight GitGutterChange ctermfg=226 ctermbg=237
-highlight GitGutterDelete ctermfg=darkred ctermbg=237
-highlight GitGutterChangeDelete ctermfg=202 ctermbg=237
+highlight GitGutterAdd ctermfg=green ctermbg=235
+highlight GitGutterChange ctermfg=226 ctermbg=235
+highlight GitGutterDelete ctermfg=darkred ctermbg=235
+highlight GitGutterChangeDelete ctermfg=202 ctermbg=235
 let g:gitgutter_enabled = 1
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_removed = '−'
 let g:gitgutter_sign_modified_removed = "~-"
+let g:gitgutter_sign_removed_above_and_below = '='
 nmap <F10> <Plug>(GitGutterNextHunk)
 nmap <F9> <Plug>(GitGutterPrevHunk)
 
 " Indent Guides
 let g:indentguides_spacechar = '|'
 let g:indentguides_tabchar = '┆'
+
+" Markdown Preview
+let g:mkdp_open_ip = 'localhost'
 
 " Rainbow
 let g:rainbow_blocklist = ['css', 'html', 'scss']

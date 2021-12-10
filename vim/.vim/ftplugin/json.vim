@@ -1,2 +1,2 @@
 set concealcursor=c
-hi link Number Type
+hi link jsonNumber Type

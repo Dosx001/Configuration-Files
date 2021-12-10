@@ -79,3 +79,6 @@ Default
 statusline.vim
 cd /home/dosx/.vim/plugged/statusline.vim
 Default
+VimTextEditor
+cd /mnt/d/Repositories/js/VimTextEditor
+Default
