@@ -41,12 +41,23 @@ command Restore execute "!git restore '%:p'"
 command Source execute "w | source %"
 command Clear execute "!clear"
 
-nnoremap <F2> :%s/
-inoremap <F2> <Esc>:%s/
-nnoremap <F3> :vs 
-inoremap <F3> <Esc>:vs 
-nnoremap <F4> :tabe 
-inoremap <F4> <Esc>:tabe 
+map <Space> <leader>
+map <leader>e $
+map <leader>s ^
+map <leader>v :vs 
+map <leader>V <C-w>v
+map <leader>h :split 
+map <leader>H <C-w>s
+map <leader>t :tabe 
+map <leader>q <C-w>q
+map <leader><C-r> :%s/
+map <leader>r :,s/
+map <leader>R :,+
+map <leader>0 :Source<CR>
+map <leader>h <C-w>h
+map <leader>j <C-w>j
+map <leader>k <C-w>k
+map <leader>l <C-w>l
 nnoremap <F5> :!<CR><CR>
 inoremap <F5> <Esc>:!<CR><CR>
 nnoremap <F12> :vnew \| vnew \| wincmd l<CR><C-W><C-X>
@@ -149,8 +160,8 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_removed = '−'
 let g:gitgutter_sign_modified_removed = "~-"
 let g:gitgutter_sign_removed_above_and_below = '='
-nmap <F10> <Plug>(GitGutterNextHunk)
-nmap <F9> <Plug>(GitGutterPrevHunk)
+nmap <leader>] <Plug>(GitGutterNextHunk)
+nmap <leader>[ <Plug>(GitGutterPrevHunk)
 
 " Indent Guides
 let g:indentguides_spacechar = '|'
@@ -173,7 +184,6 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_auto_hover = ""
 "let g:ycm_max_num_candidates = 10
-nmap <C-F10> :lnext<CR>
-nmap <C-F9> :lprevious<CR>
-imap <C-F10> <Esc>:lnext<CR>
-imap <C-F9> <Esc>:lprevious<CR>
+map <leader>n :lnext<CR>
+map <leader>p :lprevious<CR>
+map <leader>f :YcmCompleter FixIt<CR>
