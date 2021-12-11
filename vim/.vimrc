@@ -41,23 +41,48 @@ command Restore execute "!git restore '%:p'"
 command Source execute "w | source %"
 command Clear execute "!clear"
 
+set timeoutlen=5000
 map <Space> <leader>
-map <leader>e $
-map <leader>s ^
+map <leader>i ^
+map <leader>a $
 map <leader>v :vs 
 map <leader>V <C-w>v
-map <leader>h :split 
-map <leader>H <C-w>s
+map <leader>s :sp 
+map <leader>S <C-w>s
 map <leader>t :tabe 
+map <leader>m :tab h 
 map <leader>q <C-w>q
-map <leader><C-r> :%s/
+map <leader>w <C-w>w
+map <leader>x <C-w>x
+map <leader>h <C-w>h
+map <leader>H <C-w>H
+map <leader>j <C-w>j
+map <leader>J <C-w>J
+map <leader>k <C-w>k
+map <leader>K <C-w>K
+map <leader>l <C-w>l
+map <leader>L <C-w>L
 map <leader>r :,s/
 map <leader>R :,+
+map <leader><C-r> :%s/
+map <leader>u :earlier 1f<CR>
+map <leader>U :earlier 
+map <leader>. :<Up>
 map <leader>0 :Source<CR>
-map <leader>h <C-w>h
-map <leader>j <C-w>j
-map <leader>k <C-w>k
-map <leader>l <C-w>l
+nnoremap Y y$
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+inoremap <C-v> <Esc>pa
+inoremap <C-c> <C-x>s
+inoremap <C-f> <C-x><C-f>
+inoremap <C-h> <C-x><C-k>
+inoremap <Esc> <Esc>l
+nnoremap <F1> :PlugClean<CR>
+nnoremap <F2> :PlugInstall<CR>
+nnoremap <F3> :PlugUpdate<CR>
+nnoremap <F2> :PlugUpgrade<CR>
 nnoremap <F5> :!<CR><CR>
 inoremap <F5> <Esc>:!<CR><CR>
 nnoremap <F12> :vnew \| vnew \| wincmd l<CR><C-W><C-X>
