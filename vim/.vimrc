@@ -71,12 +71,14 @@ nnoremap <C-k> :call CtrlK()<CR>
 inoremap <C-k> <Esc>:call CtrlK()<CR>
 
 fun! g:CtrlK()
-    let filetype = expand('%:e')
-    if filetype == "py"
+    let ft = expand('%:e')
+    if ft == "py"
         execute "Py"
-    elseif filetype == "html"
+    elseif ft == "html"
         call cursor(line('.'), len(getline('.')))
         call emmet#expandAbbr(3,"")
+    elseif ft == "ts"
+        execute "wa | !clear; tsc"
     endif
 endfun
 
