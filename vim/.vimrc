@@ -45,13 +45,17 @@ set timeoutlen=5000
 map <Space> <leader>
 map <leader>i ^
 map <leader>a $
+map <leader>c i<C-x>s
+map <leader>C :setlocal spell!<CR>
 map <leader>v :vs 
 map <leader>V <C-w>v
 map <leader>s :sp 
 map <leader>S <C-w>s
 map <leader>t :tabe 
 map <leader>m :tab h 
+map <leader>M :vert h 
 map <leader>q <C-w>q
+map <leader>Q :q!<CR>
 map <leader>w <C-w>w
 map <leader>x <C-w>x
 map <leader>h <C-w>h
@@ -152,7 +156,7 @@ highlight ExtendsChar ctermfg=darkred ctermbg=237 cterm=bold
 highlight PrecedesChar ctermfg=darkred ctermbg=237 cterm=bold
 highlight TrailChar ctermfg=darkred ctermbg=237 cterm=bold
 
-set spell spelllang=en_us
+set spelllang=en_us
 highlight SpellBad term=reverse ctermfg=black ctermbg=red gui=undercurl guisp=Red
 highlight SpellCap term=reverse ctermfg=black ctermbg=blue gui=undercurl guisp=Blue
 highlight SpellRare term=reverse ctermfg=black ctermbg=magenta gui=undercurl guisp=Magenta
@@ -169,10 +173,10 @@ Plug 'Dosx001/vim-template'
 Plug 'Dosx001/vim-rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'tpope/vim-repeat'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'ycm-core/YouCompleteMe'
 call plug#end()
