@@ -47,4 +47,7 @@ pip install numpy
 pip install matplotlib
 pip install -U selenium
 
+_path=`pwd`
 ./setup/setup.sh
+cd _path
+cp pacman/pacman.conf pacman/paru.conf /etc/
