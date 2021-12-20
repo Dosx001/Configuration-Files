@@ -47,7 +47,7 @@ else
     mirco='intel-ucode'
 fi
 
-pacstrap /mnt base linux linux-firmware networkmanager $mirco
+pacstrap /mnt base linux linux-firmware grub networkmanager $mirco
 genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt /bin/bash <<EOT
@@ -67,15 +67,12 @@ systemctl enable NetworkManager
 
 mkinitcpio -P
 
-bootctl install
-sed -i "s/default.\+/default arch-*/" /boot/loader/loader.conf
-_UUID=$(blkid | grep /dev/sda3 | awk '{print $2}' | sed 's/["|UUID=]//g')
-echo "title Arch Linux
-linux /vmlinuz-linux
-initrd /intel-ucode.img
-initrd /initramfs-linux.img
-options root=UUID=$_UUID rw" > /boot/loader/entries/arch.conf
+if [[ $(fdisk -l | grep efi) ]]; then
+    grub-install --target=x86_64-efi --efi-directory=boot --bootloader-id=GRUB
+else
+    grub-install --target=i386-pc /dev/sda
+fi
+grub-mkconfig -o /boot/grub/grub.cfg
 
 EOT
 (echo $pass; echo $pass) | passwd
-cat /boot/loader/entries/entries/arch.conf && cat /etc/hosts
