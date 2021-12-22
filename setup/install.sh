@@ -26,8 +26,8 @@ if [[ -d /sys/firmware/efi ]]; then
     mkswap /dev/sda2
     swapon /dev/sda2
     mkfs.fat -F32 /dev/sda1
-    mkdir /mnt/boot
-    mount /dev/sda1 /mnt/boot
+    mkdir /mnt/efi
+    mount /dev/sda1 /mnt/efi
 else
     swap="n\n\n\n\n${swap}\nt\n82\n"
     root="n\n\n\n\n\n"
@@ -47,7 +47,7 @@ else
     mirco='intel-ucode'
 fi
 
-pacstrap /mnt base linux linux-firmware grub networkmanager $mirco
+pacstrap /mnt base linux linux-firmware grub xorg-server xorg-xinit i3-gaps i3stauts-rust i3lock networkmanager $mirco
 genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt /bin/bash <<EOT
@@ -66,9 +66,8 @@ echo "127.0.0.1	localhost
 systemctl enable NetworkManager
 
 mkinitcpio -P
-
 if [[ $(fdisk -l | grep efi) ]]; then
-    grub-install --target=x86_64-efi --efi-directory=boot --bootloader-id=GRUB
+    grub-install --target=x86_64-efi --efi-directory=efi --bootloader-id=GRUB
 else
     grub-install --target=i386-pc /dev/sda
 fi

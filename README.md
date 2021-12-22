@@ -20,8 +20,10 @@ wget https://github.com/Dosx001/Configuration-Files/blob/main/setup/arch.sh
 
 ### Arch
 ```
-%wheel ALL=(ALL) ALL
-root ALL=(ALL) ALL
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
+for i in {1..5}; do sed -i '$d' .xinitrc ; done
+echo 'exec i3' >> .xinitrc
+echo '[[ $(fgconsole 2> /dev/null) == 1 ]] && exec startx
 ```
 ```powershell
 .\Arch.exe config --default-user dosx
