@@ -4,7 +4,7 @@ pacman-key --init
 pacman-key --populate
 useradd -m -G wheel dosx
 passwd dosx
-EDITOR=vim visudo
+set -i 's/%wheel ALL=(ALL) ALL/root ALL=(ALL) ALL' /etc/sudoers
 sudo pacman -Syyu --noconfirm
 
 sudo pacman -S --noconfirm github-cli
@@ -42,10 +42,6 @@ rm -rf paru
 makepkg -si
 
 paru -S --noconfirm yuicompressor
-
-pip install numpy
-pip install matplotlib
-pip install -U selenium
 
 _path=`pwd`
 ./setup/setup.sh

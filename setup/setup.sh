@@ -39,7 +39,17 @@ chsh -s /bin/zsh
 
 sudo gh completion -s zsh > /usr/local/share/zsh/site-functions/_gh
 
-sudo npm install -yg sass
-sudo npm install -yg terser
-sudo npm install -yg live-server
-sudo npm install -yg typescript
+packs=(
+    numpy
+    matplotlib
+    selenium
+)
+pip3 install ${packs[@]} || pip install ${packs[@]}
+
+packs=(
+    sass
+    terser
+    live-server
+    typescript
+)
+sudo npm install -yg ${packs[@]}
