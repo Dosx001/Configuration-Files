@@ -2,7 +2,7 @@ filetype plugin on
 filetype plugin indent on
 
 set smartindent
-set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+set expandtab shiftwidth=2 tabstop=2 softtabstop=2
 set path+=**
 set complete-=i
 set incsearch
@@ -17,22 +17,24 @@ set equalalways
 set autoread
 set showcmd
 set noshowmode
+set backupcopy=yes
 
 augroup Start
-    autocmd!
-    autocmd VimResized * wincmd =
-    autocmd BufWinLeave <buffer> call clearmatches()
-    autocmd BufRead * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
-    autocmd CursorMoved,CursorMovedI * call CenterCursor()
+  autocmd!
+  autocmd VimResized * wincmd =
+  autocmd BufWinLeave <buffer> call clearmatches()
+  autocmd BufRead * if expand('%:e') == "ps1" | setlocal syntax=ps1.vim | endif
+  autocmd FileType help autocmd BufWinEnter <buffer=abuf> setlocal number relativenumber signcolumn=no
+  autocmd CursorMoved,CursorMovedI * call CenterCursor()
 augroup END
 
 fun! g:CenterCursor()
-    let i = line('$') - line('.')
-    if i < 30
-        execute "set scrolloff=" . i
-    else
-        set scrolloff=999
-    endif
+  let i = line('$') - line('.')
+  if i < 30
+    execute "set scrolloff=" . i
+  else
+    set scrolloff=999
+  endif
 endfun
 
 command Py execute "wa | !clear; python3 '%:t'"
@@ -47,6 +49,7 @@ map <leader>i ^
 map <leader>a $
 map <leader>c i<C-x>s
 map <leader>C :setlocal spell!<CR>
+map <leader><C-c> zg
 map <leader>v :vs 
 map <leader>V <C-w>v
 map <leader>s :sp 
@@ -56,6 +59,7 @@ map <leader>m :tab h
 map <leader>M :vert h 
 map <leader>q <C-w>q
 map <leader>Q :q!<CR>
+map <leader>W :setlocal wrap!<CR>
 map <leader>w <C-w>w
 map <leader>x <C-w>x
 map <leader>h <C-w>h
@@ -71,14 +75,16 @@ map <leader>R :,+
 map <leader><C-r> :%s/
 map <leader>u :earlier 1f<CR>
 map <leader>U :earlier 
-map <leader>. :<Up>
+map <leader>. :<Up><CR>
+map <leader>> :<Up>
+map <leader>, q:<Up>
 map <leader>0 :Source<CR>
 nnoremap Y y$
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
-inoremap <C-v> <Esc>pa
+inoremap <C-v> <Esc>pi
 inoremap <C-c> <C-x>s
 inoremap <C-f> <C-x><C-f>
 inoremap <C-h> <C-x><C-k>
@@ -90,6 +96,7 @@ nnoremap <F2> :PlugUpgrade<CR>
 nnoremap <F5> :!<CR><CR>
 inoremap <F5> <Esc>:!<CR><CR>
 nnoremap <F12> :vnew \| vnew \| wincmd l<CR><C-W><C-X>
+nnoremap <C-p> $p
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>
 nnoremap <C-q> :wa<CR>
@@ -100,15 +107,15 @@ nnoremap <C-k> :call CtrlK()<CR>
 inoremap <C-k> <Esc>:call CtrlK()<CR>
 
 fun! g:CtrlK()
-    let ft = expand('%:e')
-    if ft == "py"
-        execute "Py"
-    elseif ft == "html"
-        call cursor(line('.'), len(getline('.')))
-        call emmet#expandAbbr(3,"")
-    elseif ft == "ts"
-        execute "wa | !clear; tsc"
-    endif
+  let ft = expand('%:e')
+  if ft == "py"
+    execute "Py"
+  elseif ft =~ 'html\|jsx\|tsx'
+    call cursor(line('.'), len(getline('.')))
+    call emmet#expandAbbr(3,"")
+  elseif ft == "ts"
+    execute "wa | !clear; tsc"
+  endif
 endfun
 
 syntax on
@@ -149,7 +156,7 @@ highlight CursorLineNR cterm=None ctermbg=7
 set signcolumn=yes
 highlight SignColumn ctermbg=NONE
 
-set listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~ ",eol:π
+set list listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~ ",eol:π
 highlight SpecialKey ctermfg=darkred
 highlight NoneText ctermfg=darkred ctermbg=237 cterm=bold
 highlight ExtendsChar ctermfg=darkred ctermbg=237 cterm=bold
@@ -167,7 +174,7 @@ hi def Yellow ctermfg=3
 call plug#begin('~/.vim/plugged')
 Plug 'Dosx001/statusline.vim'
 Plug 'Dosx001/tabline.vim'
-Plug 'Dosx001/vim-indentguides'
+Plug 'Yggdroot/indentLine'
 Plug 'Dosx001/vim-lazy'
 Plug 'Dosx001/vim-template'
 Plug 'Dosx001/vim-rainbow'
@@ -179,6 +186,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'ycm-core/YouCompleteMe'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'yuezk/vim-js'
 call plug#end()
 
 " Git Gutter
@@ -194,19 +203,19 @@ let g:gitgutter_sign_removed_above_and_below = '='
 nmap <leader>] <Plug>(GitGutterNextHunk)
 nmap <leader>[ <Plug>(GitGutterPrevHunk)
 
-" Indent Guides
-let g:indentguides_spacechar = '|'
-let g:indentguides_tabchar = '┆'
+" Indent Lines
+let g:indentLine_char_list = ['▏','|', '¦', '┆', '┊']
+let g:indentLine_color_term = 237
 
 " Markdown Preview
 let g:mkdp_open_ip = 'localhost'
 
 " Rainbow
-let g:rainbow_blocklist = ['css', 'html', 'scss']
+let g:rainbow_blocklist = ['css', 'html', 'scss', 'jsx' , 'tsx' ]
 "let g:rainbow_ctermfgs = [196, 208, 226, 46, 51, 21, 93, 202] "rainbow colors
 let g:rainbow_ctermfgs = ['brown', 'Darkblue', 'darkgray', 'darkgreen',
-            \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray',
-            \'darkmagenta', 'Darkblue', 'darkgreen', 'darkcyan', 'darkred', 'red']
+      \'darkcyan', 'darkred', 'darkmagenta', 'brown', 'gray',
+      \'darkmagenta', 'Darkblue', 'darkgreen', 'darkcyan', 'darkred', 'red']
 
 " YouCompleteMe
 "let g:ycm_filetype_specific_completion_to_disable = {'*': 1}
