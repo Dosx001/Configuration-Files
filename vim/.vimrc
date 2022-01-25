@@ -40,7 +40,7 @@ endfun
 command Py execute "wa | !clear; python3 '%:t'"
 command Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
 command Restore execute "!git restore '%:p'"
-command Source execute "w | source %"
+command Source execute "w | source ~/.vimrc"
 command Clear execute "!clear"
 
 set timeoutlen=5000
@@ -178,6 +178,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'Dosx001/vim-lazy'
 Plug 'Dosx001/vim-template'
 Plug 'Dosx001/vim-rainbow'
+Plug 'dense-analysis/ale'
 Plug 'mattn/emmet-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'cakebaker/scss-syntax.vim'
@@ -189,6 +190,12 @@ Plug 'ycm-core/YouCompleteMe'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'yuezk/vim-js'
 call plug#end()
+
+" ALE
+let g:ale_linters = {
+      \'python' : ['pylint']
+      \}
+map <leader>F :!black '%:t' --target-version py310<CR>
 
 " Git Gutter
 highlight GitGutterAdd ctermfg=green ctermbg=235
