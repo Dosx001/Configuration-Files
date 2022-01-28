@@ -49,11 +49,11 @@ map <leader>a $
 map <leader>c i<C-x>s
 map <leader>C :setlocal spell!<CR>
 map <leader><C-c> zg
-map <leader>v :vs 
+map <leader>v :vnew<CR>\z
 map <leader>V <C-w>v
-map <leader>s :sp 
+map <leader>s :new<CR>\z
 map <leader>S <C-w>s
-map <leader>t :tabe 
+map <leader>t :tabe<CR>\z
 map <leader>m :tab h 
 map <leader>M :vert h 
 map <leader>q <C-w>q
@@ -79,20 +79,22 @@ map <leader>. :<Up><CR>
 map <leader>> :<Up>
 map <leader>/ :noh<CR>
 map <leader>0 :Source<CR>
+"nno <Tab> gt
+"nno <S-Tab> gT
 nno Y y$
-cno <C-k> <Up>
-cno <C-j> <Down>
-cno <C-h> <Left>
-cno <C-l> <Right>
+cno <A-k> <Up>
+cno <A-j> <Down>
+cno <A-h> <Left>
+cno <A-l> <Right>
 ino <C-v> <Esc>pi
 ino <C-c> <C-x>s
 ino <C-f> <C-x><C-f>
 ino <C-h> <C-x><C-k>
-ino <Esc> <Esc>l
+ino <expr><Esc> col('.') == 1 ? "\<Esc>" : "\<Esc>l"
 nno <F1> :PlugClean<CR>
 nno <F2> :PlugInstall<CR>
 nno <F3> :PlugUpdate<CR>
-nno <F2> :PlugUpgrade<CR>
+nno <F4> :PlugUpgrade<CR>
 nno <F5> :!<CR><CR>
 ino <F5> <Esc>:!<CR><CR>
 nno <F12> :vnew \| vnew \| wincmd l<CR><C-W><C-X>
@@ -197,12 +199,19 @@ Plug 'nvim-treesitter/playground'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'neovim/nvim-lspconfig'
-"Complation
+Plug 'weilbith/nvim-code-action-menu'
+" Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+" fzf
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 call plug#end()
 
 lua require("init")
@@ -220,8 +229,8 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_removed = '−'
 let g:gitgutter_sign_modified_removed = "~-"
 let g:gitgutter_sign_removed_above_and_below = '='
-nmap <leader>] <Plug>(GitGutterNextHunk)
-nmap <leader>[ <Plug>(GitGutterPrevHunk)
+nmap <A-n> <Plug>(GitGutterNextHunk)
+nmap <A-p> <Plug>(GitGutterPrevHunk)
 
 " Nvim TS Rainbow
 hi IndentBlanklineIndent1 guifg=darkred gui=nocombine
@@ -234,10 +243,17 @@ hi IndentBlanklineIndent7 guifg=darkmagenta gui=nocombine
 
 " Nvim Complation
 set completeopt=menu,menuone,noselect
-map <leader>n :lua vim.diagnostic.goto_next()<CR>
-map <leader>p :lua vim.diagnostic.goto_prev()<CR>
-map <leader>f :lua vim.lsp.buf.code_action()<CR>
-map <leader>F :lua vim.diagnostic.open_float()<CR>
-map <leader>i :lua vim.lsp.buf.implementation()<CR>
-map <leader>d :lua vim.lsp.buf.definition()<CR>
-map <leader>D :lua vim.sp.buf.declaration()<CR>
+map <leader>n <cmd>lua vim.diagnostic.goto_next()<CR>
+map <leader>p <cmd>lua vim.diagnostic.goto_prev()<CR>
+map <leader>f <cmd>CodeActionMenu<CR>
+map <leader>F <cmd>lua vim.diagnostic.open_float()<CR>
+map <leader>i <cmd>lua vim.lsp.buf.implementation()<CR>
+map <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
+map <leader>D <cmd>lua vim.sp.buf.declaration()<CR>
+
+" Telescope
+nnoremap <leader>zf <cmd>Telescope find_files<cr>
+nnoremap <leader>zg <cmd>Telescope live_grep<cr>
+nnoremap <leader>zb <cmd>Telescope buffers<cr>
+nnoremap <leader>zh <cmd>Telescope help_tags<cr>
+nnoremap <leader>ze :e 
