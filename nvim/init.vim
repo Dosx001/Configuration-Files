@@ -57,7 +57,7 @@ map <leader>t :tabe<CR>\z
 map <leader>m :tab h 
 map <leader>M :vert h 
 map <leader>q <C-w>q
-map <leader>Q :q!<CR>
+map <leader>Q :quitall<CR>
 map <leader>W :setlocal wrap!<CR>
 map <leader>w <C-w>w
 map <leader>x <C-w>x
@@ -200,6 +200,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'neovim/nvim-lspconfig'
 Plug 'weilbith/nvim-code-action-menu'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'

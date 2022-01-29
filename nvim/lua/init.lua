@@ -47,6 +47,20 @@ require('nvim-treesitter.configs').setup({
   }
 })
 
+local null_ls = require('null-ls')
+local diagnostics = null_ls.builtins.diagnostics
+local formatting = null_ls.builtins.formatting
+null_ls.setup({
+    sources = {
+      diagnostics.pylint,
+      diagnostics.flake8,
+      diagnostics.eslint,
+      formatting.black.with({extra_args = {"--target-verion py310"}}),
+      formatting.isort,
+      formatting.prettier
+    },
+})
+
 require('telescope').setup{
   defaults = {
     mappings = {
@@ -131,7 +145,7 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local servers = { 'pyright', 'tsserver' }
+local servers = { 'clangd', 'cssls', 'pyright', 'tsserver' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     capabilities = capabilities
