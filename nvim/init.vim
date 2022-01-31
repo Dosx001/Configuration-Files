@@ -141,6 +141,11 @@ hi MsgArea guifg=#efefef
 hi IncSearch term=reverse cterm=reverse gui=reverse
 hi Search term=reverse cterm=reverse gui=reverse guifg=None guibg=None
 
+hi DiffAdd term=bold ctermbg=22 guifg=black guibg=#005f00
+hi DiffChange term=bold ctermbg=3 guifg=black guibg=#c19c00
+hi DiffDelete term=bold ctermbg=88 guifg=black guibg=#870000
+hi DiffText term=reverse cterm=bold ctermbg=53 gui=bold guifg=black guibg=#5f005f
+
 set wildmenu
 "hi WildMenu ctermfg=34 ctermbg=black
 hi StatusLine ctermfg=237 ctermbg=196 guifg=#ef0000 guibg=#363636
@@ -190,7 +195,6 @@ Plug 'Dosx001/vim-template'
 Plug 'mattn/emmet-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Nvim
@@ -201,6 +205,7 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'neovim/nvim-lspconfig'
 Plug 'weilbith/nvim-code-action-menu'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -220,18 +225,14 @@ lua require("init")
 " Markdown Preview
 let g:mkdp_open_ip = 'localhost'
 
-" Git Gutter
-hi GitGutterAdd ctermfg=green ctermbg=235 guifg=#3cef3c guibg=#242424
-hi GitGutterChange ctermfg=226 ctermbg=235 guifg=#efef00 guibg=#242424
-hi GitGutterDelete ctermfg=darkred ctermbg=235 guifg=#b30000 guibg=#242424
-hi GitGutterChangeDelete ctermfg=202 ctermbg=235 guifg=#ef5900 guibg=#242424
-let g:gitgutter_enabled = 1
-let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_removed = '−'
-let g:gitgutter_sign_modified_removed = "~-"
-let g:gitgutter_sign_removed_above_and_below = '='
-nmap <A-n> <Plug>(GitGutterNextHunk)
-nmap <A-p> <Plug>(GitGutterPrevHunk)
+" Git Signs
+hi GitSignsAdd ctermfg=green ctermbg=235 guifg=#3cef3c guibg=#242424
+hi GitSignsChange ctermfg=226 ctermbg=235 guifg=#efef00 guibg=#242424
+hi GitSignsDelete ctermfg=darkred ctermbg=235 guifg=#b30000 guibg=#242424
+hi GitSignsChangeDelete ctermfg=202 ctermbg=235 guifg=#ef5900 guibg=#242424
+nmap <A-]> <cmd>Gitsigns next_hunk<CR>
+nmap <A-[> <cmd>Gitsigns prev_hunk<CR>
+map <leader>g <cmd>Gitsigns preview_hunk<CR>
 
 " Nvim TS Rainbow
 hi IndentBlanklineIndent1 guifg=darkred gui=nocombine
@@ -250,7 +251,8 @@ map <leader>f <cmd>CodeActionMenu<CR>
 map <leader>F <cmd>lua vim.diagnostic.open_float()<CR>
 map <leader>i <cmd>lua vim.lsp.buf.implementation()<CR>
 map <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
-map <leader>D <cmd>lua vim.sp.buf.declaration()<CR>
+map <leader>D <cmd>lua vim.lsp.buf.declaration()<CR>
+map <leader>e <cmd>lua vim.lsp.buf.formatting_sync()<CR>
 
 " Telescope
 nnoremap <leader>zf <cmd>Telescope find_files<cr>

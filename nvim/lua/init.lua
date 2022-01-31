@@ -16,6 +16,16 @@ require("indent_blankline").setup {
   },
 }
 
+require('gitsigns').setup{
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '−', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChangeDelete', text = '~-', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+}
+
 require('nvim-treesitter.configs').setup({
   ensure_installed = "maintained",
   highlight = {
@@ -52,9 +62,10 @@ local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 null_ls.setup({
     sources = {
+      null_ls.builtins.code_actions.gitsigns,
       diagnostics.pylint,
       diagnostics.flake8,
-      diagnostics.eslint,
+      diagnostics.eslint_d,
       formatting.black.with({extra_args = {"--target-verion py310"}}),
       formatting.isort,
       formatting.prettier
@@ -145,7 +156,7 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local servers = { 'clangd', 'cssls', 'pyright', 'tsserver' }
+local servers = { 'clangd', 'cssls', 'jsonls', 'html', 'pyright', 'tsserver' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     capabilities = capabilities
