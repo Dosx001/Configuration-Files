@@ -64,12 +64,12 @@ null_ls.setup({
     sources = {
       null_ls.builtins.code_actions.gitsigns,
       diagnostics.pylint,
-      diagnostics.flake8,
+      --diagnostics.flake8.with({extra_args = {"--ignore E501"}}),
       diagnostics.eslint_d,
-      formatting.black.with({extra_args = {"--target-verion py310"}}),
+      formatting.black,
       formatting.isort,
       formatting.prettier
-    },
+    }
 })
 
 require('telescope').setup{
@@ -156,9 +156,15 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local servers = { 'clangd', 'cssls', 'jsonls', 'html', 'pyright', 'tsserver' }
+local servers = { 'clangd', 'cssls', 'jsonls', 'html', 'pyright', 'sumneko_lua', 'tsserver' }
 for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
-    capabilities = capabilities
-  }
+  require("lspconfig")[lsp].setup({
+    capabilities = capabilities,
+    on_attach = function(client)
+      if client.name == 'tsserver' or client.name == 'html' then
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end
+    end
+  })
 end

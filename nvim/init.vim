@@ -22,6 +22,7 @@ set guicursor=a:ver25-blinkon0
 augroup Start
   au!
   au VimResized * wincmd =
+  au FileType json set filetype=jsonc
   au BufWinLeave <buffer> call clearmatches()
   au FileType help autocmd BufWinEnter <buffer=abuf> setlocal number relativenumber signcolumn=no
   au CursorMoved,CursorMovedI * call CenterCursor()
