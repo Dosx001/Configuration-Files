@@ -27,7 +27,7 @@
     {
         "defaults":
         {
-            "fontFace": "Consolas Nerd Font",
+            "fontFace": "LigaConsolas Nerd Font",
             "fontSize": 10,
             "padding": "0, 0, 0, 0",
             "background": "#000",
