@@ -43,6 +43,7 @@ com Restore execute "!git restore '%:p'"
 com Source execute "w | source ~/.config/nvim/init.vim"
 com Clear execute "!clear"
 
+
 set timeoutlen=5000
 map <Space> <leader>
 map <leader>i ^
@@ -121,70 +122,69 @@ fun! g:CtrlK()
   endif
 endfun
 
-hi Normal guifg=darkgray guibg=#000000
-hi Comment term=bold ctermfg=4 guifg=#0037da
-hi Constant term=underline ctermfg=1 guifg=#b30000
-hi Special term=bold ctermfg=5 guifg=#881798
-hi Identifier term=underline ctermfg=6 guifg=#3a96dd
-hi Statement term=bold ctermfg=130 gui=bold guifg=#af5f00
-hi PreProc term=underline ctermfg=5 guifg=#b3b300
-hi Type term=underline ctermfg=2 gui=bold guifg=#13a10e
+hi Normal guifg=darkgray
+hi Comment ctermfg=4 guifg=#0037da
+hi Constant ctermfg=1 guifg=#b30000
+hi Special ctermfg=5 guifg=#881798
+hi Identifier ctermfg=6 guifg=#3a96dd
+hi Statement ctermfg=130 gui=none guifg=#af5f00
+hi PreProc ctermfg=5 guifg=#b3b300
+hi Type ctermfg=2 gui=none guifg=#13a10e
 hi Underlined term=underline cterm=underline ctermfg=5 gui=underline guifg=#881798
 
 hi Visual ctermbg=235 guibg=#242424
 hi VertSplit ctermfg=237 ctermbg=darkred guibg=#b30000 guifg=#363636
-hi EndOfBuffer ctermfg=237 ctermbg=None guifg=#363636 guibg=None
+hi EndOfBuffer ctermfg=237 guifg=#363636 guibg=none
 hi Pmenu ctermfg=1 ctermbg=black guifg=#b30000 guibg=#0c0c0c
-hi PmenuSel ctermfg=208 ctermbg=8 guifg=#ef7f00 guibg=#3c3c3c
+hi! link PmenuSel Visual
 hi PmenuSbar ctermbg=248 guibg=Grey
 hi PmenuThumb ctermbg=0 guibg=DarkRed
 hi MsgArea guifg=#efefef
 hi IncSearch term=reverse cterm=reverse gui=reverse
-hi Search term=reverse cterm=reverse gui=reverse guifg=None guibg=None
+hi Search term=reverse cterm=reverse gui=reverse guifg=none guibg=none
+hi Title ctermfg=225 gui=none guifg=Magenta
 
-hi DiffAdd term=bold ctermbg=22 guifg=black guibg=#005f00
-hi DiffChange term=bold ctermbg=3 guifg=black guibg=#c19c00
-hi DiffDelete term=bold ctermbg=88 guifg=black guibg=#870000
-hi DiffText term=reverse cterm=bold ctermbg=53 gui=bold guifg=black guibg=#5f005f
+hi DiffAdd ctermbg=22 gui=none guifg=black guibg=#005f00
+hi DiffChange ctermbg=3 gui=none guifg=black guibg=#c19c00
+hi DiffDelete ctermbg=88 gui=none guifg=black guibg=#870000
+hi DiffText term=reverse ctermbg=53 gui=none guifg=black guibg=#5f005f
 
-set wildmenu
+"set wildmenu
 "hi WildMenu ctermfg=34 ctermbg=black
-hi StatusLine ctermfg=237 ctermbg=196 guifg=#ef0000 guibg=#363636
-hi StatusLineNC ctermfg=237 ctermbg=196 guifg=#ef0000 guibg=#363636
 
 set showtabline=2
-hi TabLine ctermfg=darkred ctermbg=234 cterm=None guifg=#b30000 guibg=#1a1a1a
-hi TabLineSel ctermfg=196 ctermbg=None guifg=#ef0000 guibg=None
+hi TabLine ctermfg=darkred ctermbg=234 gui=none guifg=#b30000 guibg=#1a1a1a
+hi TabLineSel ctermfg=196 guifg=#ef0000 guibg=none
 hi TabLineFill ctermfg=233 guifg=#111111
 
 set number relativenumber
 hi LineNr ctermfg=darkred ctermbg=234 guifg=#b30000 guibg=#1a1a1a
 
 set colorcolumn=100
-hi ColorColumn ctermbg=235 guibg=#242424
+hi! link ColorColumn Visual
 
 set cursorline
-hi CursorLine cterm=NONE ctermbg=235 guibg=#242424
-hi CursorLineNR cterm=None ctermbg=7 guifg=#a45900 guibg=#b3b3b3
+hi! link CursorLine Visual
+hi CursorLineNR ctermbg=7 gui=none guifg=#a45900 guibg=#b3b3b3
 
 "set cursorcolumn
-"hi CursorColumn cterm=None ctermbg=17
+"hi CursorColumn ctermbg=17
 
 set signcolumn=yes
-hi SignColumn ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=none guibg=none
 
 set listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~ ",eol:π
+hi! link NonText Title
 hi SpecialKey ctermfg=darkred guifg=#b30000
-hi NoneText ctermfg=darkred ctermbg=237 cterm=bold guifg=#b30000 guibg=#363636
-hi ExtendsChar ctermfg=darkred ctermbg=237 cterm=bold guifg=#b30000 guibg=#363636
-hi PrecedesChar ctermfg=darkred ctermbg=237 cterm=bold guifg=#b30000 guibg=#363636
-hi TrailChar ctermfg=darkred ctermbg=237 cterm=bold guifg=#b30000 guibg=#363636
+hi ExtendsChar ctermfg=darkred ctermbg=237 guifg=#b30000 guibg=#363636
+hi PrecedesChar ctermfg=darkred ctermbg=237 guifg=#b30000 guibg=#363636
+hi TrailChar ctermfg=darkred ctermbg=237 guifg=#b30000 guibg=#363636
 
 set spelllang=en_us
 hi SpellBad term=reverse ctermfg=black ctermbg=red guifg=#000000 guibg=#e74856
 hi SpellCap term=reverse ctermfg=black ctermbg=blue guifg=#000000 guibg=#3b78ff
 hi SpellRare term=reverse ctermfg=black ctermbg=magenta guifg=#000000 guibg=#b4009e
-hi SpellLocal term=underline ctermfg=black ctermbg=darkcyan guifg=#000000 guibg=#3a96dd
+hi SpellLocal ctermfg=black ctermbg=darkcyan guifg=#000000 guibg=#3a96dd
 
 call plug#begin('~/.nvim')
 " My Suff
@@ -231,8 +231,8 @@ hi GitSignsAdd ctermfg=green ctermbg=235 guifg=#3cef3c guibg=#242424
 hi GitSignsChange ctermfg=226 ctermbg=235 guifg=#efef00 guibg=#242424
 hi GitSignsDelete ctermfg=darkred ctermbg=235 guifg=#b30000 guibg=#242424
 hi GitSignsChangeDelete ctermfg=202 ctermbg=235 guifg=#ef5900 guibg=#242424
-nmap <A-]> <cmd>Gitsigns next_hunk<CR>
-nmap <A-[> <cmd>Gitsigns prev_hunk<CR>
+map <A-]> <cmd>Gitsigns next_hunk<CR>
+map <A-[> <cmd>Gitsigns prev_hunk<CR>
 map <leader>g <cmd>Gitsigns preview_hunk<CR>
 
 " Nvim TS Rainbow
@@ -243,21 +243,37 @@ hi IndentBlanklineIndent4 guifg=darkgreen gui=nocombine
 hi IndentBlanklineIndent5 guifg=darkcyan gui=nocombine
 hi IndentBlanklineIndent6 guifg=darkblue gui=nocombine
 hi IndentBlanklineIndent7 guifg=darkmagenta gui=nocombine
+hi! link IndentBlanklineSpaceChar Title
 
 " Nvim Complation
+hi CmpItemAbbrDeprecated gui=strikethrough guifg=darkgray
+hi CmpItemAbbrMatch guifg=#ef7f00
+hi CmpItemAbbrMatchFuzzy guifg=#ef7f00
+hi link CmpItemKindKeyword Statement
+hi link CmpItemKindVariable Type
+hi link CmpItemKindModule PreProc
+hi link CmpItemKindText Normal
+hi link CmpItemKindFunction Identifier
+hi link CmpItemKindMethod Identifier
+hi link CmpItemKindProperty Comment
+hi link CmpItemKindField Comment
+hi link CmpItemKindClassDefault Special
+hi link CmpItemKindSnippet Title
 set completeopt=menu,menuone,noselect
 map <leader>n <cmd>lua vim.diagnostic.goto_next()<CR>
 map <leader>p <cmd>lua vim.diagnostic.goto_prev()<CR>
 map <leader>f <cmd>CodeActionMenu<CR>
 map <leader>F <cmd>lua vim.diagnostic.open_float()<CR>
-map <leader>i <cmd>lua vim.lsp.buf.implementation()<CR>
+map <leader>I <cmd>lua vim.lsp.buf.implementation()<CR>
 map <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 map <leader>D <cmd>lua vim.lsp.buf.declaration()<CR>
 map <leader>e <cmd>lua vim.lsp.buf.formatting_sync()<CR>
 
 " Telescope
-nnoremap <leader>zf <cmd>Telescope find_files<cr>
-nnoremap <leader>zg <cmd>Telescope live_grep<cr>
-nnoremap <leader>zb <cmd>Telescope buffers<cr>
-nnoremap <leader>zh <cmd>Telescope help_tags<cr>
-nnoremap <leader>ze :e 
+map <leader>zf <cmd>Telescope find_files<CR>
+map <leader>zF <cmd>lua require('telescope.builtin').find_files{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }<CR>
+map <leader>zg <cmd>Telescope live_grep<CR>
+map <leader>zG <cmd>lua require('telescope.builtin').live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }<CR>
+map <leader>zb <cmd>Telescope buffers<CR>
+map <leader>zh <cmd>Telescope help_tags<CR>
+map <leader>ze :e 

@@ -64,7 +64,7 @@ null_ls.setup({
     sources = {
       null_ls.builtins.code_actions.gitsigns,
       diagnostics.pylint,
-      --diagnostics.flake8.with({extra_args = {"--ignore E501"}}),
+      diagnostics.flake8,
       diagnostics.eslint_d,
       formatting.black,
       formatting.isort,
@@ -81,9 +81,12 @@ require('telescope').setup{
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
         ["<C-h>"] = "which_key"
       }
-    }
+    },
   },
   pickers = {
+    find_files = {
+      hidden = true,
+    },
     -- picker_name = {
     --   picker_config_key = value,
     --   ...
@@ -117,8 +120,8 @@ cmp.setup({
   mapping = {
     ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
     ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<A-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<A-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<A-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ['<A-e>'] = cmp.mapping({
@@ -167,4 +170,10 @@ for _, lsp in pairs(servers) do
       end
     end
   })
+end
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
