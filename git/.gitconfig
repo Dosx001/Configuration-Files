@@ -9,8 +9,11 @@
 	root = rev-parse --show-toplevel
 	edit = commit -a --amend --no-edit
 	hard = reset --hard
-	age = restore --staged
+	unstage = restore --staged
 	ignore = !sh -c \"cp ~/.gitignore_global .gitignore\"
+	sparse = clone --filter=blob:none --sparse
+	check = sparse-checkout add
+	sub = submodule update --init
 [credential]
 	helper = store
 [help]

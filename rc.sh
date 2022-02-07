@@ -24,3 +24,5 @@ alias VcXsrv="Powershell -C 'D:\Repositories\Configuration-Files\VcXsrv\config.x
 alias Kill="Powershell -C 'Stop-Process -name vcxsrv'"
 alias Restart="Kill; VcXsrv"
 alias p="python3"
+alias vi="\vim"
+alias vim="nvim"
