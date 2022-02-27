@@ -43,7 +43,6 @@ com Restore execute "!git restore '%:p'"
 com Source execute "w | source ~/.config/nvim/init.vim"
 com Clear execute "!clear"
 
-
 set timeoutlen=5000
 map <Space> <leader>
 map <leader>i ^
@@ -207,6 +206,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'weilbith/nvim-code-action-menu'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -234,6 +234,12 @@ hi GitSignsChangeDelete ctermfg=202 ctermbg=235 guifg=#ef5900 guibg=#242424
 map <A-]> <cmd>Gitsigns next_hunk<CR>
 map <A-[> <cmd>Gitsigns prev_hunk<CR>
 map <leader>g <cmd>Gitsigns preview_hunk<CR>
+
+" Fire Nvim
+map <F11> :set lines=20<CR>
+if exists('g:started_by_firenvim')
+  set filetype=markdown
+endif
 
 " Nvim TS Rainbow
 hi IndentBlanklineIndent1 guifg=darkred gui=nocombine
