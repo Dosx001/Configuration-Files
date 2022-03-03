@@ -18,6 +18,8 @@ set autoread
 set showcmd
 set noshowmode
 set guicursor=a:ver25-blinkon0
+set termguicolors
+set list
 
 augroup Start
   au!
@@ -41,7 +43,7 @@ com Py execute "wa | !clear; python3 '%:t'"
 com Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
 com Restore execute "!git restore '%:p'"
 com Source execute "w | source ~/.config/nvim/init.vim"
-com Clear execute "!clear"
+com Print execute "hardcopy > %.ps | !ps2pdf %.ps && rm %.ps"
 
 set timeoutlen=5000
 map <Space> <leader>
@@ -58,7 +60,8 @@ map <leader>t :tabe<CR>\z
 map <leader>m :tab h 
 map <leader>M :vert h 
 map <leader>q <C-w>q
-map <leader>Q :quitall<CR>
+map <leader>Q :q!<CR>
+map <leader><C-q> :qall!<CR>
 map <leader>W :setlocal wrap!<CR>
 map <leader>w <C-w>w
 map <leader>x <C-w>x
@@ -98,6 +101,7 @@ nno <F3> :PlugUpdate<CR>
 nno <F4> :PlugUpgrade<CR>
 nno <F5> :!<CR><CR>
 ino <F5> <Esc>:!<CR><CR>
+map <F8> :Print<CR>
 nno <F12> :vnew \| vnew \| wincmd l<CR><C-W><C-X>
 nno <C-p> $p
 nno <C-s> :w<CR>
@@ -194,6 +198,7 @@ Plug 'Dosx001/vim-template'
 " Vim
 Plug 'mattn/emmet-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -207,6 +212,7 @@ Plug 'weilbith/nvim-code-action-menu'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'monaqa/dial.nvim'
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -214,7 +220,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh8th/vim-vsnip'
 " fzf
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -226,6 +232,11 @@ lua require("init")
 " Markdown Preview
 let g:mkdp_open_ip = 'localhost'
 
+" Surround
+let g:surround_{98}  = "**\r**" " b
+let g:surround_{105} = "*\r*" " i
+let g:surround_{115} = "~~\r~~" " s
+
 " Git Signs
 hi GitSignsAdd ctermfg=green ctermbg=235 guifg=#3cef3c guibg=#242424
 hi GitSignsChange ctermfg=226 ctermbg=235 guifg=#efef00 guibg=#242424
@@ -236,10 +247,18 @@ map <A-[> <cmd>Gitsigns prev_hunk<CR>
 map <leader>g <cmd>Gitsigns preview_hunk<CR>
 
 " Fire Nvim
-map <F11> :set lines=20<CR>
+map <F11> :set lines=10<CR>
 if exists('g:started_by_firenvim')
   set filetype=markdown
 endif
+
+" Dail
+nmap  <C-a>  <Plug>(dial-increment)
+nmap  <C-x>  <Plug>(dial-decrement)
+vmap  <C-a>  <Plug>(dial-increment)
+vmap  <C-x>  <Plug>(dial-decrement)
+vmap g<C-a> g<Plug>(dial-increment)
+vmap g<C-x> g<Plug>(dial-decrement)
 
 " Nvim TS Rainbow
 hi IndentBlanklineIndent1 guifg=darkred gui=nocombine

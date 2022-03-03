@@ -1,8 +1,3 @@
-vim.opt.termguicolors = true
-vim.opt.list = true
-----vim.opt.listchars:append("space:⋅")
-----vim.opt.listchars:append("eol:↴")
-
 require("indent_blankline").setup {
   space_char_blankline = " ",
   char_highlight_list = {
@@ -177,3 +172,26 @@ for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+local augend = require("dial.augend")
+require("dial.config").augends:register_group{
+  default = {
+    augend.integer.alias.decimal,
+    augend.integer.alias.hex,
+    augend.constant.alias.alpha,
+    augend.constant.alias.Alpha,
+    augend.date.alias["%Y/%m/%d"],
+    augend.date.alias["%m/%d/%Y"],
+    augend.constant.alias.bool,
+    augend.constant.new {
+      elements = {'True', 'False'},
+    },
+    augend.constant.new {
+      elements = {'and', 'or'},
+    },
+    augend.constant.new {
+      elements = {"&&", "||"},
+      word = false,
+    },
+  },
+}
