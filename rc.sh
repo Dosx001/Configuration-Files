@@ -8,6 +8,17 @@ HISTCONTROL=ignoreboth
 
 source ~/.aliasme/aliasme.sh
 
+Update() {
+  Pwd=$(pwd)
+  Dirs=($(ls -d ~/.tmux/plugins/*; ls -d ~/.zsh/*))
+  for i in $Dirs[@]
+  do
+    cd $i
+    git pull
+  done
+  cd $Pwd
+}
+
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -AlF'
 alias la='ls -A'
