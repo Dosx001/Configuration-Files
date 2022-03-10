@@ -195,3 +195,5 @@ require("dial.config").augends:register_group{
     },
   },
 }
+
+require('Comment').setup()
