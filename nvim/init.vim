@@ -39,6 +39,14 @@ fun! g:CenterCursor()
   endif
 endfun
 
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(s:clip)
+  augroup WSLYank
+    au!
+    au TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+  augroup END
+endif
+
 com Py execute "wa | !clear; python3 '%:t'"
 com Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
 com Restore execute "!git restore '%:p'"
@@ -143,7 +151,7 @@ hi! link PmenuSel Visual
 hi PmenuSbar ctermbg=248 guibg=Grey
 hi PmenuThumb ctermbg=0 guibg=DarkRed
 hi MsgArea guifg=#efefef
-hi IncSearch term=reverse cterm=reverse gui=reverse
+hi IncSearch gui=none guifg=none guibg=black
 hi Search term=reverse cterm=reverse gui=reverse guifg=none guibg=none
 hi Title ctermfg=225 gui=none guifg=Magenta
 
@@ -285,14 +293,15 @@ hi link CmpItemKindField Comment
 hi link CmpItemKindClassDefault Special
 hi link CmpItemKindSnippet Title
 set completeopt=menu,menuone,noselect
-map <leader>n <cmd>lua vim.diagnostic.goto_next()<CR>
-map <leader>p <cmd>lua vim.diagnostic.goto_prev()<CR>
+map <A-}> <cmd>lua vim.diagnostic.goto_next()<CR>
+map <A-{> <cmd>lua vim.diagnostic.goto_prev()<CR>
 map <leader>f <cmd>CodeActionMenu<CR>
 map <leader>F <cmd>lua vim.diagnostic.open_float()<CR>
 map <leader>I <cmd>lua vim.lsp.buf.implementation()<CR>
 map <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 map <leader>D <cmd>lua vim.lsp.buf.declaration()<CR>
 map <leader>e <cmd>lua vim.lsp.buf.formatting_sync()<CR>
+map <leader>E <cmd>lua vim.lsp.buf.formatting()<CR>
 
 " Telescope
 map <leader>zf <cmd>Telescope find_files<CR>
