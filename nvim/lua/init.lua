@@ -49,7 +49,45 @@ require('nvim-treesitter.configs').setup({
       "#b300b3"
     },
     -- termcolors = {} -- table of colour name strings
-  }
+  },
+  textobjects = {
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        ["]f"] = "@function.outer",
+        ["]l"] = "@loop.outer",
+      },
+      goto_next_end = {
+        ["]F"] = "@function.outer",
+        ["]L"] = "@loop.outer",
+      },
+      goto_previous_start = {
+        ["[f"] = "@function.outer",
+        ["[l"] = "@loop.outer",
+      },
+      goto_previous_end = {
+        ["[F"] = "@function.outer",
+        ["[l"] = "@loop.outer",
+      },
+    },
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["aa"] = "@parameter.outer",
+        ["ia"] = "@parameter.inner",
+        ["al"] = "@loop.outer",
+        ["il"] = "@loop.inner",
+        ["aA"] = "@conditional.outer",
+        ["iA"] = "@conditional.inner",
+      },
+    },
+  },
 })
 
 local null_ls = require('null-ls')

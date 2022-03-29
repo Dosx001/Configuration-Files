@@ -39,14 +39,6 @@ fun! g:CenterCursor()
   endif
 endfun
 
-let s:clip = '/mnt/c/Windows/System32/clip.exe'
-if executable(s:clip)
-  augroup WSLYank
-    au!
-    au TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-  augroup END
-endif
-
 com Py execute "wa | !clear; python3 '%:t'"
 com Sass execute "wa | !clear; sass '%:t' > '%:t:r'.css"
 com Restore execute "!git restore '%:p'"
@@ -151,7 +143,7 @@ hi! link PmenuSel Visual
 hi PmenuSbar ctermbg=248 guibg=Grey
 hi PmenuThumb ctermbg=0 guibg=DarkRed
 hi MsgArea guifg=#efefef
-hi IncSearch gui=none guifg=none guibg=black
+hi IncSearch gui=reverse,underline guifg=none guibg=none
 hi Search term=reverse cterm=reverse gui=reverse guifg=none guibg=none
 hi Title ctermfg=225 gui=none guifg=Magenta
 
@@ -204,14 +196,20 @@ Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-lazy'
 Plug 'Dosx001/vim-template'
 " Vim
-Plug 'mattn/emmet-vim'
+Plug 'christoomey/vim-sort-motion'
+Plug 'christoomey/vim-system-copy'
+Plug 'christoomey/vim-titlecase'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'D4KU/vim-textobj-chainmember'
+Plug 'mattn/emmet-vim'
+Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Nvim
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'neovim/nvim-lspconfig'
@@ -221,6 +219,7 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'monaqa/dial.nvim'
 Plug 'numToStr/Comment.nvim'
+Plug 'justinmk/vim-sneak'
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -244,6 +243,13 @@ let g:mkdp_open_ip = 'localhost'
 let g:surround_{98}  = "**\r**" " b
 let g:surround_{105} = "*\r*" " i
 let g:surround_{115} = "~~\r~~" " s
+
+" Sneak
+map s s
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
 " Git Signs
 hi GitSignsAdd ctermfg=green ctermbg=235 guifg=#3cef3c guibg=#242424
