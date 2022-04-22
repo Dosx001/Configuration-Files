@@ -31,6 +31,7 @@ packs=(
     expect
     gtest
     tk
+    xsel
     )
 sudo pacman -S --noconfirm ${packs[@]}
 

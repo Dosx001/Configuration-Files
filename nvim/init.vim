@@ -86,6 +86,9 @@ map <leader>0 :Source<CR>
 "nno <Tab> gt
 "nno <S-Tab> gT
 nno Y y$
+map <expr> <A-i> "i" . nr2char(getchar()) . "<Esc>"
+map <A-n> gt
+map <A-p> gT
 cno <A-k> <Up>
 cno <A-j> <Down>
 cno <A-h> <Left>
@@ -208,6 +211,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'justinmk/vim-sneak'
 " Nvim
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -219,7 +223,7 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'monaqa/dial.nvim'
 Plug 'numToStr/Comment.nvim'
-Plug 'justinmk/vim-sneak'
+" Plug 'ggandor/lightspeed.nvim'
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -239,17 +243,20 @@ lua require("init")
 " Markdown Preview
 let g:mkdp_open_ip = 'localhost'
 
-" Surround
-let g:surround_{98}  = "**\r**" " b
-let g:surround_{105} = "*\r*" " i
-let g:surround_{115} = "~~\r~~" " s
-
 " Sneak
 map s s
+map S S
+map <A-s> <Plug>Sneak_s
+map <A-S> <Plug>Sneak_S
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
+
+" Surround
+let g:surround_{98}  = "**\r**" " b
+let g:surround_{105} = "*\r*" " i
+let g:surround_{115} = "~~\r~~" " s
 
 " Git Signs
 hi GitSignsAdd ctermfg=green ctermbg=235 guifg=#3cef3c guibg=#242424
@@ -283,6 +290,16 @@ hi IndentBlanklineIndent5 guifg=darkcyan gui=nocombine
 hi IndentBlanklineIndent6 guifg=darkblue gui=nocombine
 hi IndentBlanklineIndent7 guifg=darkmagenta gui=nocombine
 hi! link IndentBlanklineSpaceChar Title
+
+" " Lightspeed
+" map s s
+" map S S
+" map <A-s> <Plug>Lightspeed_s
+" map <A-S> <Plug>Lightspeed_S
+" map f <Plug>Lightspeed_f
+" map F <Plug>Lightspeed_F
+" map t <Plug>Lightspeed_t
+" map T <Plug>Lightspeed_T
 
 " Nvim Complation
 hi CmpItemAbbrDeprecated gui=strikethrough guifg=darkgray

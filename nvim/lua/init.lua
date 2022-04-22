@@ -94,15 +94,17 @@ local null_ls = require('null-ls')
 local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 null_ls.setup({
-    sources = {
-      null_ls.builtins.code_actions.gitsigns,
-      diagnostics.pylint,
-      diagnostics.flake8,
-      diagnostics.eslint_d,
-      formatting.black,
-      formatting.isort,
-      formatting.prettier
-    }
+  sources = {
+    null_ls.builtins.code_actions.gitsigns,
+    diagnostics.cppcheck,
+    diagnostics.pylint,
+    diagnostics.flake8,
+    diagnostics.eslint_d,
+    formatting.black,
+    formatting.isort,
+    formatting.prettier,
+    formatting.rustfmt
+  }
 })
 
 require('telescope').setup{
@@ -191,19 +193,57 @@ cmp.setup.cmdline(':', {
   })
 })
 
+local function contain(tab, val)
+  for _, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+  return false
+end
+
+
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = { 'clangd', 'cssls', 'jsonls', 'html', 'pyright', 'sumneko_lua', 'tsserver' }
 for _, lsp in pairs(servers) do
   require("lspconfig")[lsp].setup({
     capabilities = capabilities,
     on_attach = function(client)
-      if client.name == 'tsserver' or client.name == 'html' then
+      if contain({'html', 'tsserver'}, client.name) then
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
       end
     end
   })
 end
+
+require'lspconfig'.rust_analyzer.setup({
+  capabilities = capabilities,
+  on_attach = function(client)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end,
+  settings = {
+    ["rust-analyzer"] = {
+      -- assist = {
+      --   importMergeBehavior = "last",
+      --   importPrefix = "by_self",
+      -- },
+      -- diagnostics = {
+      --   disabled = { "unresolved-import" }
+      -- },
+      -- cargo = {
+      --     loadOutDirsFromCheck = true
+      -- },
+      -- procMacro = {
+      --     enable = true
+      -- },
+      checkOnSave = {
+          command = "clippy"
+      },
+    }
+  }
+})
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
