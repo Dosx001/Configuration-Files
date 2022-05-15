@@ -2,7 +2,7 @@
 rm .setup.sh.swp
 pacman-key --init
 pacman-key --populate
-useradd -m -G wheel dosx
+useradd -mg wheel dosx
 passwd dosx
 sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers
 sudo pacman -Syyu --noconfirm

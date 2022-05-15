@@ -41,9 +41,9 @@ else
 	swapon /dev/sda1
 fi
 
-if grep -q -m 1 hypervisor < /proc/cpuinfo; then
+if grep -qm 1 hypervisor < /proc/cpuinfo; then
 	mirco=''
-elif grep -q -m 1 AMD < /proc/cpuinfo; then
+elif grep -qm 1 AMD < /proc/cpuinfo; then
 	mirco=amd-ucode
 else
 	mirco=intel-ucode
@@ -52,6 +52,7 @@ fi
 packages=(
 	linux
 	linux-firmware
+  base
 	base-devel
 	grub
 	xorg-server
@@ -59,11 +60,12 @@ packages=(
 	networkmanager
 	"$mirco"
 	i3-gaps
-	i3status-rust
+	i3status
 	i3lock
 )
 
-pacstrap /mnt "${packages[@]}"
+# shellcheck disable=2068
+pacstrap /mnt ${packages[@]}
 genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt /bin/bash <<EOT
@@ -73,7 +75,7 @@ hwclock --systohc
 sed -i "s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/" /etc/locale.gen
 locale-gen
 
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo LANG=en_US.UTF-8 > /etc/locale.conf
 echo $hostname > /etc/hostname
 
 echo "127.0.0.1	localhost
@@ -82,8 +84,8 @@ echo "127.0.0.1	localhost
 systemctl enable NetworkManager
 
 mkinitcpio -P
-if [[ $(fdisk -l | grep efi) ]]; then
-  pacman -S efibootmgr
+if [[ -d /efi ]]; then
+  pacman -S --noconfirm efibootmgr
   grub-install --target=x86_64-efi --efi-directory=efi --bootloader-id=GRUB
 else
   grub-install --target=i386-pc /dev/sda
