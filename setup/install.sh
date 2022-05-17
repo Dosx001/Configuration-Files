@@ -1,8 +1,10 @@
 #!/bin/bash
-hostname=dosx
-read -p 'Password: ' -r pass
-if [[ -z $pass ]]; then
-  pass="pass"
+read -p 'Hostname: ' -r hostname
+if [[ -z $hostname ]]; then
+	hostname=ArchTest
+	pass="pass"
+else
+	read -p 'Password: ' -r pass
 fi
 timedatectl set-ntp true
 
@@ -41,9 +43,9 @@ else
 	swapon /dev/sda1
 fi
 
-if grep -qm 1 hypervisor < /proc/cpuinfo; then
+if grep -qm 1 hypervisor </proc/cpuinfo; then
 	mirco=''
-elif grep -qm 1 AMD < /proc/cpuinfo; then
+elif grep -qm 1 AMD </proc/cpuinfo; then
 	mirco=amd-ucode
 else
 	mirco=intel-ucode
@@ -52,7 +54,7 @@ fi
 packages=(
 	linux
 	linux-firmware
-  base
+	base
 	base-devel
 	grub
 	xorg-server
@@ -66,7 +68,7 @@ packages=(
 
 # shellcheck disable=2068
 pacstrap /mnt ${packages[@]}
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >>/mnt/etc/fstab
 
 arch-chroot /mnt /bin/bash <<EOT
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
@@ -94,6 +96,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 EOT
 (
-	echo $pass
-	echo $pass
+	echo "$pass"
+	echo "$pass"
 ) | passwd

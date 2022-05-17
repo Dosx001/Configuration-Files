@@ -56,9 +56,9 @@ sudo pacman -S --noconfirm "${packs[@]}"
 sudo pacman -S --needed base-devel
 git clone https://aur.archlinux.org/paru.git
 cd paru || exit
+makepkg -si
 cd ../
 rm -rf paru
-makepkg -si
 
 packs=(
   eslint_d
