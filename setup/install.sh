@@ -10,37 +10,53 @@ timedatectl set-ntp true
 
 swap=$(free --giga | grep Mem | awk '{print $2}')
 if [[ $swap -le 2 ]]; then
-	swap="+$((swap * 3))G"
+	swap="+$((swap * 4))G"
+elif [[ $swap -le 4 ]]; then
+	swap="+$((swap * 2))G"
 elif [[ $swap -le 8 ]]; then
 	swap="+$(swap)G"
-elif [[ $swap -ge 16 ]]; then
+elif [[ $swap -le 16 ]]; then
 	swap=+512M
 else
-	swap="+$((swap * 1 / 2))G"
+  swap=""
 fi
 
 if [[ -d /sys/firmware/efi ]]; then
 	efi="n\n\n\n+512M\nt\n1\n"
-	swap="n\n\n\n${swap}\nt\n\n19\n"
+  if [[ -n $swap ]]; then
+    swap="n\n\n\n${swap}\nt\n\n19\n"
+  fi
 	root="n\n\n\n\nt\n\n23\n"
 	echo -e "g\n$efi$swap${root}w\n" | fdisk /dev/sda
 
-	mkfs.ext4 /dev/sda3
-	mount /dev/sda3 /mnt
-	mkswap /dev/sda2
-	swapon /dev/sda2
+  if [[ -z $swap ]]; then
+    mkfs.ext4 /dev/sda2
+    mount /dev/sda2 /mnt
+  else
+    mkfs.ext4 /dev/sda3
+    mount /dev/sda3 /mnt
+    mkswap /dev/sda2
+    swapon /dev/sda2
+  fi
 	mkfs.fat -F32 /dev/sda1
 	mkdir /mnt/efi
 	mount /dev/sda1 /mnt/efi
 else
-	swap="n\n\n\n\n${swap}\nt\n82\n"
+  if [[ -n $swap ]]; then
+    swap="n\n\n\n\n${swap}\nt\n82\n"
+  fi
 	root="n\n\n\n\n\n"
 	echo -e "$swap${root}w\n" | fdisk /dev/sda
 
-	mkfs.ext4 /dev/sda2
-	mount /dev/sda2 /mnt
-	mkswap /dev/sda1
-	swapon /dev/sda1
+  if [[ -z $swap ]]; then
+    mkfs.ext4 /dev/sda1
+    mount /dev/sda1 /mnt
+  else
+    mkfs.ext4 /dev/sda2
+    mount /dev/sda2 /mnt
+    mkswap /dev/sda1
+    swapon /dev/sda1
+  fi
 fi
 
 if grep -qm 1 hypervisor </proc/cpuinfo; then
