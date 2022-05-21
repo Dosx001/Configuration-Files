@@ -17,39 +17,39 @@ gh ssh-key add id_ed25519.pub --title "$title"
 
 packs=(
   # openssh
-	cmake
-	dart-sass
-	expect
-	firefox
-	gcc
-	geckodriver
-	git
-	go
-	gtest
-	make
-	npm
-	python-pip
-	python3
-	tk
-	tmux
-	typescript
-	typescript-language-server
-	xsel
-	zsh
   clang
+  cmake
+  dart-sass
   eslint
+  expect
+  firefox
   flake8
+  gcc
+  geckodriver
+  git
+  go
+  gtest
   lua-language-server
+  make
   neovim
+  npm
   prettier
   pyright
   python-black
   python-isort
+  python-pip
   python-pylint
+  python3
   rust-analyzer
   shellcheck
   shfmt
+  tk
+  tmux
+  typescript
+  typescript-language-server
+  xsel
   yarn
+  zsh
 )
 sudo pacman -S --noconfirm "${packs[@]}"
 
@@ -62,6 +62,7 @@ rm -rf paru
 
 packs=(
   eslint_d
+  markdownlint
   nodejs-live-server
   vscode-langservers-extracted
   yuicompressor
