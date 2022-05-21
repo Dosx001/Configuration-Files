@@ -19,10 +19,18 @@ require('gitsigns').setup{
     topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChangeDelete', text = '~−', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
+  on_attach = function(bufnr)
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+  end
 }
 
 require('nvim-treesitter.configs').setup({
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   highlight = {
     enable = true,
     disable = { "vim" },
@@ -91,18 +99,26 @@ require('nvim-treesitter.configs').setup({
 })
 
 local null_ls = require('null-ls')
+local actions = null_ls.builtins.code_actions
 local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 null_ls.setup({
   sources = {
-    null_ls.builtins.code_actions.gitsigns,
+    actions.eslint_d,
+    actions.shellcheck,
+    actions.gitsigns,
+    -- actions.proselint,
     diagnostics.cppcheck,
     diagnostics.pylint,
     diagnostics.flake8,
     diagnostics.eslint_d,
+    diagnostics.shellcheck,
+    diagnostics.markdownlint,
+    -- diagnostics.proselint,
     formatting.black,
     formatting.isort,
     formatting.prettier,
+    formatting.shfmt,
     formatting.rustfmt
   }
 })
@@ -153,8 +169,8 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
+    ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's', 'c' }),
+    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's', 'c' }),
     ['<A-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<A-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<A-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -172,23 +188,25 @@ cmp.setup({
     -- { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
-  }, {
     { name = 'buffer' },
   })
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   sources = {
     { name = 'buffer' }
   }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('?', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
 cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
+    { name = 'path' },
     { name = 'cmdline' }
   })
 })
@@ -201,7 +219,6 @@ local function contain(tab, val)
   end
   return false
 end
-
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = { 'clangd', 'cssls', 'jsonls', 'html', 'pyright', 'sumneko_lua', 'tsserver' }
