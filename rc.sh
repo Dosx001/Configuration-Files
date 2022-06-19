@@ -1,5 +1,7 @@
 stty -ixon
-export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+if [[ -e /etc/wsl.conf ]]; then
+  export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+fi
 
 HISTSIZE=1000
 HISTFILESIZE=2000

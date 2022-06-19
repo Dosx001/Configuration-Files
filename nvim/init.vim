@@ -58,7 +58,7 @@ map <leader>s :new<CR>\z
 map <leader>S <C-w>s
 map <leader>t :tabe<CR>\z
 map <leader>m :tab h 
-map <leader>M :vert h 
+map <leader>M :vert h
 map <leader>q <C-w>q
 map <leader>Q :q!<CR>
 map <leader><C-q> :qall!<CR>
@@ -77,7 +77,7 @@ map <leader>r :,s/
 map <leader>R :,+
 map <leader><C-r> :%s/
 map <leader>u :earlier 1f<CR>
-map <leader>U :earlier 
+map <leader>U :earlier
 map <leader>, q:<Up>
 map <leader>. :<Up><CR>
 map <leader>> :<Up>
@@ -112,7 +112,7 @@ ino <C-s> <Esc>:w<CR>
 nno <C-q> :wa<CR>
 ino <C-q> <Esc>:wa<CR>
 ino . .<C-g>u
-ino <Space> <Space><C-g>u
+imap <Space> <Space><C-g>u
 nno <C-k> :call CtrlK()<CR>
 ino <C-k> <Esc>:call CtrlK()<CR>
 
@@ -198,24 +198,25 @@ Plug 'Dosx001/statusline.vim'
 Plug 'Dosx001/tabline.vim'
 Plug 'Dosx001/vim-lazy'
 Plug 'Dosx001/vim-template'
+Plug 'Dosx001/cmp-commit'
 " Vim
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-titlecase'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'D4KU/vim-textobj-chainmember'
 Plug 'mattn/emmet-vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
+" Text Object
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'D4KU/vim-textobj-chainmember'
+Plug 'glts/vim-textobj-comment'
 " Nvim
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'p00f/nvim-ts-rainbow'
 Plug 'neovim/nvim-lspconfig'
 Plug 'weilbith/nvim-code-action-menu'
 Plug 'jose-elias-alvarez/null-ls.nvim'
@@ -223,7 +224,11 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'monaqa/dial.nvim'
 Plug 'numToStr/Comment.nvim'
-" Plug 'ggandor/lightspeed.nvim'
+" Tree Sitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'p00f/nvim-ts-rainbow'
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -325,6 +330,7 @@ map <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 map <leader>D <cmd>lua vim.lsp.buf.declaration()<CR>
 map <leader>e <cmd>lua vim.lsp.buf.formatting_sync()<CR>
 map <leader>E <cmd>lua vim.lsp.buf.formatting()<CR>
+map <leader>G <cmd>lua vim.lsp.buf.hover()<CR>
 
 " Telescope
 map <leader>zf <cmd>Telescope find_files<CR>
