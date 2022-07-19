@@ -40,6 +40,7 @@ alias p="python3"
 alias vi="\vim"
 alias vim="nvim"
 
+alias fuck='sudo $(fc -ln -1)'
 alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 alias Explorer="/mnt/c/Windows/explorer.exe ."
 alias Server="live-server --no-browser --port=8000"

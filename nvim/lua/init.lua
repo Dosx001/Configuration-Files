@@ -48,6 +48,15 @@ require("nvim-treesitter.configs").setup({
 			["tag.delimiter"] = "TSParameter",
 		},
 	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<C-,>",
+			scope_incremental = "<C-.>",
+			node_incremental = "<A-.>",
+			node_decremental = "<A-,>",
+		},
+	},
 	rainbow = {
 		enable = true,
 		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -59,7 +68,7 @@ require("nvim-treesitter.configs").setup({
 			"#bcbc00",
 			"#00b300",
 			"#00b3b3",
-			"blue",
+			"Blue",
 			"#b300b3",
 		},
 		-- termcolors = {} -- table of colour name strings
@@ -113,11 +122,11 @@ require("treesitter-context").setup({
 			"class",
 			"function",
 			"method",
-			'for',
-			'while',
-			'if',
-			'switch',
-			'case',
+			"for",
+			"while",
+			"if",
+			"switch",
+			"case",
 		},
 	},
 	zindex = 20,
@@ -201,6 +210,9 @@ require("telescope").load_extension("fzf")
 local cmp = require("cmp")
 
 cmp.setup({
+	enabled = function()
+		return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+	end,
 	snippet = {
 		expand = function(args)
 			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
@@ -230,6 +242,7 @@ cmp.setup({
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
 		{ name = "buffer" },
+		{ name = "dap" },
 	}),
 })
 
@@ -386,3 +399,104 @@ require("dial.config").augends:register_group({
 })
 
 require("Comment").setup()
+
+require("nvim-dap-virtual-text").setup()
+require("dap-python").setup("python", {})
+
+local dap, dapui = require("dap"), require("dapui")
+
+dap.adapters.python = {
+	type = "executable",
+	command = "python",
+	args = { "-m", "debugpy.adapter" },
+}
+
+dapui.setup({
+	layouts = {
+		{
+			elements = {
+				{ id = "scopes", size = 0.25 },
+				"breakpoints",
+				"stacks",
+				"watches",
+			},
+			size = 40,
+			position = "left",
+		},
+		{
+			elements = {
+				"console",
+				"repl",
+			},
+			size = 0.25,
+			position = "bottom",
+		},
+	},
+})
+
+dap.listeners.after.event_initialized["dapui_config"] = function()
+	dapui.open({})
+end
+
+dap.configurations.python = {
+	{
+		type = "python",
+		request = "launch",
+		name = "Launch file",
+
+		program = "${file}",
+		pythonPath = function()
+			local cwd = vim.fn.getcwd()
+			if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+				return cwd .. "/venv/bin/python"
+			elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+				return cwd .. "/.venv/bin/python"
+			else
+				return "/usr/bin/python"
+			end
+		end,
+	},
+}
+
+local Hydra = require("hydra")
+
+local dap_hydra = Hydra({
+	name = "DAP",
+	mode = { "n", "x" },
+	body = "<Leader>d",
+	heads = {
+		-- 	-- 	dap.set_breakpoint(vim.fn.input("[Condition] > "))
+		-- 	-- 	return "<Ignore>"
+		-- 	-- "c",
+		-- 	-- end,
+		-- 	-- function()
+		-- 	-- { expr = true },
+		-- {
+		-- { "i", dap.step_into, { silent = true } },
+		-- { "o", dap.step_out, { silent = true } },
+		-- { "p", dap.pause, { silent = true } },
+		-- { "s", dap.step_over, { silent = true } },
+		-- { "t", dap.terminate, { silent = true } },
+		-- },
+		{ "<Enter>", dap.session, { silent = true } },
+		{ "<Esc>", nil, { exit = true, nowait = true } },
+		{ "B", dap.toggle_breakpoint, { silent = true } },
+		{ "C", dap.clear_breakpoints, { silent = true } },
+		{ "J", dap.down, { silent = true } },
+		{ "K", dap.up, { silent = true } },
+		{ "R", dap.run_last, { silent = true } },
+		{ "b", dap.set_breakpoint, { silent = true } },
+		{ "j", "j" },
+		{ "k", "k" },
+		{ "r", dap.run_to_cursor, { silent = true } },
+		{ "u", dapui.toggle, { silent = true } },
+	},
+})
+
+Hydra.spawn = function(head)
+	if head == "dap-hydra" then
+		dap_hydra:activate()
+	end
+end
+
+require("colorizer").setup()
