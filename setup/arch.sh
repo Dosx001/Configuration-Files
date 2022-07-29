@@ -16,40 +16,41 @@ ssh-add.exe ~/.ssh/id_ed25519
 gh ssh-key add id_ed25519.pub --title "$title"
 
 packs=(
-  # openssh
+	# openssh
+	clang
 	cmake
 	dart-sass
+	eslint
 	expect
 	firefox
+	flake8
 	gcc
 	geckodriver
 	git
 	go
 	gtest
+	lua-language-server
 	make
+	neovim
 	npm
+	prettier
+	pyright
+	python-black
+	python-debugpy
+	python-isort
 	python-pip
+	python-pylint
 	python3
+	rust-analyzer
+	shellcheck
+	shfmt
 	tk
 	tmux
 	typescript
 	typescript-language-server
 	xsel
+	yarn
 	zsh
-  clang
-  eslint
-  flake8
-  lua-language-server
-  neovim
-  prettier
-  pyright
-  python-black
-  python-isort
-  python-pylint
-  rust-analyzer
-  shellcheck
-  shfmt
-  yarn
 )
 sudo pacman -S --noconfirm "${packs[@]}"
 
@@ -61,10 +62,11 @@ cd ../
 rm -rf paru
 
 packs=(
-  eslint_d
-  nodejs-live-server
-  vscode-langservers-extracted
-  yuicompressor
+	eslint_d
+	nodejs-live-server
+	vscode-langservers-extracted
+	yuicompressor
+  nodejs-n
 )
 paru -S --noconfirm "${packs[@]}"
 
