@@ -12,6 +12,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
+setopt correct_all
 
 bindkey -v
 VISUAL=vi
@@ -23,13 +24,14 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey '^[f' forward-word
 bindkey '^[ ' autosuggest-execute
 
+alias GitPrompt="/mnt/d/Repositories/C++/GitPrompt/bin/GitPrompt.exe"
 _prompt() {
-    if [[ -e `git rev-parse --git-dir 2> /dev/null` ]]; then
-        echo -n "$fg[green]`whoami`@`cat /proc/sys/kernel/hostname` "
-    else
-        echo "$fg[green]`whoami`@`cat /proc/sys/kernel/hostname`"
-    fi
-    ~/GitPrompt.exe
+  if [[ -e `git rev-parse --git-dir 2> /dev/null` ]]; then
+    echo -n "$fg[green]`whoami`@`cat /proc/sys/kernel/hostname` "
+  else
+    echo "$fg[green]`whoami`@`cat /proc/sys/kernel/hostname`"
+  fi
+  GitPrompt
 }
 
 autoload -U add-zsh-hook

@@ -1,5 +1,7 @@
 stty -ixon
-export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+if [[ -e /etc/wsl.conf ]]; then
+  export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+fi
 
 HISTSIZE=1000
 HISTFILESIZE=2000
@@ -38,6 +40,7 @@ alias p="python3"
 alias vi="\vim"
 alias vim="nvim"
 
+alias fuck='sudo $(fc -ln -1)'
 alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 alias Explorer="/mnt/c/Windows/explorer.exe ."
 alias Server="live-server --no-browser --port=8000"

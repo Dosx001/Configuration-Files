@@ -65,30 +65,29 @@ map <leader><C-q> :qall!<CR>
 map <leader>W :setlocal wrap!<CR>
 map <leader>w <C-w>w
 map <leader>x <C-w>x
-map <leader>h <C-w>h
-map <leader>H <C-w>H
-map <leader>j <C-w>j
-map <leader>J <C-w>J
-map <leader>k <C-w>k
-map <leader>K <C-w>K
-map <leader>l <C-w>l
-map <leader>L <C-w>L
 map <leader>r :,s/
-map <leader>R :,+
 map <leader><C-r> :%s/
 map <leader>u :earlier 1f<CR>
-map <leader>U :earlier 
+map <leader>U :earlier
 map <leader>, q:<Up>
 map <leader>. :<Up><CR>
 map <leader>> :<Up>
 map <leader>/ :noh<CR>
 map <leader>0 :Source<CR>
-"nno <Tab> gt
-"nno <S-Tab> gT
+map <leader>o yyp<C-a>f.lDA 
+ino <A-o> <Esc>yyp<C-a>f.2lDA
 nno Y y$
 map <expr> <A-i> "i" . nr2char(getchar()) . "<Esc>"
 map <A-n> gt
 map <A-p> gT
+map <A-h> <C-w>h
+map <A-j> <C-w>j
+map <A-k> <C-w>k
+map <A-l> <C-w>l
+map <A-H> <C-w>5<
+map <A-J> <C-w>5+
+map <A-K> <C-w>5-
+map <A-L> <C-w>5>
 cno <A-k> <Up>
 cno <A-j> <Down>
 cno <A-h> <Left>
@@ -98,14 +97,12 @@ ino <C-c> <C-x>s
 ino <C-f> <C-x><C-f>
 ino <C-h> <C-x><C-k>
 ino <expr><Esc> col('.') == 1 ? "\<Esc>" : "\<Esc>l"
-nno <F1> :PlugClean<CR>
-nno <F2> :PlugInstall<CR>
-nno <F3> :PlugUpdate<CR>
-nno <F4> :PlugUpgrade<CR>
+nno <F9> :PlugClean<CR>
+nno <F10> :PlugInstall<CR>
+nno <F11> :PlugUpdate<CR>
+nno <F12> :PlugUpgrade<CR>
 nno <F5> :!<CR><CR>
 ino <F5> <Esc>:!<CR><CR>
-map <F8> :Print<CR>
-nno <F12> :vnew \| vnew \| wincmd l<CR><C-W><C-X>
 nno <C-p> $p
 nno <C-s> :w<CR>
 ino <C-s> <Esc>:w<CR>
@@ -128,7 +125,29 @@ fun! g:CtrlK()
   endif
 endfun
 
-hi Normal guifg=darkgray
+map gl <cmd>call NumList()<CR>
+fun! g:NumList()
+  let str = getline('.')
+  let args = split(str)
+  let ran = [1, 1, 1]
+  let opt = split(args[0], ',')
+  if len(opt) == 1
+    let ran[1] = opt[0]
+  elseif len(opt) == 2
+    let ran[0] = opt[0]
+    let ran[1] = opt[1]
+  else
+    let ran[0] = opt[0]
+    let ran[1] = opt[1]
+    let ran[2] = opt[2]
+  endif
+  norm 0D
+  for i in range(ran[0], ran[1], ran[2])
+    put = i . args[1]
+  endfor
+endfun
+
+hi Normal guifg=DarkGray
 hi Comment ctermfg=4 guifg=#0037da
 hi Constant ctermfg=1 guifg=#b30000
 hi Special ctermfg=5 guifg=#881798
@@ -139,9 +158,9 @@ hi Type ctermfg=2 gui=none guifg=#13a10e
 hi Underlined term=underline cterm=underline ctermfg=5 gui=underline guifg=#881798
 
 hi Visual ctermbg=235 guibg=#242424
-hi VertSplit ctermfg=237 ctermbg=darkred guibg=#b30000 guifg=#363636
+hi VertSplit ctermfg=237 ctermbg=DarkRed guibg=#b30000 guifg=#363636
 hi EndOfBuffer ctermfg=237 guifg=#363636 guibg=none
-hi Pmenu ctermfg=1 ctermbg=black guifg=#b30000 guibg=#0c0c0c
+hi Pmenu ctermfg=1 ctermbg=Black guifg=#b30000 guibg=#0c0c0c
 hi! link PmenuSel Visual
 hi PmenuSbar ctermbg=248 guibg=Grey
 hi PmenuThumb ctermbg=0 guibg=DarkRed
@@ -150,21 +169,21 @@ hi IncSearch gui=reverse,underline guifg=none guibg=none
 hi Search term=reverse cterm=reverse gui=reverse guifg=none guibg=none
 hi Title ctermfg=225 gui=none guifg=Magenta
 
-hi DiffAdd ctermbg=22 gui=none guifg=black guibg=#005f00
-hi DiffChange ctermbg=3 gui=none guifg=black guibg=#c19c00
-hi DiffDelete ctermbg=88 gui=none guifg=black guibg=#870000
-hi DiffText term=reverse ctermbg=53 gui=none guifg=black guibg=#5f005f
+hi DiffAdd ctermbg=22 gui=none guifg=Black guibg=#005f00
+hi DiffChange ctermbg=3 gui=none guifg=Black guibg=#c19c00
+hi DiffDelete ctermbg=88 gui=none guifg=Black guibg=#870000
+hi DiffText term=reverse ctermbg=53 gui=none guifg=Black guibg=#5f005f
 
 "set wildmenu
 "hi WildMenu ctermfg=34 ctermbg=black
 
 set showtabline=2
-hi TabLine ctermfg=darkred ctermbg=234 gui=none guifg=#b30000 guibg=#1a1a1a
+hi TabLine ctermfg=DarkRed ctermbg=234 gui=none guifg=#b30000 guibg=#1a1a1a
 hi TabLineSel ctermfg=196 guifg=#ef0000 guibg=none
 hi TabLineFill ctermfg=233 guifg=#111111
 
 set number relativenumber
-hi LineNr ctermfg=darkred ctermbg=234 guifg=#b30000 guibg=#1a1a1a
+hi LineNr ctermfg=DarkRed ctermbg=234 guifg=#b30000 guibg=#1a1a1a
 
 set colorcolumn=100
 hi! link ColorColumn Visual
@@ -181,49 +200,58 @@ hi SignColumn ctermbg=none guibg=none
 
 set listchars=tab:┆\ ,trail:•,extends:>,precedes:<,nbsp:~ ",eol:π
 hi! link NonText Title
-hi SpecialKey ctermfg=darkred guifg=#b30000
-hi ExtendsChar ctermfg=darkred ctermbg=237 guifg=#b30000 guibg=#363636
-hi PrecedesChar ctermfg=darkred ctermbg=237 guifg=#b30000 guibg=#363636
-hi TrailChar ctermfg=darkred ctermbg=237 guifg=#b30000 guibg=#363636
+hi SpecialKey ctermfg=DarkRed guifg=#b30000
+hi ExtendsChar ctermfg=DarkRed ctermbg=237 guifg=#b30000 guibg=#363636
+hi PrecedesChar ctermfg=DarkRed ctermbg=237 guifg=#b30000 guibg=#363636
+hi TrailChar ctermfg=DarkRed ctermbg=237 guifg=#b30000 guibg=#363636
 
 set spelllang=en_us
-hi SpellBad term=reverse ctermfg=black ctermbg=red guifg=#000000 guibg=#e74856
-hi SpellCap term=reverse ctermfg=black ctermbg=blue guifg=#000000 guibg=#3b78ff
-hi SpellRare term=reverse ctermfg=black ctermbg=magenta guifg=#000000 guibg=#b4009e
-hi SpellLocal ctermfg=black ctermbg=darkcyan guifg=#000000 guibg=#3a96dd
+hi SpellBad term=reverse ctermfg=Black ctermbg=Red guifg=#000000 guibg=#e74856
+hi SpellCap term=reverse ctermfg=Black ctermbg=Blue guifg=#000000 guibg=#3b78ff
+hi SpellRare term=reverse ctermfg=Black ctermbg=Magenta guifg=#000000 guibg=#b4009e
+hi SpellLocal ctermfg=Black ctermbg=DarkCyan guifg=#000000 guibg=#3a96dd
 
 call plug#begin('~/.nvim')
 " My Suff
 Plug 'Dosx001/statusline.vim'
 Plug 'Dosx001/tabline.vim'
-Plug 'Dosx001/vim-lazy'
+" Plug 'Dosx002/vim-lazy'
 Plug 'Dosx001/vim-template'
 " Vim
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-titlecase'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'D4KU/vim-textobj-chainmember'
 Plug 'mattn/emmet-vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
+Plug 'hrsh7th/vim-vsnip'
+" Text Object
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'D4KU/vim-textobj-chainmember'
+Plug 'glts/vim-textobj-comment'
 " Nvim
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'neovim/nvim-lspconfig'
-Plug 'weilbith/nvim-code-action-menu'
-Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'monaqa/dial.nvim'
 Plug 'numToStr/Comment.nvim'
-" Plug 'ggandor/lightspeed.nvim'
+Plug 'anuvyklack/hydra.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'weilbith/nvim-code-action-menu'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+" Plug 'ray-x/lsp_signature.nvim'
+" Tree Sitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'p00f/nvim-ts-rainbow'
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -231,7 +259,12 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'rcarriga/cmp-dap'
+" Debugger
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'mfussenegger/nvim-dap-python'
 " fzf
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -254,9 +287,16 @@ map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 
 " Surround
-let g:surround_{98}  = "**\r**" " b
+let g:surround_{99}  = "**\r**" " b
 let g:surround_{105} = "*\r*" " i
 let g:surround_{115} = "~~\r~~" " s
+
+" System Copy
+if system('uname -r | grep WSL')
+  let g:system_copy#copy_command='/mnt/c/Windows/System32/clip.exe'
+  let g:system_copy#paste_command='powershell.exe -NoProfile -command Get-Clipboard'
+  let g:netrw_browsex_viewer="cmd.exe /C start"
+endif
 
 " Git Signs
 hi GitSignsAdd ctermfg=green ctermbg=235 guifg=#3cef3c guibg=#242424
@@ -268,7 +308,7 @@ map <A-[> <cmd>Gitsigns prev_hunk<CR>
 map <leader>g <cmd>Gitsigns preview_hunk<CR>
 
 " Fire Nvim
-map <F11> :set lines=10<CR>
+map <F8> :set lines=10<CR>
 if exists('g:started_by_firenvim')
   set filetype=markdown
 endif
@@ -282,29 +322,22 @@ vmap g<C-a> g<Plug>(dial-increment)
 vmap g<C-x> g<Plug>(dial-decrement)
 
 " Nvim TS Rainbow
-hi IndentBlanklineIndent1 guifg=darkred gui=nocombine
+hi IndentBlanklineIndent1 guifg=DarkRed gui=nocombine
 hi IndentBlanklineIndent2 guifg=#974300 gui=nocombine
 hi IndentBlanklineIndent3 guifg=#828200 gui=nocombine
-hi IndentBlanklineIndent4 guifg=darkgreen gui=nocombine
-hi IndentBlanklineIndent5 guifg=darkcyan gui=nocombine
-hi IndentBlanklineIndent6 guifg=darkblue gui=nocombine
-hi IndentBlanklineIndent7 guifg=darkmagenta gui=nocombine
+hi IndentBlanklineIndent4 guifg=DarkGreen gui=nocombine
+hi IndentBlanklineIndent5 guifg=DarkCyan gui=nocombine
+hi IndentBlanklineIndent6 guifg=DarkBlue gui=nocombine
+hi IndentBlanklineIndent7 guifg=DarkMagenta gui=nocombine
 hi! link IndentBlanklineSpaceChar Title
 
-" " Lightspeed
-" map s s
-" map S S
-" map <A-s> <Plug>Lightspeed_s
-" map <A-S> <Plug>Lightspeed_S
-" map f <Plug>Lightspeed_f
-" map F <Plug>Lightspeed_F
-" map t <Plug>Lightspeed_t
-" map T <Plug>Lightspeed_T
-
 " Nvim Complation
-hi CmpItemAbbrDeprecated gui=strikethrough guifg=darkgray
+hi CmpItemAbbrDeprecated gui=strikethrough guifg=DarkGray
 hi CmpItemAbbrMatch guifg=#ef7f00
-hi CmpItemAbbrMatchFuzzy guifg=#ef7f00
+hi link CmpItemAbbrMatchFuzzy Type
+hi link CmpItemAbbrDefault Constant
+hi link CmpItemMenuDefault Constant
+hi link CmpItemKindDefault Constant
 hi link CmpItemKindKeyword Statement
 hi link CmpItemKindVariable Type
 hi link CmpItemKindModule PreProc
@@ -320,11 +353,18 @@ map <A-}> <cmd>lua vim.diagnostic.goto_next()<CR>
 map <A-{> <cmd>lua vim.diagnostic.goto_prev()<CR>
 map <leader>f <cmd>CodeActionMenu<CR>
 map <leader>F <cmd>lua vim.diagnostic.open_float()<CR>
-map <leader>I <cmd>lua vim.lsp.buf.implementation()<CR>
-map <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
-map <leader>D <cmd>lua vim.lsp.buf.declaration()<CR>
 map <leader>e <cmd>lua vim.lsp.buf.formatting_sync()<CR>
 map <leader>E <cmd>lua vim.lsp.buf.formatting()<CR>
+map <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
+map <leader>R <cmd>lua vim.lsp.buf.rename()<CR>
+map <leader>ld <cmd>lua vim.lsp.buf.definition()<CR>
+map <leader>lD <cmd>lua vim.lsp.buf.declaration()<CR>
+map <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>
+map <leader>la <cmd>lua vim.lsp.buf.add_workspace_folder()<CR>
+map <leader>lr <cmd>lua vim.lsp.buf.reomve_workspace_folder()<CR>
+map <leader>ll <cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
+map <leader>lR <cmd>lua vim.lsp.buf.references()<CR>
+map <leader>lt <cmd>lua vim.lsp.buf.type_definition()<CR>
 
 " Telescope
 map <leader>zf <cmd>Telescope find_files<CR>
@@ -334,3 +374,21 @@ map <leader>zG <cmd>lua require('telescope.builtin').live_grep{ cwd = vim.fn.sys
 map <leader>zb <cmd>Telescope buffers<CR>
 map <leader>zh <cmd>Telescope help_tags<CR>
 map <leader>ze :e 
+
+" DAP
+map <F1> <cmd>lua require("dap").step_into()<CR>
+map <F2> <cmd>lua require("dap").step_over()<CR>
+map <F3> <cmd>lua require("dap").step_out()<CR>
+map <F4> <cmd>lua require("dap").continue()<CR>
+map <F8> <cmd>lua require("dap").pause()<CR>
+map <F7> <cmd>lua require("dap").terminate()<CR>
+map <leader>dc <cmd>lua require("dap").set_breakpoint(vim.fn.input("Condition: "))<CR>
+map <leader>dr <cmd>lua require("dap").run_to_cursor()<CR>
+map <leader>dR <cmd>lua require("dap").run_last()<CR>
+map <leader>dh <cmd>lua require("dap.ui.widgets").hover()<CR>
+map <leader>ds <cmd>lua require("dap.ui.widgets").scopes()<CR>
+map <leader>dl <cmd>lua require("dap").goto_()<CR>
+
+map <leader>dpm <cmd>lua require('dap-python').test_method()<CR>
+map <leader>dpc <cmd>lua require('dap-python').test_class()<CR>
+map <leader>dps <cmd>lua require('dap-python').debug_selection()<CR>

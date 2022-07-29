@@ -17,6 +17,7 @@ gh ssh-key add id_ed25519.pub --title "$title"
 
 packs=(
   # openssh
+  # tk
   clang
   cmake
   dart-sass
@@ -36,6 +37,7 @@ packs=(
   prettier
   pyright
   python-black
+  python-debugpy
   python-isort
   python-pip
   python-pylint
@@ -43,7 +45,6 @@ packs=(
   rust-analyzer
   shellcheck
   shfmt
-  tk
   tmux
   typescript
   typescript-language-server
@@ -64,6 +65,7 @@ packs=(
   eslint_d
   markdownlint
   nodejs-live-server
+  nodejs-n
   vscode-langservers-extracted
   yuicompressor
 )
