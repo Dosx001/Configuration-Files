@@ -267,10 +267,17 @@ cmp.setup.cmdline("?", {
 	},
 })
 
+local cmdline
+if vim.fn.systemlist("uname -r | grep WSL") then
+	cmdline = { name = "cmdline", keyword_pattern = [=[[^[:blank:]\!]*]=] }
+else
+	cmdline = { name = "cmdline" }
+end
+
 cmp.setup.cmdline(":", {
 	sources = cmp.config.sources({
 		{ name = "path" },
-		{ name = "cmdline", keyword_pattern = [=[[^[:blank:]\!]*]=] },
+		cmdline,
 	}),
 })
 
@@ -284,12 +291,12 @@ local function contain(tab, val)
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local servers = { "bashls", "clangd", "cssls", "jsonls", "html", "pyright", "tsserver" }
+local servers = { "bashls", "clangd", "cssls", "html", "jsonls", "prismals", "pyright", "tailwindcss", "tsserver" }
 for _, lsp in pairs(servers) do
 	require("lspconfig")[lsp].setup({
 		capabilities = capabilities,
 		on_attach = function(client)
-			if contain({ "html", "tsserver" }, client.name) then
+			if contain({ "html", "jsonls", "tsserver" }, client.name) then
 				client.resolved_capabilities.document_formatting = false
 				client.resolved_capabilities.document_range_formatting = false
 			end
