@@ -74,8 +74,11 @@ map <leader>. :<Up><CR>
 map <leader>> :<Up>
 map <leader>/ :noh<CR>
 map <leader>0 :Source<CR>
+map <leader>9 <cmd>source ~/.config/nvim/snippets/python.lua<CR>
+map <leader>1 <cmd>set expandtab shiftwidth=4 tabstop=4 softtabstop=4<CR>
 map <leader>o yyp<C-a>f.lDA 
 ino <A-o> <Esc>yyp<C-a>f.2lDA
+map gF :tabe <cfile><CR>
 nno Y y$
 map <expr> <A-i> "i" . nr2char(getchar()) . "<Esc>"
 map <A-n> gt
@@ -215,7 +218,7 @@ call plug#begin('~/.nvim')
 " My Suff
 Plug 'Dosx001/statusline.vim'
 Plug 'Dosx001/tabline.vim'
-" Plug 'Dosx002/vim-lazy'
+" Plug 'Dosx001/vim-lazy'
 Plug 'Dosx001/vim-template'
 " Vim
 Plug 'christoomey/vim-sort-motion'
@@ -228,7 +231,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
-Plug 'hrsh7th/vim-vsnip'
 " Text Object
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
@@ -241,7 +243,10 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'monaqa/dial.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'anuvyklack/hydra.nvim'
-Plug 'norcalli/nvim-colorizer.lua'
+Plug 'NvChad/nvim-colorizer.lua'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'gennaro-tedesco/nvim-peekup'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'weilbith/nvim-code-action-menu'
@@ -258,7 +263,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-vsnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rcarriga/cmp-dap'
 " Debugger
 Plug 'mfussenegger/nvim-dap'
@@ -281,10 +286,10 @@ map s s
 map S S
 map <A-s> <Plug>Sneak_s
 map <A-S> <Plug>Sneak_S
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
 
 " Surround
 let g:surround_{99}  = "**\r**" " b

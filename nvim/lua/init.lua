@@ -91,7 +91,7 @@ require("nvim-treesitter.configs").setup({
 			},
 			goto_previous_end = {
 				["[F"] = "@function.outer",
-				["[l"] = "@loop.outer",
+				["[L"] = "@loop.outer",
 			},
 		},
 		select = {
@@ -215,8 +215,9 @@ cmp.setup({
 	end,
 	snippet = {
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-			-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+			-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			-- require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+			ls.lsp_expand(args.body) -- For `luasnip` users.
 			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
 			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 		end,
@@ -235,13 +236,13 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	},
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "vsnip" }, -- For vsnip users.
-		{ name = "path" },
-		-- { name = 'luasnip' }, -- For luasnip users.
+		-- { name = "vsnip" }, -- For vsnip users.
+		{ name = "luasnip" }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
+		{ name = "nvim_lsp" },
 		{ name = "buffer" },
+		{ name = "path" },
 		{ name = "dap" },
 	}),
 })
@@ -269,7 +270,7 @@ cmp.setup.cmdline("?", {
 cmp.setup.cmdline(":", {
 	sources = cmp.config.sources({
 		{ name = "path" },
-		{ name = "cmdline" },
+		{ name = "cmdline", keyword_pattern = [=[[^[:blank:]\!]*]=] },
 	}),
 })
 
@@ -398,10 +399,8 @@ require("dial.config").augends:register_group({
 	},
 })
 
-require("Comment").setup()
-
-require("nvim-dap-virtual-text").setup()
-require("dap-python").setup("python", {})
+require("nvim-dap-virtual-text").setup({})
+require("dap-python").setup()
 
 local dap, dapui = require("dap"), require("dapui")
 
@@ -499,4 +498,42 @@ Hydra.spawn = function(head)
 	end
 end
 
+local ls = require("luasnip")
+local types = require("luasnip.util.types")
+-- require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
+require("luasnip.loaders.from_vscode").lazy_load()
+
+ls.config.set_config({
+	history = true,
+	updateevents = "TextChanged,TextChangedI",
+	enable_autosnippets = true,
+	ext_opts = {
+		[types.choiceNode] = {
+			active = {
+				virt_text = { { " <- Current Choice", "NonTest" } },
+			},
+		},
+	},
+})
+
+vim.keymap.set({ "i", "s" }, "<A-j>", function()
+	if ls.expand_or_jumpable() then
+		ls.expand_or_jump()
+	end
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<A-k>", function()
+	if ls.jumpable(-1) then
+		ls.jump(-1)
+	end
+end, { silent = true })
+
+vim.keymap.set("i", "<A-l>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end)
+
 require("colorizer").setup()
+require("Comment").setup()
+-- require("lsp_signature").setup()

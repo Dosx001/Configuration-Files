@@ -1,5 +1,18 @@
 autoload -U compinit
 zstyle ':completion:*' menu select
+# zstyle ':completion:*:correct:*' insert-unambiguous true
+# zstyle ':completion:*:corrections' format $'${\e[0:31m%}%d (errors: %e)%{\e[0m%}'
+# zstyle ':completion:*:correct:*' original true
+# zstyle ':completion:*:matched' group 'yes'
+# zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' verbose true
+# zstyle ':completion:*' group-order original corrections
+# zstyle ':completion:*' group-order original corrections
+# zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' original true
+# zstyle ':completion:*:*:-command-:*:*' group-order \
+#   builtins functions commands
+
 zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=32=31' '=*=32'
 zmodload zsh/complist
 compinit -i
@@ -12,7 +25,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
-setopt correct_all
+# setopt correct_all
 
 bindkey -v
 VISUAL=vi
@@ -45,6 +58,7 @@ source ~/rc.sh
 source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2> /dev/null
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/yarn-completion/yarn-completion.plugin.zsh
+# source ~/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # pip zsh completion start
 function _pip_completion {
