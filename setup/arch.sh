@@ -18,6 +18,8 @@ gh ssh-key add id_ed25519.pub --title "$title"
 packs=(
 	# openssh
 	# tk
+	bluez
+	bluez-utils
 	clang
 	cmake
 	cppcheck
@@ -32,9 +34,15 @@ packs=(
 	go
 	gtest
 	lua-language-server
+	lutris
 	make
+	mpv
 	neovim
+	noto-fonts
+	noto-fonts-cjk
+	noto-fonts-emoji
 	npm
+	polkit
 	prettier
 	pyright
 	python-black
@@ -43,15 +51,22 @@ packs=(
 	python-pip
 	python-pylint
 	python3
+	qbittorrent
+	redshift
 	ripgrep
 	rust-analyzer
 	selene-linter
 	shellcheck
 	shfmt
+	steam
 	stylua
 	tmux
 	typescript
 	typescript-language-server
+	wine
+	xclip
+	xdotool
+	xf86-video-amdgpu
 	xsel
 	yarn
 	zsh

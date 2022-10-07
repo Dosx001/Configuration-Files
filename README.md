@@ -2,9 +2,6 @@
 
 ## Main
 
-steam wine lutris mpv qbittorrent redshift xf86-video-amdgpu maim xclip xdotool polkit
-feh bluez bluez-utils
-
 ## AUR
 
 Powershell admin

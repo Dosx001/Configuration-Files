@@ -271,11 +271,11 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	},
 	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
 		-- { name = "vsnip" }, -- For vsnip users.
 		{ name = "luasnip" }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
-		{ name = "nvim_lsp" },
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "dap" },
@@ -326,6 +326,9 @@ local function contain(tab, val)
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.colorProvider = {
+	dynamicRegistration = true,
+}
 local servers = { "bashls", "clangd", "cssls", "html", "jsonls", "prismals", "pyright", "tailwindcss", "tsserver" }
 for _, lsp in pairs(servers) do
 	require("lspconfig")[lsp].setup({
@@ -334,6 +337,9 @@ for _, lsp in pairs(servers) do
 			if contain({ "html", "jsonls", "tsserver" }, client.name) then
 				client.resolved_capabilities.document_formatting = false
 				client.resolved_capabilities.document_range_formatting = false
+			end
+			if client.server_capabilities.colorProvider then
+				require("document-color").buf_attach(bufnr)
 			end
 		end,
 	})
@@ -540,6 +546,11 @@ Hydra.spawn = function(head)
 	end
 end
 
-require("colorizer").setup()
+require("colorizer").setup({
+	filetypes = {
+		"*",
+		"!typescriptreact",
+	},
+})
 require("Comment").setup()
 -- require("lsp_signature").setup()

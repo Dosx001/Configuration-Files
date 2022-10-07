@@ -1,93 +1,12 @@
-terminal
-cd /mnt/c/Users/Dosx001/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
-Default
-origin
-cd /mnt/d/Repositories
-Default
-genshin
-cd /mnt/d/Repositories/python/Genshin_Tools
-Default
-Google
-cd /mnt/d/Repositories/python/Google
-Default
-configuration
-cd /mnt/d/Repositories/Configuration-Files
-Default
-mini-RPG
-cd /mnt/d/Repositories/C++/mini-RPG
-Default
-anime-calendar
-cd /mnt/d/Repositories/html/anime-calendar
-Default
-homeC
-cd /mnt/c/Users/Dosx001
-Default
-github
-cd /mnt/d/Repositories/github
-Default
-keyboard
-cd /mnt/c/Users/Dosx001/AndroidStudioProjects/AndroidBluetoothKeyboardMouse
-Default
-robin
-cd /mnt/d/Repositories/python/robinhood-bot
-Default
-practice
-cd /mnt/d/Users/Dosx001/AndroidStudioProjects/AndroidAppPractice
-Default
-QWERTY
-cd /mnt/d/Users/Dosx001/AndroidStudioProjects/QWERTY
-Default
-banner
-cd /mnt/d/Repositories/python/Genshin_Banner
-Default
-merge
-files=(); for i in `git status -s`; do if [[ -f $i && -n $(git diff --raw $i) ]]; then files+=($i); fi; done; vim ${files[@]} -p
-Default
-branch
-git push --set-upstream origin `git branch --show-current`
-Default
-resume
-cd /mnt/d/Repositories/github/Dosx001/resume
-Default
-Prompt
-cd /mnt/d/Repositories/C++/GitPrompt
-Default
-date
-GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date "$(date)"
-Default
-Template
-cd ~/.vim/plugged/vim-template
-Default
-Lazy
-cd /home/dosx/.vim/plugged/vim-lazy
-Default
 pwd
 al add `basename $PWD` "cd `pwd`"
-Default
+merge
+files=(); for i in `git status -s`; do if [[ -f $i && -n $(git diff --raw $i) ]]; then files+=($i); fi; done; vim ${files[@]} -p
+branch
+git push --set-upstream origin `git branch --show-current`
+date
+GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date "$(date)"
 del
 files=(); chk=false; for i in `git status -s`; do if $chk; then files+=($i); chk=false; fi; if [[ $i == "D" ]]; then chk=true; fi; done; git restore ${files[@]}
-Default
 root
 cd `git rev-parse --show-toplevel`
-Default
-GI-Artifact-Leveler
-cd /mnt/d/Repositories/python/GI-Artifact-Leveler
-Default
-statusline.vim
-cd /home/dosx/.vim/plugged/statusline.vim
-Default
-VimTextEditor
-cd /mnt/d/Repositories/js/VimTextEditor
-Default
-dosx001.github.io
-cd /home/dosx/dosx001.github.io
-Default
-rust-gtk-guis
-cd /mnt/d/Repositories/rust/rust-gtk-guis
-Default
-cmp-commit
-cd /home/dosx/.nvim/cmp-commit
-Default
-AnimeCalendar.github.io
-cd /mnt/d/Repositories/html/AnimeCalendar.github.io
-Default

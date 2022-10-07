@@ -251,6 +251,7 @@ Plug 'gennaro-tedesco/nvim-peekup'
 Plug 'neovim/nvim-lspconfig'
 Plug 'weilbith/nvim-code-action-menu'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'mrshmllow/document-color.nvim'
 " Plug 'ray-x/lsp_signature.nvim'
 " Tree Sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
