@@ -335,8 +335,8 @@ for _, lsp in pairs(servers) do
 		capabilities = capabilities,
 		on_attach = function(client)
 			if contain({ "html", "jsonls", "tsserver" }, client.name) then
-				client.resolved_capabilities.document_formatting = false
-				client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.document_formatting = false
+        client.server_capabilities.document_range_formatting = false
 			end
 			if client.server_capabilities.colorProvider then
 				require("document-color").buf_attach(bufnr)
@@ -355,8 +355,8 @@ table.insert(runtime_path, "lua/?/init.lua")
 require("lspconfig").sumneko_lua.setup({
 	capabilities = capabilities,
 	on_attach = function(client)
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
 	end,
 	cmd = { sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua" },
 	settings = {
@@ -381,8 +381,8 @@ require("lspconfig").sumneko_lua.setup({
 require("lspconfig").rust_analyzer.setup({
 	capabilities = capabilities,
 	on_attach = function(client)
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
 	end,
 	settings = {
 		["rust-analyzer"] = {

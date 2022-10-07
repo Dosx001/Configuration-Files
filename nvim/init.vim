@@ -341,13 +341,14 @@ hi! link IndentBlanklineSpaceChar Title
 hi CmpItemAbbrDeprecated gui=strikethrough guifg=DarkGray
 hi CmpItemAbbrMatch guifg=#ef7f00
 hi link CmpItemAbbrMatchFuzzy Type
-hi link CmpItemAbbrDefault Constant
-hi link CmpItemMenuDefault Constant
-hi link CmpItemKindDefault Constant
+hi link CmpItemAbbr Constant
+hi link CmpItemKind Constant
+hi link CmpItemMenu Constant
 hi link CmpItemKindKeyword Statement
 hi link CmpItemKindVariable Type
 hi link CmpItemKindModule PreProc
-hi link CmpItemKindText Normal
+" hi link CmpItemKindText Normal
+hi CmpItemKindText guifg=DarkGray
 hi link CmpItemKindFunction Identifier
 hi link CmpItemKindMethod Identifier
 hi link CmpItemKindProperty Comment
@@ -359,8 +360,8 @@ map <A-}> <cmd>lua vim.diagnostic.goto_next()<CR>
 map <A-{> <cmd>lua vim.diagnostic.goto_prev()<CR>
 map <leader>f <cmd>CodeActionMenu<CR>
 map <leader>F <cmd>lua vim.diagnostic.open_float()<CR>
-map <leader>e <cmd>lua vim.lsp.buf.formatting_sync()<CR>
-map <leader>E <cmd>lua vim.lsp.buf.formatting()<CR>
+map <leader>e <cmd>lua vim.lsp.buf.format()<CR>
+map <leader>E <cmd>lua vim.lsp.buf.format{async = true}<CR>
 map <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
 map <leader>R <cmd>lua vim.lsp.buf.rename()<CR>
 map <leader>ld <cmd>lua vim.lsp.buf.definition()<CR>
