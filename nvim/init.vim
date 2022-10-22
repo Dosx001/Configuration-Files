@@ -161,7 +161,7 @@ hi Type ctermfg=2 gui=none guifg=#13a10e
 hi Underlined term=underline cterm=underline ctermfg=5 gui=underline guifg=#881798
 
 hi Visual ctermbg=235 guibg=#242424
-hi VertSplit ctermfg=237 ctermbg=DarkRed guibg=#b30000 guifg=#363636
+hi VertSplit ctermfg=DarkRed ctermbg=237 guibg=#363636 guifg=#b30000
 hi EndOfBuffer ctermfg=237 guifg=#363636 guibg=none
 hi Pmenu ctermfg=1 ctermbg=Black guifg=#b30000 guibg=#0c0c0c
 hi! link PmenuSel Visual
@@ -266,6 +266,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rcarriga/cmp-dap'
+Plug 'uga-rosa/cmp-dictionary'
 " Debugger
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'

@@ -277,6 +277,7 @@ cmp.setup({
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
 		{ name = "buffer" },
+    { name = "dictionary", keyword_length = 2 },
 		{ name = "path" },
 		{ name = "dap" },
 	}),
@@ -316,6 +317,12 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
+require("cmp_dictionary").setup({
+  dic = {
+    ["*"] = "~/en.dict",
+  },
+})
+
 local function contain(tab, val)
 	for _, value in ipairs(tab) do
 		if value == val then
@@ -325,7 +332,7 @@ local function contain(tab, val)
 	return false
 end
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.colorProvider = {
 	dynamicRegistration = true,
 }
@@ -339,7 +346,7 @@ for _, lsp in pairs(servers) do
         client.server_capabilities.document_range_formatting = false
 			end
 			if client.server_capabilities.colorProvider then
-				require("document-color").buf_attach(bufnr)
+				require("document-color").buf_attach()
 			end
 		end,
 	})
