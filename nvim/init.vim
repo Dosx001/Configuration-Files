@@ -113,6 +113,7 @@ nno <C-q> :wa<CR>
 ino <C-q> <Esc>:wa<CR>
 ino . .<C-g>u
 ino <Space> <Space><C-g>u
+map <A-r> <cmd>TSDisable rainbow \| TSEnable rainbow<CR>
 nno <C-k> :call CtrlK()<CR>
 ino <C-k> <Esc>:call CtrlK()<CR>
 
@@ -155,6 +156,7 @@ hi Comment ctermfg=4 guifg=#0037da
 hi Constant ctermfg=1 guifg=#b30000
 hi Special ctermfg=5 guifg=#881798
 hi Identifier ctermfg=6 guifg=#3a96dd
+" hi Function ctermfg=6 guifg=#e37d00
 hi Statement ctermfg=130 gui=none guifg=#af5f00
 hi PreProc ctermfg=5 guifg=#b3b300
 hi Type ctermfg=2 gui=none guifg=#13a10e
@@ -230,6 +232,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-obsession'
 Plug 'justinmk/vim-sneak'
 " Text Object
 Plug 'kana/vim-textobj-user'
@@ -247,6 +250,7 @@ Plug 'NvChad/nvim-colorizer.lua'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'gennaro-tedesco/nvim-peekup'
+Plug 'stevearc/dressing.nvim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'weilbith/nvim-code-action-menu'
@@ -258,6 +262,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'p00f/nvim-ts-rainbow'
+Plug 'jose-elias-alvarez/typescript.nvim'
 " Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -337,6 +342,9 @@ hi IndentBlanklineIndent5 guifg=DarkCyan gui=nocombine
 hi IndentBlanklineIndent6 guifg=DarkBlue gui=nocombine
 hi IndentBlanklineIndent7 guifg=DarkMagenta gui=nocombine
 hi! link IndentBlanklineSpaceChar Title
+hi link @variable Normal
+" hi link @parameter Normal
+hi @parameter ctermfg=6 guifg=#e37d00
 
 " Nvim Complation
 hi CmpItemAbbrDeprecated gui=strikethrough guifg=DarkGray

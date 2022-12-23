@@ -60,6 +60,7 @@ alias l='ls -CF'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias ds4="echo 0 | sudo tee find /sys/class/leds/*global/brightness"
 
 alias p="python3"
 alias vi="\vim"
@@ -72,7 +73,7 @@ alias Branch='git push --set-upstream origin $(git branch --show-current)'
 alias Date='GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date "$(date)"'
 
 if [[ -e /etc/wsl ]]; then
-  DISPLAY=$(grep -oP "(?<=nameserver ).+" /etc/resolv.conf):0.0
+	DISPLAY=$(grep -oP "(?<=nameserver ).+" /etc/resolv.conf):0.0
 	alias Fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 	alias Explorer="/mnt/c/Windows/explorer.exe ."
 	alias code="/mnt/e/Users/Dosx001/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"
