@@ -4,6 +4,7 @@ zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=32=31' '=*=32'
 zmodload zsh/complist
 compinit -i
 _comp_options+=(globdots)
+export PATH=/home/dosx/.cargo/bin:$PATH
 
 HISTFILE=~/.histfile
 setopt HIST_EXPIRE_DUPS_FIRST
@@ -24,7 +25,6 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey '^[f' forward-word
 bindkey '^[ ' autosuggest-execute
 
-alias GitPrompt="/mnt/d/Repositories/C++/GitPrompt/bin/GitPrompt.exe"
 _prompt() {
   if [[ -e `git rev-parse --git-dir 2> /dev/null` ]]; then
     echo -n "$fg[green]`whoami`@`cat /proc/sys/kernel/hostname` "
