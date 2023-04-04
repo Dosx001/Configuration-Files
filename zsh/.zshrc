@@ -4,7 +4,6 @@ zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=32=31' '=*=32'
 zmodload zsh/complist
 compinit -i
 _comp_options+=(globdots)
-export PATH=/home/dosx/.cargo/bin:$PATH
 
 HISTFILE=~/.histfile
 setopt HIST_EXPIRE_DUPS_FIRST
@@ -16,14 +15,15 @@ setopt HIST_SAVE_NO_DUPS
 # setopt correct_all
 
 bindkey -v
-VISUAL=vi
-EDITOR=vi
+VISUAL=nvim
+EDITOR=nvim
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey '^[f' forward-word
 bindkey '^[ ' autosuggest-execute
+bindkey '\e[3~' delete-char
 
 _prompt() {
   if [[ -e `git rev-parse --git-dir 2> /dev/null` ]]; then
