@@ -6,14 +6,14 @@
 [init]
 	defaultBranch = main
 [alias]
-	root = rev-parse --show-toplevel
+	check = sparse-checkout add
 	edit = commit -a --amend --no-edit
 	hard = reset --hard
-	unstage = restore --staged
 	ignore = !sh -c \"cp ~/.gitignore_global .gitignore\"
+	root = rev-parse --show-toplevel
 	sparse = clone --filter=blob:none --sparse
-	check = sparse-checkout add
 	sub = submodule update --init
+	unstage = restore --staged
 [credential]
 	helper = store
 [help]
