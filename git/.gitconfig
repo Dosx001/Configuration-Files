@@ -10,9 +10,11 @@
 	edit = commit -a --amend --no-edit
 	hard = reset --hard
 	ignore = !sh -c \"cp ~/.gitignore_global .gitignore\"
+	pb = !git push --set-upstream origin $(git branch --show-current)
 	root = rev-parse --show-toplevel
 	sparse = clone --filter=blob:none --sparse
 	sub = submodule update --init
+	sync = !git fetch upstream && git rebase upstream/$(git branch --show-current)
 	unstage = restore --staged
 [credential]
 	helper = store
