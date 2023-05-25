@@ -13,11 +13,10 @@ source ~/.aliasme/aliasme.sh
 Update() {
 	Pwd=$(pwd)
 	Dirs=$(
-		ls -d ~/.tmux/plugins/*
-		ls -d ~/.zsh/*
+		find ~/.tmux/plugins/* ~/.zsh/* -maxdepth 0 -type d
 	)
-	for i in $Dirs[@]; do
-		cd $i
+	for i in $Dirs; do
+		cd "$i"
 		git pull
 	done
 	cd $Pwd
