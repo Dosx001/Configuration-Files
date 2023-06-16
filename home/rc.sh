@@ -22,13 +22,6 @@ Update() {
 	cd $Pwd
 }
 
-Dot() {
-	cp ~/.prettierrc .
-	eslint --init
-	npm install --save-dev eslint-config-prettier
-	npm install --save-dev eslint-plugin-prettier
-}
-
 Merge() {
 	files=()
 	for i in $(git status -s); do
@@ -61,8 +54,13 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias ds4="echo 0 | sudo tee find /sys/class/leds/*global/brightness"
 
+alias ff='cd $(fd -t d | sk)'
+alias fh='cd $(fd -Ht d | sk)'
+alias fz='cd $(fd -t d . "/home/" | sk)'
+alias fzh='cd $(fd -Ht d . "/home/" | sk)'
+
 alias p="python3"
-alias vi="\vim"
+# alias vi="\vim"
 alias vim="nvim"
 
 alias Server="live-server --no-browser --port=8000"
